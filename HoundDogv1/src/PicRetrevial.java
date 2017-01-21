@@ -1,19 +1,30 @@
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
 
 public class PicRetrevial {
-	VideoCapture camera = new VideoCapture();
-	public Mat mat = new Mat();
+	/*VideoCapture camera = new VideoCapture();
+	public Mat mat = new Mat();*/
 	
 	public PicRetrevial(){
-		camera.open(2);
+		//camera.open(2);
 	}
 	
 	public BufferedImage getImg(){
-		camera.read(mat);
+		try {
+			return ImageIO.read(new File("/home/pi/Desktop/buffer/img.jpg"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		 /*camera.read(mat);
 		 int type = BufferedImage.TYPE_BYTE_GRAY;
 	     if ( mat.channels() > 1 ) {
 	         type = BufferedImage.TYPE_3BYTE_BGR;
@@ -24,10 +35,10 @@ public class PicRetrevial {
 	     BufferedImage image = new BufferedImage(mat.cols(),mat.rows(), type);
 	     final byte[] targetPixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
 	     System.arraycopy(b, 0, targetPixels, 0, b.length);  
-	     return image;
+	     return image;*/
 	}
 	
 	public void releaseCam(){
-		camera.release();
+		//camera.release();
 	}
 }

@@ -8,28 +8,26 @@ public class OverCoat {
 	
 	public static void main(String args[]){
 		boolean safe = false;
-		try{
+		/*try{
 			System.load("/home/pi/Desktop/shazam/opencv_java320.so");
 			safe = true;
 		}
 		catch(UnsatisfiedLinkError e){
 			System.out.println("System: Not Linux Defalting to Windows");
-			try{
+			/*try{
 				System.load("C:\\Users\\curti\\OneDrive\\Programming\\opencv\\build\\java\\x64\\opencv_java320.dll");	
 				safe = true;
 			}
 			catch(UnsatisfiedLinkError f){
 				lostHound = new LostHound();
 				
-			}
-		}
-		if(safe){
+			}*/
+		//}
+		if(true){
 			showDog = new ShowDog();
 			picRetrevial = new PicRetrevial();
 			picRecoginition = new PicRecoginition();
-			while(true){
-				showDog.drawImg(picRecoginition.porcessedImg(picRetrevial.getImg()));
-			}
+			showDog.drawImg(picRecoginition.porcessedImg(picRetrevial.getImg()));
 		}
 	}
 	
