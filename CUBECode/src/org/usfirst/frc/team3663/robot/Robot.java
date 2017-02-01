@@ -2,7 +2,10 @@
 package org.usfirst.frc.team3663.robot;
 
 import org.usfirst.frc.team3663.robot.subsystems.SS_DriveTrain;
-import org.usfirst.frc.team3663.robot.subsystems.SS_Pistons;
+import org.usfirst.frc.team3663.robot.subsystems.SS_DriveTrainPneumatics;
+import org.usfirst.frc.team3663.robot.subsystems.SS_FuelPickup;
+import org.usfirst.frc.team3663.robot.subsystems.SS_Lift;
+import org.usfirst.frc.team3663.robot.subsystems.SS_Shooter;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -22,8 +25,11 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	public static RobotMap robotMap;
-	public static SS_Pistons ss_Pistons;
 	public static SS_DriveTrain ss_DriveTrain;
+	public static SS_FuelPickup ss_FuelPickup;
+	public static SS_DriveTrainPneumatics ss_DriveTrainPneumatics;
+	public static SS_Shooter ss_Shooter;
+	public static SS_Lift ss_Lift;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -32,9 +38,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		robotMap = new RobotMap();
-		ss_Pistons = new SS_Pistons();
-		oi = new OI();
+		ss_FuelPickup = new SS_FuelPickup();
+		ss_DriveTrainPneumatics = new SS_DriveTrainPneumatics();
 		ss_DriveTrain = new SS_DriveTrain();
+		ss_Shooter = new SS_Shooter();
+		ss_Lift = new SS_Lift();
+		oi = new OI();
 	}
 
 	/**

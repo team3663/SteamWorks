@@ -19,7 +19,8 @@ public class WindowSystem {
 	}
 	
 	public void drawImg(BufferedImage pImg){
-		System.out.println("Successfull");
+		g.fillRect(40, 40, 40, 40);
+		System.out.println(pImg);
 		g.drawImage(pImg, 40, 40, frame);
 	}
 

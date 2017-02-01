@@ -7,15 +7,31 @@ package org.usfirst.frc.team3663.robot;
  * floating around.
  */
 public class RobotMap {
-	public static int pistonOneLocOne = 0;
-	public static int pistonOneLocTwo = 1;
-	public static int pistonTwoLocOne = 2;
-	public static int pistonTwoLocTow = 3;
 	
+/***DRIVETRAIN PORTS***/	
 	public static int driveMotorLeftOne = 0;
 	public static int driveMotorLeftTwo = 1;
 	public static int driveMotorRightOne = 2;
 	public static int driveMotorRightTwo = 3;
+
+	public static int driveTrainButterflyOne = 0;
+	public static int driveTrainButterflyTwo = 1;
+	public static int driveTrainGearShiftOne = 2;
+	public static int driveTrainGearShiftTwo = 3;
+	
+/***PICKUP PORTS***/	
+	public static int fuelPickupMotor = 4;
+	
+/***SHOOTER PORTS***/
+	public static int shooterRotMotor  = 7;
+	public static int shooterMainMotor = 6;
+	public static int shooterMainMotor2= 5;
+
+	public static int shooterZeroDIO = 0;
+	
+/***LIFT PORTS***/
+	public static int liftMoveMotor = 8;
+	
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
 	// public static int leftMotor = 1;

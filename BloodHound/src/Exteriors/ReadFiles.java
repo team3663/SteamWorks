@@ -11,26 +11,34 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import com.hopding.jrpicam.RPiCamera;
+import com.hopding.jrpicam.enums.AWB;
+import com.hopding.jrpicam.enums.DRC;
+import com.hopding.jrpicam.enums.Encoding;
 import com.hopding.jrpicam.exceptions.FailedToRunRaspistillException;
 
 public class ReadFiles {
 	
 	ImageIcon pIMG;
+	RPiCamera piCam = null;
 	
-	public BufferedImage getImage(){
-		RPiCamera piCam = null;
+	public ReadFiles(){
 		try {
-			 piCam = new RPiCamera();
+			 piCam = new RPiCamera("/home/pi/Desktop");
 		} catch (FailedToRunRaspistillException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		piCam.setFullPreviewOff();
-		piCam.setBrightness(30);
-		piCam.setWidth(50);
-		piCam.setHeight(50);
-		piCam.setAddRawBayer(true);
-		piCam.turnOffPreview();
+		piCam.setAWB(AWB.AUTO);
+		piCam.setDRC(DRC.HIGH);
+		piCam.setContrast(100);
+		piCam.setSharpness(100);
+		piCam.setQuality(100);
+		piCam.setTimeout(1000);
+		piCam.turnOnPreview();
+		piCam.setEncoding(Encoding.PNG);
+	}
+	
+	public BufferedImage getImage(){
 		try {
 			return piCam.takeBufferedStill();
 		} catch (IOException | InterruptedException e) {

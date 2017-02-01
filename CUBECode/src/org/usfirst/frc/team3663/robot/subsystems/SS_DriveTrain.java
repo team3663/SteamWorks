@@ -5,6 +5,7 @@ import org.usfirst.frc.team3663.robot.commands.C_Drive;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -25,6 +26,7 @@ public class SS_DriveTrain extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         setDefaultCommand(new C_Drive());
+        drive.setSafetyEnabled(false);
     }
     
     public void moveMotor(double speed){
@@ -34,6 +36,6 @@ public class SS_DriveTrain extends Subsystem {
     
     public void driveRobot(double pAxisX, double pAxisY){
     	drive.arcadeDrive(pAxisY, pAxisX);
-    }
+    } 
 }
 

@@ -1,7 +1,10 @@
 package org.usfirst.frc.team3663.robot;
 
-import org.usfirst.frc.team3663.robot.commands.C_FirePistonOne;
-import org.usfirst.frc.team3663.robot.commands.C_FirePistonTwo;
+import org.usfirst.frc.team3663.robot.commands.C_DriveTrainToggleButterfly;
+import org.usfirst.frc.team3663.robot.commands.C_DriveTrainToggleGearShift;
+import org.usfirst.frc.team3663.robot.commands.C_FuelPickupToggle;
+import org.usfirst.frc.team3663.robot.commands.C_LiftMoveUp;
+import org.usfirst.frc.team3663.robot.commands.C_ShooterRotateToDegree;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -9,45 +12,54 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 
 /**
- * This class is the glue that binds the controls on the physical operator
- * interface to the commands and command groups that allow control of the robot.
+ * This Sub System is fo all of the buttons see bottom for button layout.
  */
 public class OI {
 	public Joystick driveJoystick = new Joystick(0);
 	
 	public OI(){
-		Button firePiston1 = new JoystickButton(driveJoystick, 1);
-		Button firePiston2 = new JoystickButton(driveJoystick, 2);
+/***DRIVE TRAIN BUTTONS***/
+		Button driveTrainToggleButterfly = new JoystickButton(driveJoystick, 1);
+		Button driveTrainToggleGearShift = new JoystickButton(driveJoystick, 2);
 		
-		firePiston1.whenPressed(new C_FirePistonOne());
-		firePiston2.whenPressed(new C_FirePistonTwo());
+		driveTrainToggleButterfly.whenReleased(new C_DriveTrainToggleButterfly());
+		driveTrainToggleGearShift.whenReleased(new C_DriveTrainToggleGearShift());
+		
+/***FUEL PICKUP BUTTONS***/
+		Button fuelPickupToggle = new JoystickButton(driveJoystick, 3);
+		
+		fuelPickupToggle.whenReleased(new C_FuelPickupToggle());
+		
+/***SHOOTER BUTTONS***/
+		Button shooterPresetTest = new JoystickButton(driveJoystick, 4);
+		
+		shooterPresetTest.whenPressed(new C_ShooterRotateToDegree());
+		
+/***LIFT BUTTONS***/
+		Button liftFuelUp = new JoystickButton(driveJoystick,5);
+		
+		liftFuelUp.whileHeld(new C_LiftMoveUp());
+		
 	}
-	
-	//// CREATING BUTTONS
-	// One type of button is a joystick button which is any button on a
-	//// joystick.
-	// You create one by telling it which joystick it's on and which button
-	// number it is.
-	// Joystick stick = new Joystick(port);
-	// Button button = new JoystickButton(stick, buttonNumber);
-
-	// There are a few additional built in buttons you can use. Additionally,
-	// by subclassing Button you can create custom triggers and bind those to
-	// commands the same as any other Button.
-
-	//// TRIGGERING COMMANDS WITH BUTTONS
-	// Once you have a button, it's trivial to bind it to a button in one of
-	// three ways:
-
-	// Start the command when the button is pressed and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenPressed(new ExampleCommand());
-
-	// Run the command while the button is being held down and interrupt it once
-	// the button is released.
-	// button.whileHeld(new ExampleCommand());
-
-	// Start the command when the button is released and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenReleased(new ExampleCommand());
 }
+
+/****BUTTON LAYOUT FOR XBOX****//*
+ * 1 = A
+ * 2 = B
+ * 3 = X
+ * 4 = Y
+ * 5 = LEFT-BUMPER
+ * 6 = RIGHT-BUMPER
+ * 7 = BACK
+ * 8 = START
+ * 9 = LEFT-STICK		as a side note please reframe from using 9-10 
+ * 10 = RIGHT-STICK		because the can cause issues with commands using
+ * 						the stick axis	
+ * AXIS ARE AS FOLLOWS
+ * 0 = LEFT-X-AXIS
+ * 1 = LEFT-Y-AXIS
+ * 2 = LEFT-TRIGGER
+ * 3 = RIGHT-TRIGGER
+ * 4 = RIGHT-X-AXIS
+ * 5 = RIGHT-Y-AXIS
+ */
