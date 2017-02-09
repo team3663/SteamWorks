@@ -36,6 +36,6 @@ public class SS_DriveTrain extends Subsystem {
     
     public void driveRobot(double pAxisX, double pAxisY){
     	drive.arcadeDrive(pAxisY, pAxisX);
-    } 
+    }
 }
 

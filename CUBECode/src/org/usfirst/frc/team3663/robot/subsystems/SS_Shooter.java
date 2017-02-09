@@ -16,7 +16,8 @@ public class SS_Shooter extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	private final int ROTATION_MOTOR_MAX = 20000;
+	private final int ROTATION_MOTOR_MAX = 200000;
+	private final int SHOOTER_EST_MAX_SPEED= 2000;
 	
 	private CANTalon rotationMotor = new CANTalon(Robot.robotMap.shooterRotMotor);
 	private CANTalon mainMotor = new CANTalon(Robot.robotMap.shooterMainMotor);
@@ -53,12 +54,13 @@ public class SS_Shooter extends Subsystem {
 
     public void resetMainMotorEncoder(int targetSpeed){
     	if(targetSpeed > 0){
-    		currentSpeed = .5; 
+    		currentSpeed = (double)targetSpeed/(double)SHOOTER_EST_MAX_SPEED; 
     	}
     	else{
-    		currentSpeed = -.5;
+    		currentSpeed = -(double)targetSpeed/(double)SHOOTER_EST_MAX_SPEED;
     	}
-    	lastEncVal = mainMotor.getEncPosition();
+    	System.out.println("Current Speed : " + currentSpeed);
+    	lastEncVal = mainMotor.getEncPosition()+1;
     }
  
     private double currentSpeed = 0;
@@ -69,17 +71,17 @@ public class SS_Shooter extends Subsystem {
 	    	double vel = (currentEncVal - lastEncVal)/20;
 	    	if(Math.abs(vel) < 5000){
 		    	currentSpeed -= ((vel - pVal)/Math.abs(pVal))/25;
-		    	setSpeedMainMotor(currentSpeed);
+		    	setSpeedMainMotor(-currentSpeed);
 		    	System.out.println("Velocity : " + vel + "ticks/ms);  CEncPos : " + currentEncVal + "  Current Speed : " + currentSpeed);
 	    	}
 	    	lastEncVal = currentEncVal;
 	    } 
-    	
     }
     
 /***all of the code responsible for moving the rotation***/   
     private int encoderZero = 0;
     private int lastEncRun = 0;
+    private double lastSpeed = 0;
     
     public void setSpeedRotationMotor(double pSpeed){
     	rotationMotor.set(pSpeed);
@@ -89,24 +91,38 @@ public class SS_Shooter extends Subsystem {
     	rotationMotor.setPosition(0);
     }
     
+    public void setRotMotorBreak(boolean pBreak){
+    	rotationMotor.enableBrakeMode(pBreak);
+    }
+    
     public void advSetRotSpd(double pSpd){
-    	int currentEncLocation = rotationMotor.getEncPosition();
-    	if((currentEncLocation < ROTATION_MOTOR_MAX && pSpd > 0)||(currentEncLocation > 0 && pSpd < 0)){
-    		setSpeedRotationMotor(pSpd/10);
-    		getAccel(currentEncLocation, lastEncRun, ROTATION_MOTOR_MAX);
+    	int currentEncLocation = -rotationMotor.getEncPosition();
+    	if((currentEncLocation < ROTATION_MOTOR_MAX && pSpd > 0)){
+    		pSpd = advConvertSpeed(pSpd, currentEncLocation, ROTATION_MOTOR_MAX);
+    		setSpeedRotationMotor(pSpd);
+    	}
+    	else if((currentEncLocation > 0 && pSpd < 0)){
+    		pSpd = advConvertSpeed(pSpd, currentEncLocation, 0);
+    		setSpeedRotationMotor(pSpd);
     	}
     	else{
     		setSpeedRotationMotor(0);
     	}
     	lastEncRun = currentEncLocation;
-    	//System.out.println("Encoder Location : " + currentEncLocation);
     }
     
-    public double getAccel(int currEncPos, int lastEncPos, int endLoc){
-    	int vel = (currEncPos-lastEncPos)/20;
-    	double accel = -((vel*vel)/(2*currEncPos-endLoc));
-    	System.out.println("currentAcceleration : " + accel);
-    	return 0;
+    private double advConvertSpeed(double pSpd, int pEnc, int dest){
+    	if(pEnc != lastEncRun){
+    		int encDisp = pEnc - lastEncRun;
+    		int encToDest = pEnc - dest;
+    		double amount = ((double)encToDest/(double)encDisp);
+    		double speed = amount/50;
+    		if(Math.abs(pSpd) > Math.abs(speed)){
+    			pSpd = speed;
+    		}
+    		System.out.println(pEnc + "  " + pSpd + "  " + encDisp + "  " + encToDest + "  " + amount + "  " + speed);
+    	}
+    	return pSpd;
     }
 }
 

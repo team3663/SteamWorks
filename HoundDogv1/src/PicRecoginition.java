@@ -7,7 +7,7 @@ public class PicRecoginition {
 	}
 	
 	private MaskCreator maskCreator;
-	private int redAmount = 36, greenAmount = 64, blueAmount = 41, execNum = 10;
+	private int redAmount = 176, greenAmount = 203, blueAmount = 214, execNum = 10;
 	private int[] winningLocation = new int[3];
 	
 	public BufferedImage porcessedImg(BufferedImage pImg){

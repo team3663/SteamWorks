@@ -20,7 +20,7 @@ public class WindowSystem {
 	
 	public void drawImg(BufferedImage pImg){
 		g.fillRect(40, 40, 40, 40);
-		System.out.println(pImg);
+		//System.out.println(pImg);
 		g.drawImage(pImg, 40, 40, frame);
 	}
 

@@ -18,7 +18,7 @@ public class PicRetrevial {
 	
 	public BufferedImage getImg(){
 		try {
-			return ImageIO.read(new File("/home/pi/Desktop/buffer/img.jpg"));
+			return ImageIO.read(new File("C:\\Users\\curti\\OneDrive\\Programming\\SteamWorks\\BloodHound\\test.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

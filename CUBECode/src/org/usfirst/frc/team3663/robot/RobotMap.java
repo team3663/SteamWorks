@@ -20,10 +20,10 @@ public class RobotMap {
 	public static int driveTrainGearShiftTwo = 3;
 	
 /***PICKUP PORTS***/	
-	public static int fuelPickupMotor = 4;
+	public static int fuelPickupMotor = 10;
 	
 /***SHOOTER PORTS***/
-	public static int shooterRotMotor  = 7;
+	public static int shooterRotMotor  = 20;
 	public static int shooterMainMotor = 6;
 	public static int shooterMainMotor2= 5;
 

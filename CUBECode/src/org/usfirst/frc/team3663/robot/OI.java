@@ -1,9 +1,10 @@
 package org.usfirst.frc.team3663.robot;
 
-import org.usfirst.frc.team3663.robot.commands.C_DriveTrainToggleButterfly;
-import org.usfirst.frc.team3663.robot.commands.C_DriveTrainToggleGearShift;
+import org.usfirst.frc.team3663.robot.commands.C_DriveTrainSetButterfly;
+import org.usfirst.frc.team3663.robot.commands.C_DriveTrainSetGearShift;
 import org.usfirst.frc.team3663.robot.commands.C_FuelPickupToggle;
 import org.usfirst.frc.team3663.robot.commands.C_LiftMoveUp;
+import org.usfirst.frc.team3663.robot.commands.C_ShooterHoldSpeed;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterRotateToDegree;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -22,8 +23,8 @@ public class OI {
 		Button driveTrainToggleButterfly = new JoystickButton(driveJoystick, 1);
 		Button driveTrainToggleGearShift = new JoystickButton(driveJoystick, 2);
 		
-		driveTrainToggleButterfly.whenReleased(new C_DriveTrainToggleButterfly());
-		driveTrainToggleGearShift.whenReleased(new C_DriveTrainToggleGearShift());
+		driveTrainToggleButterfly.whenReleased(new C_DriveTrainSetButterfly(Robot.ss_DriveTrainPneumatics.wheelsDown));
+		driveTrainToggleGearShift.whenReleased(new C_DriveTrainSetGearShift(Robot.ss_DriveTrainPneumatics.lowGear));
 		
 /***FUEL PICKUP BUTTONS***/
 		Button fuelPickupToggle = new JoystickButton(driveJoystick, 3);
@@ -33,7 +34,7 @@ public class OI {
 /***SHOOTER BUTTONS***/
 		Button shooterPresetTest = new JoystickButton(driveJoystick, 4);
 		
-		shooterPresetTest.whenPressed(new C_ShooterRotateToDegree());
+		shooterPresetTest.whenPressed(new C_ShooterHoldSpeed(1175));
 		
 /***LIFT BUTTONS***/
 		Button liftFuelUp = new JoystickButton(driveJoystick,5);
