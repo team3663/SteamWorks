@@ -27,7 +27,9 @@ public class RobotMap {
 	public static int shooterMainMotor = 6;
 	public static int shooterMainMotor2= 5;
 
-	public static int shooterZeroDIO = 0;
+	public static int shooterZeroDIO = 2;
+	public static int shooterTurnLeftDIO = 0;
+	public static int shooterTurnRightDIO = 1;
 	
 /***LIFT PORTS***/
 	public static int liftMoveMotor = 8;

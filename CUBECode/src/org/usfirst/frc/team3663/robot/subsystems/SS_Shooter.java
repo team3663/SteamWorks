@@ -24,6 +24,8 @@ public class SS_Shooter extends Subsystem {
 	private CANTalon mainMotor2 = new CANTalon(Robot.robotMap.shooterMainMotor2);
 	
 	private DigitalInput zeroSwitch = new DigitalInput(Robot.robotMap.shooterZeroDIO);
+	private DigitalInput turnLeftDIO = new DigitalInput(Robot.robotMap.shooterTurnLeftDIO);
+	private DigitalInput turnRightDIO = new DigitalInput(Robot.robotMap.shooterTurnRightDIO);
 	
 	private int[] perviousEncPos = new int[40];
 	private int arrayLoc = 0;
@@ -108,21 +110,72 @@ public class SS_Shooter extends Subsystem {
     	else{
     		setSpeedRotationMotor(0);
     	}
-    	lastEncRun = currentEncLocation;
+        lastEncRun = currentEncLocation; 
     }
     
     private double advConvertSpeed(double pSpd, int pEnc, int dest){
-    	if(pEnc != lastEncRun){
-    		int encDisp = pEnc - lastEncRun;
-    		int encToDest = pEnc - dest;
-    		double amount = ((double)encToDest/(double)encDisp);
-    		double speed = amount/50;
-    		if(Math.abs(pSpd) > Math.abs(speed)){
-    			pSpd = speed;
+    	double speed = lastSpeed;
+    	if(pSpd != 0 && (lastEncRun != pEnc || .04 > Math.abs(speed))){
+    		int encDisp = 0;
+    		if(pSpd > 0){
+    			encDisp = lastEncRun - pEnc;
     		}
-    		System.out.println(pEnc + "  " + pSpd + "  " + encDisp + "  " + encToDest + "  " + amount + "  " + speed);
+    		else{
+    			encDisp = pEnc - lastEncRun;
+    		}
+			int encToDest = pEnc - dest;
+			double amount = ((double)encToDest/(double)encDisp);
+			speed = amount/20;
+			if(Math.abs(speed) < 1000){
+				lastSpeed = speed;				
+			}
+			if(Math.abs(speed) > 1000){
+				if(pSpd > 0){
+					speed = .06;
+				}
+				else{
+					speed = -.06;
+				}
+			}
     	}
+		if(Math.abs(pSpd) > Math.abs(speed) && pSpd*speed > 0){
+			pSpd = speed;
+		}
+		//System.out.println(lastEncRun + "   " + pEnc + "  " + pSpd + "   " + speed + "   " + lastSpeed);
     	return pSpd;
+    }
+    
+    private void advRotorMoveToLoc(int encLocation){
+    	int currEnc = -rotationMotor.getEncPosition();
+    	double pSpd = 0;
+    	if(currEnc-encLocation > 0){
+    		pSpd = 1;
+    	}
+    	else{
+    		pSpd = -1;
+    	}
+    	advSetRotSpd(pSpd);    	
+    }
+    
+    public void advMoveRotOffDIO(){
+    	boolean left = turnLeftDIO.get();
+    	boolean right = turnRightDIO.get();
+    	if(left && right){
+    		advSetRotSpd(0);
+    		System.out.println("****GOOD TO SHOOT****");
+    	}
+    	else if(right){
+    		advSetRotSpd(1);    		
+    		System.out.println("MOVE : right");
+    	}
+    	else if(left){
+    		advSetRotSpd(-1);
+    		System.out.println("MOVE : left");
+    	}
+    	else{
+    		setSpeedRotationMotor(0);
+    		System.out.println("ERROR : no input");
+    	}
     }
 }
 
