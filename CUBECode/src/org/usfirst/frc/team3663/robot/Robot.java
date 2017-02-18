@@ -4,6 +4,7 @@ package org.usfirst.frc.team3663.robot;
 import org.usfirst.frc.team3663.robot.subsystems.SS_DriveTrain;
 import org.usfirst.frc.team3663.robot.subsystems.SS_DriveTrainPneumatics;
 import org.usfirst.frc.team3663.robot.subsystems.SS_FuelPickup;
+import org.usfirst.frc.team3663.robot.subsystems.SS_Gyro;
 import org.usfirst.frc.team3663.robot.subsystems.SS_Lift;
 import org.usfirst.frc.team3663.robot.subsystems.SS_Shooter;
 
@@ -30,6 +31,7 @@ public class Robot extends IterativeRobot {
 	public static SS_DriveTrainPneumatics ss_DriveTrainPneumatics;
 	public static SS_Shooter ss_Shooter;
 	public static SS_Lift ss_Lift;
+	public static SS_Gyro gyro;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -43,6 +45,7 @@ public class Robot extends IterativeRobot {
 		ss_DriveTrain = new SS_DriveTrain();
 		ss_Shooter = new SS_Shooter();
 		ss_Lift = new SS_Lift();
+		gyro = new SS_Gyro();
 		oi = new OI();
 	}
 

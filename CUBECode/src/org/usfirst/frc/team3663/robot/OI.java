@@ -3,6 +3,7 @@ package org.usfirst.frc.team3663.robot;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainSetButterfly;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainSetGearShift;
 import org.usfirst.frc.team3663.robot.commands.C_FuelPickupToggle;
+import org.usfirst.frc.team3663.robot.commands.C_Gyro;
 import org.usfirst.frc.team3663.robot.commands.C_LiftMoveUp;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterHoldSpeed;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterRotateToDegree;
@@ -17,12 +18,14 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	public Joystick driveJoystick = new Joystick(0);
-	
+	public Button GyroStartNeg = new JoystickButton(driveJoystick,6);
+	public Button GyroStartPos = new JoystickButton(driveJoystick,5);
 	public OI(){
 /***DRIVE TRAIN BUTTONS***/
 		Button driveTrainToggleButterfly = new JoystickButton(driveJoystick, 1);
 		Button driveTrainToggleGearShift = new JoystickButton(driveJoystick, 2);
-		
+		GyroStartNeg.whenPressed(new C_Gyro(-90));
+		GyroStartPos.whenPressed(new C_Gyro(90));
 		driveTrainToggleButterfly.whenReleased(new C_DriveTrainSetButterfly(Robot.ss_DriveTrainPneumatics.wheelsDown));
 		driveTrainToggleGearShift.whenReleased(new C_DriveTrainSetGearShift(Robot.ss_DriveTrainPneumatics.lowGear));
 		

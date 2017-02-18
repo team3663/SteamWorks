@@ -9,7 +9,7 @@ package org.usfirst.frc.team3663.robot;
 public class RobotMap {
 	
 /***DRIVETRAIN PORTS***/	
-	public static int driveMotorLeftOne = 0;
+	public static int driveMotorLeftOne = 20; // changed to 20 from 0 MC
 	public static int driveMotorLeftTwo = 1;
 	public static int driveMotorRightOne = 2;
 	public static int driveMotorRightTwo = 3;
@@ -23,7 +23,7 @@ public class RobotMap {
 	public static int fuelPickupMotor = 10;
 	
 /***SHOOTER PORTS***/
-	public static int shooterRotMotor  = 20;
+	public static int shooterRotMotor  = 15; // changed for drive train/ gyro setting MC should be 20
 	public static int shooterMainMotor = 6;
 	public static int shooterMainMotor2= 5;
 
@@ -31,6 +31,10 @@ public class RobotMap {
 	
 /***LIFT PORTS***/
 	public static int liftMoveMotor = 8;
+	
+/***Gear Pick Up Ports***/
+	public static int GearInTake = 16;
+	//public static int 
 	
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.

@@ -31,7 +31,7 @@ public class SS_Shooter extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
     	//rotationMotor.enableBrakeMode(true);
-        setDefaultCommand(new C_ShooterMoveRotation());
+        //setDefaultCommand(new C_ShooterMoveRotation()); // Comented out for testing
     }
     
     public void setSpeedMainMotor(double pSpeed){
