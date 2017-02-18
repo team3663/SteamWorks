@@ -23,7 +23,7 @@ public class SS_FuelPickup extends Subsystem {
     }
     
     private void setPickupMotorSpeed(double pSpeed){
-    	pickupMotor.set(pSpeed);
+    	pickupMotor.set(-pSpeed);
     }
     
     public void togglePickupMotor(){

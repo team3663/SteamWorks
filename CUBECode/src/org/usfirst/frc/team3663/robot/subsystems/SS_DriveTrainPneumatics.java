@@ -13,7 +13,6 @@ public class SS_DriveTrainPneumatics extends Subsystem {
 
 	private DoubleSolenoid dropButterfly = new DoubleSolenoid(Robot.robotMap.driveTrainButterflyOne, Robot.robotMap.driveTrainButterflyTwo);
 	private DoubleSolenoid gearShift = new DoubleSolenoid(Robot.robotMap.driveTrainGearShiftOne, Robot.robotMap.driveTrainGearShiftTwo);
-	
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 

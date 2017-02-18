@@ -1,44 +1,40 @@
 package org.usfirst.frc.team3663.robot.subsystems;
 
 import org.usfirst.frc.team3663.robot.Robot;
-import org.usfirst.frc.team3663.robot.commands.C_ShooterMoveRotation;
+import org.usfirst.frc.team3663.robot.commands.C_ShooterMoveRotationTeleop;
 
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
-public class SS_Shooter extends Subsystem {
+public class SS_ShooterRotation extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	private final int ROTATION_MOTOR_MAX = 200000;
-	private final int SHOOTER_EST_MAX_SPEED= 2000;
+	private final int ROTATION_MOTOR_MAX = 1450;
+	private final int ROTATION_MOTOR_MIN = 0;
 	
 	private CANTalon rotationMotor = new CANTalon(Robot.robotMap.shooterRotMotor);
-	private CANTalon mainMotor = new CANTalon(Robot.robotMap.shooterMainMotor);
-	private CANTalon mainMotor2 = new CANTalon(Robot.robotMap.shooterMainMotor2);
-	
+
 	private DigitalInput zeroSwitch = new DigitalInput(Robot.robotMap.shooterZeroDIO);
 	private DigitalInput turnLeftDIO = new DigitalInput(Robot.robotMap.shooterTurnLeftDIO);
 	private DigitalInput turnRightDIO = new DigitalInput(Robot.robotMap.shooterTurnRightDIO);
 	
-	private int[] perviousEncPos = new int[40];
+	private Encoder encoder = new Encoder(Robot.robotMap.shooterRotEncOne, Robot.robotMap.shooterRotEncTwo);
+
+	private int[] perviousEncPos = new int[5];
 	private int arrayLoc = 0;
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
     	//rotationMotor.enableBrakeMode(true);
-        setDefaultCommand(new C_ShooterMoveRotation());
-    }
-    
-    public void setSpeedMainMotor(double pSpeed){
-    	mainMotor.set(pSpeed);
-    	mainMotor2.set(-pSpeed);
+        setDefaultCommand(new C_ShooterMoveRotationTeleop());
     }
     
     public int getEncoderRotationMotor(){
@@ -53,58 +49,39 @@ public class SS_Shooter extends Subsystem {
     	//System.out.println("EncoderAvrage : " + temp/perviousEncPos.length);
     	return (int) (temp/perviousEncPos.length);
     }
-
-    public void resetMainMotorEncoder(int targetSpeed){
-    	if(targetSpeed > 0){
-    		currentSpeed = (double)targetSpeed/(double)SHOOTER_EST_MAX_SPEED; 
-    	}
-    	else{
-    		currentSpeed = -(double)targetSpeed/(double)SHOOTER_EST_MAX_SPEED;
-    	}
-    	System.out.println("Current Speed : " + currentSpeed);
-    	lastEncVal = mainMotor.getEncPosition()+1;
-    }
- 
-    private double currentSpeed = 0;
-    private int lastEncVal = 0;
-    public void mainMotorStayAtVel(int pVal){
-    	int currentEncVal = mainMotor.getEncPosition();
-    	if(currentEncVal != lastEncVal){
-	    	double vel = (currentEncVal - lastEncVal)/20;
-	    	if(Math.abs(vel) < 5000){
-		    	currentSpeed -= ((vel - pVal)/Math.abs(pVal))/25;
-		    	setSpeedMainMotor(-currentSpeed);
-		    	System.out.println("Velocity : " + vel + "ticks/ms);  CEncPos : " + currentEncVal + "  Current Speed : " + currentSpeed);
-	    	}
-	    	lastEncVal = currentEncVal;
-	    } 
-    }
     
 /***all of the code responsible for moving the rotation***/   
     private int encoderZero = 0;
     private int lastEncRun = 0;
     private double lastSpeed = 0;
+    public boolean isZeroFound = false;
+    public boolean safeToShoot = false;
     
     public void setSpeedRotationMotor(double pSpeed){
     	rotationMotor.set(pSpeed);
     }
     
     public void advRotResetEnc(){
-    	rotationMotor.setPosition(0);
+    	encoder.reset();
     }
     
     public void setRotMotorBreak(boolean pBreak){
     	rotationMotor.enableBrakeMode(pBreak);
     }
     
+    public int getEncLocation(){
+    	return encoder.get();
+    }
+    
     public void advSetRotSpd(double pSpd){
-    	int currentEncLocation = -rotationMotor.getEncPosition();
-    	if((currentEncLocation < ROTATION_MOTOR_MAX && pSpd > 0)){
+    	int currentEncLocation = getEncLocation();
+    	//System.out.println("Current Enc Loc : " + currentEncLocation);
+    	if((currentEncLocation < ROTATION_MOTOR_MAX && pSpd > 0) && isZeroFound){
     		pSpd = advConvertSpeed(pSpd, currentEncLocation, ROTATION_MOTOR_MAX);
     		setSpeedRotationMotor(pSpd);
     	}
-    	else if((currentEncLocation > 0 && pSpd < 0)){
-    		pSpd = advConvertSpeed(pSpd, currentEncLocation, 0);
+    	else if((currentEncLocation > ROTATION_MOTOR_MIN && pSpd < 0) && isZeroFound){
+    		pSpd = advConvertSpeed(pSpd, currentEncLocation, ROTATION_MOTOR_MIN);
     		setSpeedRotationMotor(pSpd);
     	}
     	else{
@@ -125,28 +102,28 @@ public class SS_Shooter extends Subsystem {
     		}
 			int encToDest = pEnc - dest;
 			double amount = ((double)encToDest/(double)encDisp);
-			speed = amount/20;
+			speed = amount/10;
 			if(Math.abs(speed) < 1000){
 				lastSpeed = speed;				
 			}
 			if(Math.abs(speed) > 1000){
 				if(pSpd > 0){
-					speed = .06;
+					speed = .1;
 				}
 				else{
-					speed = -.06;
+					speed = -.1;
 				}
 			}
     	}
 		if(Math.abs(pSpd) > Math.abs(speed) && pSpd*speed > 0){
 			pSpd = speed;
 		}
-		//System.out.println(lastEncRun + "   " + pEnc + "  " + pSpd + "   " + speed + "   " + lastSpeed);
+		System.out.println(lastEncRun + "   " + pEnc + "  " + pSpd + "   " + speed + "   " + lastSpeed);
     	return pSpd;
     }
     
     private void advRotorMoveToLoc(int encLocation){
-    	int currEnc = -rotationMotor.getEncPosition();
+    	int currEnc = -getEncLocation();
     	double pSpd = 0;
     	if(currEnc-encLocation > 0){
     		pSpd = 1;
@@ -162,20 +139,28 @@ public class SS_Shooter extends Subsystem {
     	boolean right = turnRightDIO.get();
     	if(left && right){
     		advSetRotSpd(0);
-    		System.out.println("****GOOD TO SHOOT****");
+    		//System.out.println("****GOOD TO SHOOT****");
+    		safeToShoot = true;
     	}
     	else if(right){
     		advSetRotSpd(1);    		
-    		System.out.println("MOVE : right");
+    		//System.out.println("MOVE : right");
+    		safeToShoot = false;
     	}
     	else if(left){
     		advSetRotSpd(-1);
-    		System.out.println("MOVE : left");
+    		//System.out.println("MOVE : left");
+    		safeToShoot = false;
     	}
     	else{
     		setSpeedRotationMotor(0);
-    		System.out.println("ERROR : no input");
+    		//System.out.println("ERROR : no input");
+    		safeToShoot = false;
     	}
+    }
+    
+    public boolean zeroEncLimit(){
+    	return zeroSwitch.get();
     }
 }
 
