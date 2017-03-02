@@ -1,7 +1,10 @@
 package org.usfirst.frc.team3663.robot;
 
+import org.usfirst.frc.team3663.robot.commands.CG_GearLift;
+import org.usfirst.frc.team3663.robot.commands.CG_GearLoadSet;
 import org.usfirst.frc.team3663.robot.commands.CG_ShootBasedOnCam;
 import org.usfirst.frc.team3663.robot.commands.CG_ShooterFireAndLoad;
+import org.usfirst.frc.team3663.robot.commands.C_ClimberSetSpeed;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainEncoderDrive;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainSetButterfly;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainSetGearShift;
@@ -11,8 +14,10 @@ import org.usfirst.frc.team3663.robot.commands.C_GearRunMotor;
 import org.usfirst.frc.team3663.robot.commands.C_GearUpPistonSet;
 import org.usfirst.frc.team3663.robot.commands.C_LiftMoveUp;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterHoldSpeed;
+import org.usfirst.frc.team3663.robot.commands.C_ShooterMoveRotationAuto;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterRotFindZero;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterRotateToDegree;
+import org.usfirst.frc.team3663.robot.commands.C_ShooterSetPiston;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -29,44 +34,50 @@ public class OI {
 /***DRIVE TRAIN BUTTONS***/
 		Button driveTrainToggleButterfly = new JoystickButton(driveJoystick, 8);
 		Button driveTrainToggleGearShift = new JoystickButton(driveJoystick, 9);//1
-		Button driveToEncLoc = new JoystickButton(driveJoystick, 3);
+		//Button driveToEncLoc = new JoystickButton(driveJoystick, 3);
 		
 		driveTrainToggleButterfly.whenReleased(new C_DriveTrainSetButterfly(Robot.ss_DriveTrainPneumatics.wheelsDown));
 		driveTrainToggleGearShift.whenReleased(new C_DriveTrainSetGearShift(Robot.ss_DriveTrainPneumatics.lowGear));
-		driveToEncLoc.whenPressed(new C_DriveTrainEncoderDrive(200000));
+		//driveToEncLoc.whenPressed(new C_DriveTrainEncoderDrive(180));
 		
 /***FUEL PICKUP BUTTONS***/
+		
 		Button fuelPickupToggle = new JoystickButton(driveJoystick, 2);
 		
 		fuelPickupToggle.whenReleased(new C_FuelPickupToggle());
 		
 /***SHOOTER BUTTONS***/
-		//Button shooterPresetTest = new JoystickButton(driveJoystick, 10);
+		//Button shooterUseDIO = new JoystickButton(driveJoystick, 3);
+	    //Button shooterPresetTest = new JoystickButton(driveJoystick, 10);
 		//Button shooterFireAndLoad = new JoystickButton(driveJoystick, 1);
-		Button shooterZeroRotation = new JoystickButton(driveJoystick, 7);
+		//Button shooterZeroRotation = new JoystickButton(driveJoystick, 7);
 		//Button shooterAutoFire = new JoystickButton(driveJoystick, 4);
+		//Button shooterTest = new JoystickButton(driveJoystick, 1);
 		
-		//shooterPresetTest.whenPressed(new C_ShooterHoldSpeed(1175));
+		//shooterUseDIO.whenPressed(new C_ShooterMoveRotationAuto());
+		//shooterPresetTest.whenPressed(new C_ShooterHoldSpeed(1100));
 		//shooterFireAndLoad.whileHeld(new CG_ShooterFireAndLoad());
-		shooterZeroRotation.whenPressed(new C_ShooterRotFindZero());
+		//shooterZeroRotation.whenPressed(new C_ShooterRotFindZero());
 		//shooterAutoFire.whileHeld(new CG_ShootBasedOnCam());
+		//shooterTest.whenPressed(new C_ShooterSetPiston(Robot.ss_ShooterMainWheel.hoodUp));
 		
 /***LIFT BUTTONS***/
-		Button liftFuelUp = new JoystickButton(driveJoystick,1);
+		//Button liftFuelUp = new JoystickButton(driveJoystick,1);
 		
-		liftFuelUp.whileHeld(new C_LiftMoveUp(1));
+		//liftFuelUp.whileHeld(new C_LiftMoveUp(1));
 		
 /***GEAR PICKUP BUTTONS***/
-		Button gearUp = new JoystickButton(driveJoystick, 5);
-		Button gearClose = new JoystickButton(driveJoystick, 6);//3
-		Button gearMotorRun = new JoystickButton(driveJoystick, 4);
+		Button gearAutoLift = new JoystickButton(driveJoystick, 6);
 		
-		gearMotorRun.whileHeld(new C_GearRunMotor());
-		gearUp.whenPressed(new C_GearUpPistonSet(true));
-		gearUp.whenReleased(new C_GearUpPistonSet(false));
-		gearClose.whenPressed(new C_GearClampSet(true));
-		gearClose.whenReleased(new C_GearClampSet(false));
+		gearAutoLift.whenPressed(new CG_GearLoadSet());
+		gearAutoLift.whenReleased(new CG_GearLift());
 		
+/***CLIMBER MOTORS***/
+		Button climb = new JoystickButton(driveJoystick, 3);
+		Button climbRelease = new JoystickButton(driveJoystick, 7);
+		
+		climb.whileHeld(new C_ClimberSetSpeed(1));
+		climbRelease.whileHeld(new C_ClimberSetSpeed(-.2));
 	}
 }
 

@@ -17,7 +17,7 @@ public class SS_ShooterRotation extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	private final int ROTATION_MOTOR_MAX = 1450;
+	private final int ROTATION_MOTOR_MAX = 1445;
 	private final int ROTATION_MOTOR_MIN = 0;
 	
 	private CANTalon rotationMotor = new CANTalon(Robot.robotMap.shooterRotMotor);
@@ -58,7 +58,7 @@ public class SS_ShooterRotation extends Subsystem {
     public boolean safeToShoot = false;
     
     public void setSpeedRotationMotor(double pSpeed){
-    	rotationMotor.set(pSpeed);
+    	rotationMotor.set(-pSpeed);
     }
     
     public void advRotResetEnc(){
@@ -139,22 +139,22 @@ public class SS_ShooterRotation extends Subsystem {
     	boolean right = turnRightDIO.get();
     	if(left && right){
     		advSetRotSpd(0);
-    		//System.out.println("****GOOD TO SHOOT****");
+    		System.out.println("****GOOD TO SHOOT****");
     		safeToShoot = true;
     	}
     	else if(right){
-    		advSetRotSpd(1);    		
-    		//System.out.println("MOVE : right");
+    		advSetRotSpd(.4);    		
+    		System.out.println("MOVE : right");
     		safeToShoot = false;
     	}
     	else if(left){
-    		advSetRotSpd(-1);
-    		//System.out.println("MOVE : left");
+    		advSetRotSpd(-.4);
+    		System.out.println("MOVE : left");
     		safeToShoot = false;
     	}
     	else{
     		setSpeedRotationMotor(0);
-    		//System.out.println("ERROR : no input");
+    		System.out.println("ERROR : no input");
     		safeToShoot = false;
     	}
     }

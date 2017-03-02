@@ -33,7 +33,7 @@ public class SS_FuelPickup extends Subsystem {
     	}
     	else{
     		motorToggled = true;
-    		setPickupMotorSpeed(1);
+    		setPickupMotorSpeed(.5);
     	}
     }
 }

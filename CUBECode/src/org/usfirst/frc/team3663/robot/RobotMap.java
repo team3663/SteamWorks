@@ -7,58 +7,64 @@ public class RobotMap {
 	
 /***DRIVETRAIN PORTS***/	
 	//motors
-	public static int driveMotorLeftOne = 7;
-	public static int driveMotorLeftTwo = 11;
-	public static int driveMotorRightOne = 4;
-	public static int driveMotorRightTwo = 20;
+	public static int driveMotorLeftOne = 0;
+	public static int driveMotorLeftTwo = 1;
+	public static int driveMotorRightOne = 2;
+	public static int driveMotorRightTwo = 3;
 	//pneumatics
-	public static int driveTrainButterflyOne = 2;
-	public static int driveTrainButterflyTwo = 3;
-	public static int driveTrainGearShiftOne = 6;
-	public static int driveTrainGearShiftTwo = 7;
+	public static int driveTrainMain = 0;
+	public static int driveTrainButterflyOne = 6;
+	public static int driveTrainButterflyTwo = 7;
+	public static int driveTrainGearShiftOne = 4;
+	public static int driveTrainGearShiftTwo = 5;
 	//encoders
-	public static int driveTrainEncoderLeftOne 	= 4;
-	public static int driveTrainEncoderLeftTwo 	= 5;
-	public static int driveTrainEncoderRightOne = 6;
-	public static int driveTrainEncoderRightTwo = 7;
+	public static int driveTrainEncoderLeftOne 	= 2;
+	public static int driveTrainEncoderLeftTwo 	= 3;
+	public static int driveTrainEncoderRightOne = 0;
+	public static int driveTrainEncoderRightTwo = 1;
 	
 /***PICKUP PORTS***/	
 	//motors
-	public static int fuelPickupMotor = 6;
+	public static int fuelPickupMotor = 10;
 	
 /***SHOOTER PORTS***/
 	//motors
-	public static int shooterRotMotor  = 0;	
-	public static int shooterMainMotor = 1;		//has encoder attached
-	public static int shooterMainMotor2= 4;
+	public static int shooterRotMotor  = 7;	
+	public static int shooterMainMotor = 12;		//has encoder attached
+	public static int shooterMainMotor2= 6;
 	//digtial Input
-	public static int shooterZeroDIO = 2;
-	public static int shooterTurnLeftDIO = 20;
-	public static int shooterTurnRightDIO = 25;
+	public static int shooterZeroDIO = 7;
+	public static int shooterTurnLeftDIO = 9;
+	public static int shooterTurnRightDIO = 8;
 	//Encoder
-	public static int shooterRotEncOne = 0;
-	public static int shooterRotEncTwo = 1;
+	public static int shooterRotEncOne = 4;
+	public static int shooterRotEncTwo = 5;
+	//pneumatic
+	public static int shooterMain = 1;
+	public static int shooterPistonOne = 0;
+	public static int shooterPistonTwo = 1;
 	
 /***LIFT PORTS***/
 	//motor
-	public static int liftFeedMotor = 5;
-	public static int liftYellowMotor = 3;
+	public static int liftFeedMotor = 8;
+	public static int liftYellowMotor = 9;
 	
 /***CLIMBER PORTS***/
 	//motor
-	public static int climberMotor = 19;
-	public static int climberMotor2 = 19;
+	public static int climberMotor = 4;
+	public static int climberMotor2 = 5;
 	
 /***GearPickup***/
 	//motors
-	public static int gearPickupMotor = 2;
+	public static int gearPickupMotor = 11;
 	//pneumatics
-	public static int gearPickupUpOne = 4;
-	public static int gearPickupUpTwo = 5;
+	public static int gearMain = 0;
+	public static int gearPickupUpOne = 2;
+	public static int gearPickupUpTwo = 3;
 	public static int gearPickupCloseOne = 0;
 	public static int gearPickupCloseTwo = 1;
 	//DIO
-	public static int gearTrigger = 3;
+	public static int gearTrigger = 20;
 	
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
