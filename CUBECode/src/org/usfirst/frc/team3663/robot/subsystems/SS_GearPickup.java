@@ -6,6 +6,7 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -22,9 +23,20 @@ public class SS_GearPickup extends Subsystem {
 	
 	private DigitalInput gearSensor = new DigitalInput(Robot.robotMap.gearTrigger);
 	
+	private Relay spike = new Relay(Robot.robotMap.pickupLED);
+	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    }
+
+    public void setLight(boolean pValue){ //True is on
+    	if(pValue){
+    		spike.set(Relay.Value.kForward);
+    	}
+    	else{
+    		spike.set(Relay.Value.kReverse);
+    	}
     }
     
     public void setGearUp(boolean pState){

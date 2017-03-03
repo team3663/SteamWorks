@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="BasicDrive/src"/>
+	<classpathentry kind="src" path="BloodHound/src"/>
+	<classpathentry kind="src" path="CUBECode/src"/>
+	<classpathentry kind="src" path="HoundDogv1/src"/>
+	<classpathentry kind="src" path="Test/src"/>
+	<classpathentry kind="lib" path="CUBECode/build/jars/cscore.jar"/>
+	<classpathentry kind="lib" path="CUBECode/build/jars/NetworkTables.jar"/>
+	<classpathentry kind="lib" path="CUBECode/build/jars/opencv.jar"/>
+	<classpathentry kind="lib" path="CUBECode/build/jars/TalonSRXLibJava.jar"/>
+	<classpathentry kind="lib" path="CUBECode/build/jars/WPILib.jar"/>
+	<classpathentry kind="lib" path="CUBECode/dist/FRCUserProgram.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="BasicDrive/bin"/>
+</classpath>

@@ -41,7 +41,6 @@ public class OI {
 		driveTrainToggleButterfly.whenReleased(new C_DriveTrainSetButterfly(Robot.ss_DriveTrainPneumatics.wheelsDown));
 		driveTrainToggleGearShift.whenReleased(new C_DriveTrainSetGearShift(Robot.ss_DriveTrainPneumatics.lowGear));
 		driveTrainToggleDir.whenPressed(new C_DriveChangeDirectionToggle());
-		//driveToEncLoc.whenPressed(new C_DriveTrainEncoderDrive(180));
 		
 /***FUEL PICKUP BUTTONS***/
 		
@@ -70,10 +69,12 @@ public class OI {
 		//liftFuelUp.whileHeld(new C_LiftMoveUp(1));
 		
 /***GEAR PICKUP BUTTONS***/
-		Button gearAutoLift = new JoystickButton(driveJoystick, 6);
+		Button gearMotorRun = new JoystickButton(driveJoystick, 4);
+		Button gearMotorReverse= new JoystickButton(driveJoystick, 3);
 		
-		gearAutoLift.whenPressed(new CG_GearLoadSet());
-		gearAutoLift.whenReleased(new CG_GearLift());
+		gearMotorReverse.whenPressed(new C_GearRunMotor(1));
+		gearMotorReverse.whenReleased(new C_GearRunMotor(0));
+		gearMotorRun.whenPressed(new CG_GearLift());
 		
 /***CLIMBER MOTORS***/
 		Button climb = new JoystickButton(driveJoystick, 3);

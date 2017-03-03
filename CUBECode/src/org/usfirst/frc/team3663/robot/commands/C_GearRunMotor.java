@@ -8,9 +8,11 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class C_GearRunMotor extends Command {
-
-    public C_GearRunMotor() {
+	
+	private int speed;
+    public C_GearRunMotor(int pSp) {
         // Use requires() here to declare subsystem dependencies
+    	speed = pSp;
         requires(Robot.ss_GearPickup);
     }
 
@@ -20,7 +22,7 @@ public class C_GearRunMotor extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ss_GearPickup.setGearMotorSpeed(-1);
+    	Robot.ss_GearPickup.setGearMotorSpeed(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
