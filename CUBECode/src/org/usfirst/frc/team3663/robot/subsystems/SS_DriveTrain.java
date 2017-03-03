@@ -27,6 +27,8 @@ public class SS_DriveTrain extends Subsystem {
 				
 	private RobotDrive drive = new RobotDrive(leftDriveMotorOne, leftDriveMotorTwo, rightDriveMotorOne, rightDriveMotorTwo);
 
+	public int dir = 1;
+	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         setDefaultCommand(new C_Drive());
@@ -38,9 +40,13 @@ public class SS_DriveTrain extends Subsystem {
     	leftDriveMotorTwo.set(speed);
     }
     
+    public void setDirection(int pDir){
+    	dir = 1;
+    }
+    
     public void driveRobot(double pAxisX, double pAxisY){
     	//System.out.println(getLeftEncoder() + ",  " + getRightEncoder());
-    	drive.arcadeDrive(pAxisX, pAxisY);
+    	drive.arcadeDrive(dir*pAxisX, pAxisY);
     }
     
 /*****Drive Encoders Code******/
