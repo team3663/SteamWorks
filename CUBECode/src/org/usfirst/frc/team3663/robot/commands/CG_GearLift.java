@@ -8,12 +8,13 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class CG_GearAutoPickup extends CommandGroup {
+public class CG_GearLift extends CommandGroup {
 
-    public CG_GearAutoPickup() {
+    public CG_GearLift() {
         // Add Commands here:
-        addSequential(new C_GearClampSet(false));
+        addSequential(new C_GearClampSet(true));
         addSequential(new C_GearUpPistonSet(false));
+<<<<<<< HEAD:CUBECode/src/org/usfirst/frc/team3663/robot/commands/CG_GearAutoPickup.java
         addParallel(new C_GearRunMotor(-1));
         addSequential(new C_GearPickupLED(true));
         addSequential(new C_GearWaitForSensor());
@@ -24,6 +25,8 @@ public class CG_GearAutoPickup extends CommandGroup {
         
    
         //addSequential(new )
+=======
+>>>>>>> 5842c84728fb8996a5ce8743d12dfa5698cc4842:CUBECode/src/org/usfirst/frc/team3663/robot/commands/CG_GearLift.java
         //      addSequential(new Command2());
         // these will run in order.
 

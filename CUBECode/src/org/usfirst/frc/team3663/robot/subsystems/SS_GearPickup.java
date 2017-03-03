@@ -15,8 +15,8 @@ public class SS_GearPickup extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	private DoubleSolenoid gearUp = new DoubleSolenoid(Robot.robotMap.gearPickupUpOne, Robot.robotMap.gearPickupUpTwo);
-	private DoubleSolenoid gearClamp = new DoubleSolenoid(Robot.robotMap.gearPickupCloseOne, Robot.robotMap.gearPickupCloseTwo);
+	private DoubleSolenoid gearUp = new DoubleSolenoid(Robot.robotMap.gearMain, Robot.robotMap.gearPickupUpOne, Robot.robotMap.gearPickupUpTwo);
+	private DoubleSolenoid gearClamp = new DoubleSolenoid(Robot.robotMap.gearMain, Robot.robotMap.gearPickupCloseOne, Robot.robotMap.gearPickupCloseTwo);
 
 	private CANTalon gearMotor = new CANTalon(Robot.robotMap.gearPickupMotor);
 	

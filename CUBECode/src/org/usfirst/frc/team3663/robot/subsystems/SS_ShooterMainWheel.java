@@ -4,6 +4,7 @@ import org.usfirst.frc.team3663.robot.Robot;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -11,10 +12,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class SS_ShooterMainWheel extends Subsystem {
 
-	private final int SHOOTER_EST_MAX_SPEED= 2000;
+	private final int SHOOTER_EST_MAX_SPEED= 1200;
 	
 	private CANTalon mainMotor = new CANTalon(Robot.robotMap.shooterMainMotor);
 	private CANTalon mainMotor2 = new CANTalon(Robot.robotMap.shooterMainMotor2);
+	
+	private DoubleSolenoid hoodHeight = new DoubleSolenoid(Robot.robotMap.shooterMain, Robot.robotMap.shooterPistonOne, Robot.robotMap.shooterPistonTwo);
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -22,7 +25,7 @@ public class SS_ShooterMainWheel extends Subsystem {
     }
     
     public void setSpeedMainMotor(double pSpeed){
-    	mainMotor.set(pSpeed);
+    	mainMotor.set(-pSpeed);
     	mainMotor2.set(pSpeed);
     }
     
@@ -30,6 +33,12 @@ public class SS_ShooterMainWheel extends Subsystem {
     	System.out.println("Shooter safe : " + Robot.ss_ShooterRotation.safeToShoot);
     	return Robot.ss_ShooterRotation.safeToShoot;
     	//return false;
+    }
+    
+    public int getEncoder(){
+    	System.out.println(""+ mainMotor.getEncPosition() + ", " + mainMotor2.getEncPosition());
+    	return mainMotor.getEncPosition();
+    	
     }
 	    
 	public void resetMainMotorEncoder(int targetSpeed){
@@ -42,13 +51,13 @@ public class SS_ShooterMainWheel extends Subsystem {
 		System.out.println("Current Speed : " + currentSpeed);
 		lastEncVal = mainMotor.getEncPosition()+1;
 	}
-	
+		
 	private double currentSpeed = 0;
 	private int lastEncVal = 0;
 	public void mainMotorStayAtVel(int pVal){
-		int currentEncVal = mainMotor.getEncPosition();
+		int currentEncVal = getEncoder();
 		if(currentEncVal != lastEncVal){
-	    	double vel = (currentEncVal - lastEncVal)/20;
+	    	double vel = -(currentEncVal - lastEncVal)/20;
 	    	if(Math.abs(vel) < 5000){
 		    	currentSpeed -= ((vel - pVal)/Math.abs(pVal))/25;
 		    	setSpeedMainMotor(currentSpeed);
@@ -56,6 +65,18 @@ public class SS_ShooterMainWheel extends Subsystem {
 	    	}
 	    	lastEncVal = currentEncVal;
 	    } 
-}
+	}
+	
+	public boolean hoodUp = false;
+	public void setPistonValue(boolean pState){
+		if(hoodUp){
+			hoodHeight.set(DoubleSolenoid.Value.kForward);
+			hoodUp = false;
+		}
+		else{
+			hoodHeight.set(DoubleSolenoid.Value.kReverse);
+			hoodUp = true;
+		}
+	}
 }
 
