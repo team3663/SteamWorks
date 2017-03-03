@@ -5,13 +5,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class CG_GearAutoPickup extends CommandGroup {
+public class CG_GearLift extends CommandGroup {
 
-    public CG_GearAutoPickup() {
+    public CG_GearLift() {
         // Add Commands here:
-        addSequential(new C_GearClampSet(false));
+        addSequential(new C_GearClampSet(true));
         addSequential(new C_GearUpPistonSet(false));
-        //addSequential(new )
         //      addSequential(new Command2());
         // these will run in order.
 

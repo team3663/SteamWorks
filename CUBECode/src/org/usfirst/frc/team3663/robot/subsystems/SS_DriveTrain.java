@@ -87,7 +87,7 @@ public class SS_DriveTrain extends Subsystem {
     }
     
     public void advStartEncDrive(int pEndLoc){
-    	setEndingRightLocation(pEndLoc);
+    	setEndingRightLocation((int)(pEndLoc*118.88));
     	setEndingLeftLocation(pEndLoc);
     	if(pEndLoc > 0){
     		lastSpeed = -1;
@@ -98,6 +98,8 @@ public class SS_DriveTrain extends Subsystem {
     }
     
     public void advDriveToLoc(){
+    	leftDriveMotorOne.enableBrakeMode(true);
+    	rightDriveMotorOne.enableBrakeMode(true);
     	int rightEnc = getRightEncoder();
     	int leftEnc = getLeftEncoder();
     	int encToDestR = endEncLocRight - rightEnc;
@@ -106,14 +108,14 @@ public class SS_DriveTrain extends Subsystem {
     	int encToDestL = endEncLocLeft - leftEnc;
     	lastEncRunRight = rightEnc;
     	lastEncRunLeft = leftEnc;
-    	double forwardSpeedR = ((double)encToDestR/(double)encDispR)/10;
-    	double forwardSpeedL = ((double)encToDestL/(double)encDispR)/10;
+    	double forwardSpeedR = ((double)encToDestR/(double)encDispR)/52.5;
+    	double forwardSpeedL = ((double)encToDestL/(double)encDispL)/52.5;
     	double turnSpeed = 0;
-    	if(forwardSpeedR < 0xffffffff){
-    		turnSpeed = (forwardSpeedR - forwardSpeedL);
+    	if(forwardSpeedR < 0x00ffffff){
+    		turnSpeed = (double)((double)forwardSpeedL - (double)forwardSpeedR)/1000;
     	}
-    	System.out.println(rightEnc + ",  " + leftEnc + ",  " + turnSpeed);
-    	driveRobot(forwardSpeedR, 0);
+    	System.out.println(rightEnc + ",  " + leftEnc + ",  " + turnSpeed + ",  " + forwardSpeedR + ",  " + forwardSpeedL);
+    	driveRobot(forwardSpeedR, turnSpeed);
     }
     
     public boolean advDriveOverLoc(){
