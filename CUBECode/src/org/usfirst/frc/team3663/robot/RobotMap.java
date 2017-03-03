@@ -59,6 +59,8 @@ public class RobotMap {
 	public static int gearPickupCloseTwo = 1;
 	//DIO
 	public static int gearTrigger = 3;
+	//Relay
+	public static int pickupLED= 1;
 	
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.

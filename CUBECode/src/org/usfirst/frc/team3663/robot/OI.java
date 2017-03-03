@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3663.robot;
 
+import org.usfirst.frc.team3663.robot.commands.CG_GearAutoPickup;
 import org.usfirst.frc.team3663.robot.commands.CG_ShootBasedOnCam;
 import org.usfirst.frc.team3663.robot.commands.CG_ShooterFireAndLoad;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainEncoderDrive;
@@ -29,11 +30,11 @@ public class OI {
 /***DRIVE TRAIN BUTTONS***/
 		Button driveTrainToggleButterfly = new JoystickButton(driveJoystick, 8);
 		Button driveTrainToggleGearShift = new JoystickButton(driveJoystick, 9);//1
-		Button driveToEncLoc = new JoystickButton(driveJoystick, 3);
+		//Button driveToEncLoc = new JoystickButton(driveJoystick, 3);
 		
 		driveTrainToggleButterfly.whenReleased(new C_DriveTrainSetButterfly(Robot.ss_DriveTrainPneumatics.wheelsDown));
 		driveTrainToggleGearShift.whenReleased(new C_DriveTrainSetGearShift(Robot.ss_DriveTrainPneumatics.lowGear));
-		driveToEncLoc.whenPressed(new C_DriveTrainEncoderDrive(200000));
+		//driveToEncLoc.whenPressed(new C_DriveTrainEncoderDrive(200000));
 		
 /***FUEL PICKUP BUTTONS***/
 		Button fuelPickupToggle = new JoystickButton(driveJoystick, 2);
@@ -60,8 +61,11 @@ public class OI {
 		Button gearUp = new JoystickButton(driveJoystick, 5);
 		Button gearClose = new JoystickButton(driveJoystick, 6);//3
 		Button gearMotorRun = new JoystickButton(driveJoystick, 4);
+		Button gearMotorReverse= new JoystickButton(driveJoystick, 3);
 		
-		gearMotorRun.whileHeld(new C_GearRunMotor());
+		gearMotorReverse.whenPressed(new C_GearRunMotor(1));
+		gearMotorReverse.whenReleased(new C_GearRunMotor(0));
+		gearMotorRun.whenPressed(new CG_GearAutoPickup());
 		gearUp.whenPressed(new C_GearUpPistonSet(true));
 		gearUp.whenReleased(new C_GearUpPistonSet(false));
 		gearClose.whenPressed(new C_GearClampSet(true));

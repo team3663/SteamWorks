@@ -5,11 +5,13 @@ import org.usfirst.frc.team3663.robot.subsystems.SS_Climber;
 import org.usfirst.frc.team3663.robot.subsystems.SS_DriveTrain;
 import org.usfirst.frc.team3663.robot.subsystems.SS_DriveTrainPneumatics;
 import org.usfirst.frc.team3663.robot.subsystems.SS_FuelPickup;
+import org.usfirst.frc.team3663.robot.subsystems.SS_GearLED;
 import org.usfirst.frc.team3663.robot.subsystems.SS_GearPickup;
 import org.usfirst.frc.team3663.robot.subsystems.SS_Lift;
 import org.usfirst.frc.team3663.robot.subsystems.SS_ShooterMainWheel;
 import org.usfirst.frc.team3663.robot.subsystems.SS_ShooterRotation;
 import org.usfirst.frc.team3663.robot.subsystems.SS_Timer;
+
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -38,6 +40,7 @@ public class Robot extends IterativeRobot {
 	public static SS_Timer ss_Timer;
 	public static SS_Climber ss_Climber;
 	public static SS_GearPickup ss_GearPickup;
+	public static SS_GearLED ss_GearLED;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -55,6 +58,7 @@ public class Robot extends IterativeRobot {
 		ss_Timer = new SS_Timer();
 		ss_Climber = new SS_Climber();
 		ss_GearPickup = new SS_GearPickup();
+		ss_GearLED = new SS_GearLED();
 		oi = new OI();
 	}
 

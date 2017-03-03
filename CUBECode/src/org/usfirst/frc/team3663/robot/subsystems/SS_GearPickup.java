@@ -27,6 +27,7 @@ public class SS_GearPickup extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
+    
     public void setGearUp(boolean pState){
     	if(pState){
     		gearUp.set(DoubleSolenoid.Value.kForward);
