@@ -6,7 +6,6 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-private CANTalon rotationMotor = new CANTalon(Robot.robotMap.shooterRotMotor);
 
 /**
  *
@@ -19,18 +18,6 @@ public class SS_EncoderTest extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    }
-    public driveStright(){
-    	
-    	
-    	if(){
-    		
-    		
-    		
-    	}
-    	
-    	
-    }
     }
 }
 

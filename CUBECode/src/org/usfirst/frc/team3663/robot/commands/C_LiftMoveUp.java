@@ -9,8 +9,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class C_LiftMoveUp extends Command {
 
-    public C_LiftMoveUp() {
+	private double speed = 0;
+    public C_LiftMoveUp(double pSpd) {
         // Use requires() here to declare subsystem dependencies
+    	speed = pSpd;
         requires(Robot.ss_Lift);
     }
 
@@ -20,7 +22,7 @@ public class C_LiftMoveUp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ss_Lift.setSpeedLiftMotor(.5);
+    	Robot.ss_Lift.setTotalLiftSpeed(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -30,7 +32,7 @@ public class C_LiftMoveUp extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.ss_Lift.setSpeedLiftMotor(0);
+    	Robot.ss_Lift.setTotalLiftSpeed(0);
     }
 
     // Called when another command which requires one or more of the same

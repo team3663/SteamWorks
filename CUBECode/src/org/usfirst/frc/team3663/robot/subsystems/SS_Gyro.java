@@ -21,7 +21,7 @@ public class SS_Gyro extends Subsystem {
 	public double currentHeading;
 	public double MaxSpeed = 0;
 	public double speed = 0;
-	public double BaseSpeed = .35;
+	public double BaseSpeed = .5;                // this value is for .35 for turret;
 	public double angle;
 	public double offSet;
 	double lastValue = 0;
@@ -81,15 +81,15 @@ public class SS_Gyro extends Subsystem {
         //    DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
         //    return false;
        // }
-    	if (currentHeading < -180) {
-    		currentHeading = currentHeading + 180;
-    	}
-    	if (currentHeading > 180) {
-    		currentHeading = currentHeading - 180;
-    	}
+//    	if (currentHeading < -180) {
+//    		currentHeading = currentHeading + 180;
+//    	}
+//    	if (currentHeading > 180) {
+//    		currentHeading = currentHeading - 180;
+//    	}
     	if (Math.abs(degree) > 15)
     	{
-    		MaxSpeed = .50;
+    		MaxSpeed = .5;
     	}
     	else
     	{
@@ -105,14 +105,21 @@ public class SS_Gyro extends Subsystem {
     		{
     			speed = -1*speed;
     		}
-    		Robot.ss_DriveTrain.driveRobot(speed, -1*speed);
-	    	if(Math.abs(currentHeading-degree) <= .5)
+    		Robot.ss_DriveTrain.driveRobot(0, speed);
+	    	if(Math.abs(currentHeading-degree) <= .25)
 	    	{
 	    		speed = 0;
 	    		Robot.ss_DriveTrain.driveRobot(speed, speed);
+	    		Robot.ss_DriveTrain.EnableBrakeMode(true);
 	    		System.out.println("Angled Reached" + currentHeading);
 	    		return true;
 	    	}
+    	}
+    	if (Math.abs(currentHeading) > 180)
+    	{
+    		Robot.ss_DriveTrain.EnableBrakeMode(true);
+    		System.out.println("Angled Reached" + currentHeading);
+    		return true;
     	}
     	if (Math.abs(speed) > 1)
     	{

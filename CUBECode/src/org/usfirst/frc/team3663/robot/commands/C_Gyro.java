@@ -13,6 +13,7 @@ public class C_Gyro extends Command {
     public C_Gyro(int pdes)
     {
     	requires(Robot.gyro);
+    	requires(Robot.ss_DriveTrain);
     	turnValue = pdes;
     }
     protected void initialize()

@@ -14,15 +14,25 @@ public class SS_Lift extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-	CANTalon liftMotor = new CANTalon(Robot.robotMap.liftMoveMotor);
+	CANTalon liftFeedMotor = new CANTalon(Robot.robotMap.liftFeedMotor);
+	CANTalon liftYellowMotor = new CANTalon(Robot.robotMap.liftYellowMotor);
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void setSpeedLiftMotor(double pSpeed){
-    	liftMotor.set(pSpeed);
+    public void setSpeedLiftFeedMotor(double pSpd){
+    	liftFeedMotor.set(-pSpd/2.5);
+    }
+    
+    public void setSpeedLiftYellowMotor(double pSpd){
+    	liftYellowMotor.set(pSpd);
+    }
+    
+    public void setTotalLiftSpeed(double pSpd){
+    	setSpeedLiftFeedMotor(pSpd);
+    	setSpeedLiftYellowMotor(-pSpd);
     }
 }
 

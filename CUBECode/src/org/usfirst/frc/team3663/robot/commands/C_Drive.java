@@ -21,7 +21,7 @@ public class C_Drive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Robot.ss_DriveTrain.moveMotor(Robot.oi.driveJoystick.getRawAxis(0));
-    	Robot.ss_DriveTrain.driveRobot(Robot.oi.driveJoystick.getRawAxis(0), -Robot.oi.driveJoystick.getRawAxis(1));
+    	Robot.ss_DriveTrain.driveRobot(Robot.oi.driveJoystick.getRawAxis(1), Robot.oi.driveJoystick.getRawAxis(0));
     }
 
     // Make this return true when this Command no longer needs to run execute()
