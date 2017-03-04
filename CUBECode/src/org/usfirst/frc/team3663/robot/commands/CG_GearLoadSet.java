@@ -12,6 +12,8 @@ public class CG_GearLoadSet extends CommandGroup {
         addSequential(new C_GearClampSet(false));
         addSequential(new C_GearUpPistonSet(true));
         //addSequential(new C_GearRunMotor());
+        addSequential(new C_GearRunMotor(1));
+
         //      addSequential(new Command2());
         // these will run in order.
 

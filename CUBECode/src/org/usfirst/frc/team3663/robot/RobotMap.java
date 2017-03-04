@@ -19,7 +19,9 @@ public class RobotMap {
 	public static int driveTrainGearShiftTwo = 5;
 	//encoders
 	public static int driveTrainEncoderLeftOne 	= 2;
-	public static int driveTrainEncoderLeftTwo 	= 27;//3
+	public static int driveTrainEncoderLeftTwo 	= 3;//3
+
+
 	public static int driveTrainEncoderRightOne = 0;
 	public static int driveTrainEncoderRightTwo = 1;
 	
@@ -64,10 +66,14 @@ public class RobotMap {
 	public static int gearPickupCloseOne = 0;
 	public static int gearPickupCloseTwo = 1;
 	//DIO
+
 	public static int gearTrigger = 6;
 	//Relay
 	public static int pickupLED= 0;
 
+	
+/***Gear Pick Up Ports***/
+	//public static int 
 	
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
