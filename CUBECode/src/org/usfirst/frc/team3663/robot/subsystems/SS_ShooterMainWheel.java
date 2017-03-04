@@ -77,7 +77,7 @@ public class SS_ShooterMainWheel extends Subsystem {
 		}
 		return (int)vel;
 	}
-	public int targetvalue=0;
+	public int targetvalue=1000;
 	public boolean hoodUp = false;
 	public void setPistonValue(boolean pState){
 		if(hoodUp){

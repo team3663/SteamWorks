@@ -14,6 +14,7 @@ public class CG_ShooterFireAndLoad extends CommandGroup {
         // these will run in order.
 
     	addParallel(new C_ShooterSpeedSet());
+    	addParallel(new C_ShooterHoldSpeed());
     	addParallel(new C_LiftMoveUp(1));
         // To run multiple commands at the same time,
         // use addParallel()

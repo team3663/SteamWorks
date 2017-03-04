@@ -31,44 +31,44 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	public Joystick driveJoystick = new Joystick(0);
-	public Joystick SpeedJoystick = new Joystick(1);
+	public Joystick speedJoystick = new Joystick(1);
 	
 	public OI(){
 /***DRIVE TRAIN BUTTONS***/
 		Button driveTrainToggleButterfly = new JoystickButton(driveJoystick, 8);
 		Button driveTrainToggleGearShift = new JoystickButton(driveJoystick, 9);
 		Button driveTrainToggleDir = new JoystickButton(driveJoystick, 4);
-		Button GyroStartNeg = new JoystickButton(SpeedJoystick,6);
-		Button GyroStartPos = new JoystickButton(SpeedJoystick,5);
+		//Button GyroStartNeg = new JoystickButton(SpeedJoystick,6);
+		//Button GyroStartPos = new JoystickButton(SpeedJoystick,5);
 		
 		driveTrainToggleButterfly.whenPressed(new C_DriveTrainSetButterfly());
 		driveTrainToggleGearShift.whenReleased(new C_DriveTrainSetGearShift(Robot.ss_DriveTrainPneumatics.lowGear));
 
 		//driveToEncLoc.whenPressed(new C_DriveTrainEncoderDrive(200000));
 
-		GyroStartNeg.whenPressed(new C_Gyro(-35));
-		GyroStartPos.whenPressed(new C_Gyro(35));		
+		//GyroStartNeg.whenPressed(new C_Gyro(-35));
+		//GyroStartPos.whenPressed(new C_Gyro(35));		
 		driveTrainToggleGearShift.whenReleased(new C_DriveTrainSetGearShift(Robot.ss_DriveTrainPneumatics.lowGear));
 		driveTrainToggleDir.whenPressed(new C_DriveChangeDirectionToggle());
 		
 /***FUEL PICKUP BUTTONS***/
 		
-		//Button fuelPickupToggle = new JoystickButton(driveJoystick, 2);
+		Button fuelPickupToggle = new JoystickButton(driveJoystick, 2);
 		
-		//fuelPickupToggle.whenReleased(new C_FuelPickupToggle());
+		fuelPickupToggle.whenReleased(new C_FuelPickupToggle());
 		
 /***SHOOTER BUTTONS***/
 		//Button shooterUseDIO = new JoystickButton(driveJoystick, 3);
 	    //Button shooterPresetTest = new JoystickButton(driveJoystick, 10);
-		Button shooterFireAndLoad = new JoystickButton(SpeedJoystick, 1);
-		//Button shooterZeroRotation = new JoystickButton(driveJoystick, 7);
+		Button shooterFireAndLoad = new JoystickButton(speedJoystick, 1);
+		Button shooterZeroRotation = new JoystickButton(speedJoystick, 7);
 		//Button shooterAutoFire = new JoystickButton(driveJoystick, 4);
 		//Button shooterTest = new JoystickButton(driveJoystick, 1);
 		
 		//shooterUseDIO.whenPressed(new C_ShooterMoveRotationAuto());
 		//shooterPresetTest.whenPressed(new C_ShooterHoldSpeed(1100));
 		shooterFireAndLoad.whileHeld(new CG_ShooterFireAndLoad());
-		//shooterZeroRotation.whenPressed(new C_ShooterRotFindZero());
+		shooterZeroRotation.whenPressed(new C_ShooterRotFindZero());
 		//shooterAutoFire.whileHeld(new CG_ShootBasedOnCam());
 		//shooterTest.whenPressed(new C_ShooterSetPiston(Robot.ss_ShooterMainWheel.hoodUp));
 		
@@ -79,21 +79,21 @@ public class OI {
 		
 /***GEAR PICKUP BUTTONS***/
 		//Button gearUp = new JoystickButton(driveJoystick, 5);
-		Button gearOpen = new JoystickButton(driveJoystick, 5);//3
-		Button gearClose = new JoystickButton(driveJoystick, 6);//3
+		//Button gearOpen = new JoystickButton(driveJoystick, 5);//3
+		//Button gearClose = new JoystickButton(driveJoystick, 6);//3
 		Button gearMotorRun = new JoystickButton(driveJoystick, 3);
-		Button gearLift = new JoystickButton(driveJoystick, 1);
-		Button gearMotorReverse= new JoystickButton(driveJoystick, 2); //Reverse	
+		//Button gearLift = new JoystickButton(driveJoystick, 1);
+		//Button gearMotorReverse= new JoystickButton(driveJoystick, 2); //Reverse	
 		
 		gearMotorRun.whenPressed(new CG_GearLift());
-		gearLift.whenPressed(new C_GearUpPistonSet(true));
-		gearLift.whenReleased(new C_GearUpPistonSet(false));
+		//gearLift.whenPressed(new C_GearUpPistonSet(true));
+		//gearLift.whenReleased(new C_GearUpPistonSet(false));
 		//gearUp.whenPressed(new C_GearUpPistonSet(true));
 		//gearUp.whenReleased(new C_GearUpPistonSet(false));
-		gearOpen.whenPressed(new C_GearClampSet(true));
-		gearClose.whenReleased(new C_GearClampSet(false));
-		gearMotorReverse.whenPressed(new C_GearRunMotor(1)); //Reverse
-		gearMotorReverse.whenReleased(new C_GearRunMotor(0)); //Reverse
+		//gearOpen.whenPressed(new C_GearClampSet(true));
+		//gearClose.whenReleased(new C_GearClampSet(false));
+		//gearMotorReverse.whenPressed(new C_GearRunMotor(1)); //Reverse
+		//gearMotorReverse.whenReleased(new C_GearRunMotor(0)); //Reverse
 
 		//Button gearAutoLift = new JoystickButton(driveJoystick, 6);
 		

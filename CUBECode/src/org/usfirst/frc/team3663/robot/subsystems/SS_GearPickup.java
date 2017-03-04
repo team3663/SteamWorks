@@ -17,7 +17,7 @@ public class SS_GearPickup extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	private CANTalon gearMotor = new CANTalon(Robot.robotMap.GearInTake);
+	private CANTalon gearMotor = new CANTalon(Robot.robotMap.gearPickupMotor);
 	//private DoubleSolenoid GearPickUp = new DoubleSolenoid(Robot.robotMap.GearPickUpOne, Robot.robotMap.dGearPickUpTwo);
 	private boolean motorToggled = false;
 	private double pSpeed = .5;
@@ -67,15 +67,6 @@ public class SS_GearPickup extends Subsystem {
     	}
     	return motorToggled; 
     }
-
-    public void setLight(boolean pValue){ //True is on
-    	if(pValue){
-    		spike.set(Relay.Value.kForward);
-    	}
-    	else{
-    		spike.set(Relay.Value.kReverse);
-    	}
-    }
     
     public void setGearUp(boolean pState){
     	if(pState){
@@ -102,6 +93,7 @@ public class SS_GearPickup extends Subsystem {
     public boolean getGearSensor(){
     	return gearSensor.get();
     }
+    
     public void setLight(boolean pValue){ //True is on
     	if(pValue){
     		spike.set(Relay.Value.kReverse);
@@ -109,5 +101,6 @@ public class SS_GearPickup extends Subsystem {
     	else{
     		spike.set(Relay.Value.kForward);
     	}
+    }
 }
 
