@@ -87,9 +87,11 @@ public class OI {
 		Button gearOPpickup = new JoystickButton(gearJoystick, 3);
 		Button gearLift = new JoystickButton(gearJoystick, 1);
 		Button gearMotorReverse= new JoystickButton(gearJoystick, 4); //Reverse	
+		Button gearSetGear= new JoystickButton(gearJoystick, 8);
 		
 		gearPickup.whenPressed(new CG_GearLift());
 		gearOPpickup.whenPressed(new CG_GearLift());
+		//gearSetGear.whenPressed(new CG_SetGear());
 		gearLift.whenPressed(new C_GearUpPistonSet(false));
 		gearLift.whenReleased(new C_GearUpPistonSet(true));
 		gearOpen.whenPressed(new C_GearClampSet(false));

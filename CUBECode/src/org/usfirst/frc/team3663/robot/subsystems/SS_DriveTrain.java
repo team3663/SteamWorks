@@ -41,7 +41,7 @@ public class SS_DriveTrain extends Subsystem {
     }
     
     public void setDirection(int pDir){
-    	dir = 1;
+    	dir = pDir;
     }
     
     public void driveRobot(double pAxisX, double pAxisY){
