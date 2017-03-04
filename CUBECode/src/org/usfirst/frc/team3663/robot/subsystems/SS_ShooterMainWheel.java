@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3663.robot.subsystems;
 
 import org.usfirst.frc.team3663.robot.Robot;
+import org.usfirst.frc.team3663.robot.commands.C_ShooterSpeedSet;
 
 import com.ctre.CANTalon;
 
@@ -12,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class SS_ShooterMainWheel extends Subsystem {
 
-	private final int SHOOTER_EST_MAX_SPEED= 1200;
+	public final int SHOOTER_EST_MAX_SPEED= 2000;
 	
 	private CANTalon mainMotor = new CANTalon(Robot.robotMap.shooterMainMotor);
 	private CANTalon mainMotor2 = new CANTalon(Robot.robotMap.shooterMainMotor2);
@@ -22,10 +23,11 @@ public class SS_ShooterMainWheel extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	setDefaultCommand(new C_ShooterSpeedSet());
     }
     
     public void setSpeedMainMotor(double pSpeed){
-    	mainMotor.set(-pSpeed);
+    	mainMotor.set(pSpeed);
     	mainMotor2.set(pSpeed);
     }
     
@@ -57,7 +59,7 @@ public class SS_ShooterMainWheel extends Subsystem {
 	public void mainMotorStayAtVel(int pVal){
 		int currentEncVal = getEncoder();
 		if(currentEncVal != lastEncVal){
-	    	double vel = -(currentEncVal - lastEncVal)/20;
+	    	double vel = (currentEncVal - lastEncVal)/20;
 	    	if(Math.abs(vel) < 5000){
 		    	currentSpeed -= ((vel - pVal)/Math.abs(pVal))/25;
 		    	setSpeedMainMotor(currentSpeed);
@@ -67,6 +69,15 @@ public class SS_ShooterMainWheel extends Subsystem {
 	    } 
 	}
 	
+	public int getMotorVel(){
+		int currentEncVal = getEncoder();
+		double vel= 0;
+		if(currentEncVal != lastEncVal){
+	    	vel = (currentEncVal - lastEncVal)/20;
+		}
+		return (int)vel;
+	}
+	public int targetvalue=0;
 	public boolean hoodUp = false;
 	public void setPistonValue(boolean pState){
 		if(hoodUp){

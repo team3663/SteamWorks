@@ -7,26 +7,21 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class C_GearPickupLED extends Command {
-	
-	private boolean state=false;
+public class C_DriveTrainSetButterflyOff extends Command {
 
-    public C_GearPickupLED(boolean pState) {
+    public C_DriveTrainSetButterflyOff() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	state =pState;
-    	requires (Robot.ss_GearPickup);
-   
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.ss_GearPickup.setLight(state);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
+    	Robot.ss_DriveTrainPneumatics.wheelsDown= false;
+    	Robot.ss_DriveTrainPneumatics.toggleButterfly();
     }
 
     // Make this return true when this Command no longer needs to run execute()

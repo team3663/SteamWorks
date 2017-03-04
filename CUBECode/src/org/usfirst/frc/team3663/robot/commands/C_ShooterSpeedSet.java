@@ -7,23 +7,34 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class C_ShooterHoldSpeed extends Command {
+public class C_ShooterSpeedSet extends Command {
 
-	private int velocity;
-    public C_ShooterHoldSpeed(int pVel) {
+    public C_ShooterSpeedSet() {
         // Use requires() here to declare subsystem dependencies
-    	velocity = pVel;
+        // eg. requires(chassis);
     	requires(Robot.ss_ShooterMainWheel);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.ss_ShooterMainWheel.resetMainMotorEncoder(velocity);
+    
     }
-
+    private boolean press = false;
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ss_ShooterMainWheel.mainMotorStayAtVel(velocity);
+    	if (Robot.oi.SpeedJoystick.getPOV()==0 && Robot.ss_ShooterMainWheel.SHOOTER_EST_MAX_SPEED > Robot.ss_ShooterMainWheel.targetvalue && press==false){
+    		Robot.ss_ShooterMainWheel.targetvalue += 200;
+    		press=true;
+    	}
+    	if (Robot.oi.SpeedJoystick.getPOV()==180 && Robot.ss_ShooterMainWheel.targetvalue >0 && press==false){
+    		Robot.ss_ShooterMainWheel.targetvalue -= 200;
+    		press=true;
+    	}
+    	System.out.println(Robot.ss_ShooterMainWheel.targetvalue);
+    	if(Robot.oi.SpeedJoystick.getPOV()==-1){
+    		press=false;
+    	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -33,12 +44,10 @@ public class C_ShooterHoldSpeed extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.ss_ShooterMainWheel.setSpeedMainMotor(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }
