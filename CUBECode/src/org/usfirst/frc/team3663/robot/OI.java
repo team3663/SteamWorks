@@ -32,25 +32,16 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	public Joystick driveJoystick = new Joystick(0);
 	public Joystick TestJoystick = new Joystick(1);
-	public Button GyroStartNeg = new JoystickButton(TestJoystick,6);
-	public Button GyroStartPos = new JoystickButton(TestJoystick,5);
 	public OI(){
 /***DRIVE TRAIN BUTTONS***/
-<<<<<<< HEAD
-		Button driveTrainToggleButterfly = new JoystickButton(driveJoystick, 1);
-		Button driveTrainToggleGearShift = new JoystickButton(driveJoystick, 2);
-		GyroStartNeg.whenPressed(new C_Gyro(-35));
-		GyroStartPos.whenPressed(new C_Gyro(35));
-		//Button driveTrainToggleButterfly = new JoystickButton(driveJoystick, 8);
-		//Button driveTrainToggleGearShift = new JoystickButton(driveJoystick, 9);//1
-		Button driveToEncLoc = new JoystickButton(driveJoystick, 3);
-=======
 		Button driveTrainToggleButterfly = new JoystickButton(driveJoystick, 8);
-		Button driveTrainToggleGearShift = new JoystickButton(driveJoystick, 9);//1
+		Button driveTrainToggleGearShift = new JoystickButton(driveJoystick, 9);
 		Button driveTrainToggleDir = new JoystickButton(driveJoystick, 4);
-		//Button driveToEncLoc = new JoystickButton(driveJoystick, 3);
->>>>>>> 5842c84728fb8996a5ce8743d12dfa5698cc4842
+		Button GyroStartNeg = new JoystickButton(TestJoystick,6);
+		Button GyroStartPos = new JoystickButton(TestJoystick,5);
 		
+		GyroStartNeg.whenPressed(new C_Gyro(-35));
+		GyroStartPos.whenPressed(new C_Gyro(35));		
 		driveTrainToggleButterfly.whenReleased(new C_DriveTrainSetButterfly(Robot.ss_DriveTrainPneumatics.wheelsDown));
 		driveTrainToggleGearShift.whenReleased(new C_DriveTrainSetGearShift(Robot.ss_DriveTrainPneumatics.lowGear));
 		driveTrainToggleDir.whenPressed(new C_DriveChangeDirectionToggle());
