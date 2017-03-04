@@ -5,8 +5,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import org.opencv.core.Mat;
-import org.opencv.videoio.VideoCapture;
+
 
 public class PicRetrevial {
 	/*VideoCapture camera = new VideoCapture();

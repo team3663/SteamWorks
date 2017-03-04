@@ -5,6 +5,7 @@ import org.usfirst.frc.team3663.robot.commands.CG_GearLoadSet;
 import org.usfirst.frc.team3663.robot.commands.CG_ShootBasedOnCam;
 import org.usfirst.frc.team3663.robot.commands.CG_ShooterFireAndLoad;
 import org.usfirst.frc.team3663.robot.commands.C_ClimberSetSpeed;
+import org.usfirst.frc.team3663.robot.commands.C_DriveChangeDirectionToggle;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainEncoderDrive;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainSetButterfly;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainSetGearShift;
@@ -46,12 +47,13 @@ public class OI {
 =======
 		Button driveTrainToggleButterfly = new JoystickButton(driveJoystick, 8);
 		Button driveTrainToggleGearShift = new JoystickButton(driveJoystick, 9);//1
+		Button driveTrainToggleDir = new JoystickButton(driveJoystick, 4);
 		//Button driveToEncLoc = new JoystickButton(driveJoystick, 3);
 >>>>>>> 5842c84728fb8996a5ce8743d12dfa5698cc4842
 		
 		driveTrainToggleButterfly.whenReleased(new C_DriveTrainSetButterfly(Robot.ss_DriveTrainPneumatics.wheelsDown));
 		driveTrainToggleGearShift.whenReleased(new C_DriveTrainSetGearShift(Robot.ss_DriveTrainPneumatics.lowGear));
-		//driveToEncLoc.whenPressed(new C_DriveTrainEncoderDrive(180));
+		driveTrainToggleDir.whenPressed(new C_DriveChangeDirectionToggle());
 		
 /***FUEL PICKUP BUTTONS***/
 		
@@ -80,10 +82,12 @@ public class OI {
 		//liftFuelUp.whileHeld(new C_LiftMoveUp(1));
 		
 /***GEAR PICKUP BUTTONS***/
-		Button gearAutoLift = new JoystickButton(driveJoystick, 6);
+		Button gearMotorRun = new JoystickButton(driveJoystick, 4);
+		Button gearMotorReverse= new JoystickButton(driveJoystick, 3);
 		
-		gearAutoLift.whenPressed(new CG_GearLoadSet());
-		gearAutoLift.whenReleased(new CG_GearLift());
+		gearMotorReverse.whenPressed(new C_GearRunMotor(1));
+		gearMotorReverse.whenReleased(new C_GearRunMotor(0));
+		gearMotorRun.whenPressed(new CG_GearLift());
 		
 /***CLIMBER MOTORS***/
 		Button climb = new JoystickButton(driveJoystick, 3);

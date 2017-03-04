@@ -6,10 +6,16 @@
 	<classpathentry kind="src" path="HoundDogv1/src"/>
 	<classpathentry kind="src" path="Test/src"/>
 	<classpathentry kind="lib" path="CUBECode/build/jars/cscore.jar"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="CUBECode/build/jars/CTRLib.jar"/>
 	<classpathentry kind="lib" path="CUBECode/build/jars/navx_frc.jar"/>
 	<classpathentry kind="lib" path="CUBECode/build/jars/NetworkTables.jar"/>
 	<classpathentry kind="lib" path="CUBECode/build/jars/opencv.jar"/>
+=======
+	<classpathentry kind="lib" path="CUBECode/build/jars/NetworkTables.jar"/>
+	<classpathentry kind="lib" path="CUBECode/build/jars/opencv.jar"/>
+	<classpathentry kind="lib" path="CUBECode/build/jars/TalonSRXLibJava.jar"/>
+>>>>>>> b1c6631c42dd5b9d710af5024b8e6e58ddac2916
 	<classpathentry kind="lib" path="CUBECode/build/jars/WPILib.jar"/>
 	<classpathentry kind="lib" path="CUBECode/dist/FRCUserProgram.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
