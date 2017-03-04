@@ -22,16 +22,16 @@ public class C_ShooterSpeedSet extends Command {
     private boolean press = false;
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.oi.SpeedJoystick.getPOV()==0 && Robot.ss_ShooterMainWheel.SHOOTER_EST_MAX_SPEED > Robot.ss_ShooterMainWheel.targetvalue && press==false){
-    		Robot.ss_ShooterMainWheel.targetvalue += 200;
+    	if (Robot.oi.speedJoystick.getPOV()==0 && Robot.ss_ShooterMainWheel.SHOOTER_EST_MAX_SPEED > Robot.ss_ShooterMainWheel.targetvalue && press==false){
+    		Robot.ss_ShooterMainWheel.targetvalue += 50;
     		press=true;
     	}
-    	if (Robot.oi.SpeedJoystick.getPOV()==180 && Robot.ss_ShooterMainWheel.targetvalue >0 && press==false){
-    		Robot.ss_ShooterMainWheel.targetvalue -= 200;
+    	if (Robot.oi.speedJoystick.getPOV()==180 && Robot.ss_ShooterMainWheel.targetvalue >0 && press==false){
+    		Robot.ss_ShooterMainWheel.targetvalue -= 50;
     		press=true;
     	}
     	System.out.println(Robot.ss_ShooterMainWheel.targetvalue);
-    	if(Robot.oi.SpeedJoystick.getPOV()==-1){
+    	if(Robot.oi.speedJoystick.getPOV()==-1){
     		press=false;
     	}
     	

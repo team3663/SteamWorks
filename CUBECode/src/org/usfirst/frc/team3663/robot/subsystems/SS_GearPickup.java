@@ -67,7 +67,6 @@ public class SS_GearPickup extends Subsystem {
     	}
     	return motorToggled; 
     }
-
     
     public void setGearUp(boolean pState){
     	if(pState){
@@ -94,6 +93,7 @@ public class SS_GearPickup extends Subsystem {
     public boolean getGearSensor(){
     	return gearSensor.get();
     }
+    
     public void setLight(boolean pValue){ //True is on
     	if(pValue){
     		spike.set(Relay.Value.kReverse);

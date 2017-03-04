@@ -7,22 +7,21 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class C_ShooterMoveRotationTeleop extends Command {
+public class C_ShooterHoldSpeed extends Command {
 
-    public C_ShooterMoveRotationTeleop() {
+    public C_ShooterHoldSpeed() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.ss_ShooterRotation);
-        System.out.println("moving shooter");
+        requires(Robot.ss_ShooterMainWheel);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.ss_ShooterRotation.setRotMotorBreak(true);
+    	Robot.ss_ShooterMainWheel.resetMainMotorEncoder(Robot.ss_ShooterMainWheel.targetvalue);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ss_ShooterRotation.advSetRotSpd(Robot.oi.speedJoystick.getRawAxis(4));
+    	Robot.ss_ShooterMainWheel.mainMotorStayAtVel(Robot.ss_ShooterMainWheel.targetvalue);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -32,10 +31,12 @@ public class C_ShooterMoveRotationTeleop extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.ss_ShooterMainWheel.setSpeedMainMotor(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }
