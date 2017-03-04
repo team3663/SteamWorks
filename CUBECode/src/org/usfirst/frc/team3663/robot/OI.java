@@ -32,6 +32,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	public Joystick driveJoystick = new Joystick(0);
 	public Joystick SpeedJoystick = new Joystick(1);
+	public Joystick GearJoystick = new Joystick(2);
 	
 	public OI(){
 /***DRIVE TRAIN BUTTONS***/
@@ -79,19 +80,19 @@ public class OI {
 		
 /***GEAR PICKUP BUTTONS***/
 		//Button gearUp = new JoystickButton(driveJoystick, 5);
-		Button gearOpen = new JoystickButton(driveJoystick, 5);//3
-		Button gearClose = new JoystickButton(driveJoystick, 6);//3
-		Button gearMotorRun = new JoystickButton(driveJoystick, 3);
-		Button gearLift = new JoystickButton(driveJoystick, 1);
-		Button gearMotorReverse= new JoystickButton(driveJoystick, 2); //Reverse	
+		Button gearOpen = new JoystickButton(GearJoystick, 5);//3
+		Button gearClose = new JoystickButton(GearJoystick, 6);//3
+		Button gearPickup = new JoystickButton(driveJoystick, 3);
+		Button gearOPpickup = new JoystickButton(GearJoystick, 3);
+		Button gearLift = new JoystickButton(GearJoystick, 1);
+		Button gearMotorReverse= new JoystickButton(GearJoystick, 4); //Reverse	
 		
-		gearMotorRun.whenPressed(new CG_GearLift());
-		gearLift.whenPressed(new C_GearUpPistonSet(true));
-		gearLift.whenReleased(new C_GearUpPistonSet(false));
-		//gearUp.whenPressed(new C_GearUpPistonSet(true));
-		//gearUp.whenReleased(new C_GearUpPistonSet(false));
-		gearOpen.whenPressed(new C_GearClampSet(true));
-		gearClose.whenReleased(new C_GearClampSet(false));
+		gearPickup.whenPressed(new CG_GearLift());
+		gearOPpickup.whenPressed(new CG_GearLift());
+		gearLift.whenPressed(new C_GearUpPistonSet(false));
+		gearLift.whenReleased(new C_GearUpPistonSet(true));
+		gearOpen.whenPressed(new C_GearClampSet(false));
+		gearClose.whenReleased(new C_GearClampSet(true));
 		gearMotorReverse.whenPressed(new C_GearRunMotor(1)); //Reverse
 		gearMotorReverse.whenReleased(new C_GearRunMotor(0)); //Reverse
 
@@ -100,7 +101,6 @@ public class OI {
 		//gearAutoLift.whenPressed(new CG_GearLoadSet());
 		//gearAutoLift.whenReleased(new CG_GearLift());
 
-		gearMotorRun.whenPressed(new CG_GearLift());
 
 		
 /***CLIMBER MOTORS***/
