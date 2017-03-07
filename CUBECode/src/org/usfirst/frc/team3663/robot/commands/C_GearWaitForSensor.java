@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3663.robot.commands;
 
 import org.usfirst.frc.team3663.robot.Robot;
+import org.usfirst.frc.team3663.robot.subsystems.SS_GearPickup;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -12,6 +13,7 @@ public class C_GearWaitForSensor extends Command {
     public C_GearWaitForSensor() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires ( Robot.ss_GearPickup);
     	
     }
 
@@ -31,6 +33,7 @@ public class C_GearWaitForSensor extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("Sensor was true");
     }
 
     // Called when another command which requires one or more of the same

@@ -1,8 +1,10 @@
 package org.usfirst.frc.team3663.robot;
 
 
-import org.usfirst.frc.team3663.robot.commands.CG_GearLift;
+import org.usfirst.frc.team3663.robot.commands.CG_GearLiftAuto;
 import org.usfirst.frc.team3663.robot.commands.CG_GearLoadSet;
+import org.usfirst.frc.team3663.robot.commands.CG_GearMotorTest;
+import org.usfirst.frc.team3663.robot.commands.CG_OPGearSet;
 import org.usfirst.frc.team3663.robot.commands.CG_ShootBasedOnCam;
 import org.usfirst.frc.team3663.robot.commands.CG_ShooterFireAndLoad;
 import org.usfirst.frc.team3663.robot.commands.C_ClimberSetSpeed;
@@ -81,21 +83,26 @@ public class OI {
 		
 /***GEAR PICKUP BUTTONS***/
 		//Button gearUp = new JoystickButton(driveJoystick, 5);
-		Button gearOpen = new JoystickButton(gearJoystick, 5);//3
-		Button gearClose = new JoystickButton(gearJoystick, 6);//3
+		Button gearOpen = new JoystickButton(gearJoystick, 6);//3
+		//Button gearClose = new JoystickButton(gearJoystick, 6);//3
 		Button gearPickup = new JoystickButton(driveJoystick, 3);
 		Button gearOPpickup = new JoystickButton(gearJoystick, 3);
 		Button gearLift = new JoystickButton(gearJoystick, 1);
 		Button gearMotorReverse= new JoystickButton(gearJoystick, 4); //Reverse	
 		Button gearSetGear= new JoystickButton(gearJoystick, 8);
+		Button gearOPdrop= new JoystickButton(gearJoystick, 5);
+		Button geardrop= new JoystickButton(driveJoystick, 5);
 		
-		gearPickup.whenPressed(new CG_GearLift());
-		gearOPpickup.whenPressed(new CG_GearLift());
+		gearPickup.whenPressed(new CG_GearLiftAuto());
+		gearOPpickup.whenPressed(new CG_GearLiftAuto());
+		gearOPdrop.whenPressed(new CG_OPGearSet());
+		geardrop.whenPressed(new CG_OPGearSet());
+		
 		//gearSetGear.whenPressed(new CG_SetGear());
-		gearLift.whenPressed(new C_GearUpPistonSet(false));
-		gearLift.whenReleased(new C_GearUpPistonSet(true));
+		gearLift.whenPressed(new C_GearUpPistonSet(true));
+		gearLift.whenReleased(new C_GearUpPistonSet(false));
 		gearOpen.whenPressed(new C_GearClampSet(false));
-		gearClose.whenReleased(new C_GearClampSet(true));
+		//gearClose.whenReleased(new C_GearClampSet(true));
 		gearMotorReverse.whenPressed(new C_GearRunMotor(1)); //Reverse
 		gearMotorReverse.whenReleased(new C_GearRunMotor(0)); //Reverse
 		//Button gearOpen = new JoystickButton(driveJoystick, 5);//3

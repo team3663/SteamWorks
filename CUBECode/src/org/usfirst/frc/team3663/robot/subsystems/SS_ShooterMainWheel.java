@@ -38,7 +38,7 @@ public class SS_ShooterMainWheel extends Subsystem {
     }
     
     public int getEncoder(){
-    	System.out.println(""+ mainMotor.getEncPosition() + ", " + mainMotor2.getEncPosition());
+    	//System.out.println(""+ mainMotor.getEncPosition() + ", " + mainMotor2.getEncPosition());
     	return mainMotor.getEncPosition();
     	
     }

@@ -5,9 +5,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class CG_ShootBasedOnCam extends CommandGroup {
+public class CG_ShooterTele extends CommandGroup {
 
-    public CG_ShootBasedOnCam() {
+    public CG_ShooterTele() {
+    	addParallel(new C_ShooterMoveRotationTeleop());
+    	addParallel(new C_ShooterSpeedSet());
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -15,8 +17,8 @@ public class CG_ShootBasedOnCam extends CommandGroup {
 
         // To run multiple commands at the same time,
         // use addParallel()
-        addParallel(new C_ShooterMoveRotationAuto());
-       // addParallel(new C_ShooterFireAuto(300));
+        // e.g. addParallel(new Command1());
+        //      addSequential(new Command2());
         // Command1 and Command2 will run in parallel.
 
         // A command group will require all of the subsystems that each member
