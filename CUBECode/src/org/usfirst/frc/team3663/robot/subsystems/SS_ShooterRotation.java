@@ -118,7 +118,7 @@ public class SS_ShooterRotation extends Subsystem {
 		if(Math.abs(pSpd) > Math.abs(speed) && pSpd*speed > 0){
 			pSpd = speed;
 		}
-		System.out.println(lastEncRun + "   " + pEnc + "  " + pSpd + "   " + speed + "   " + lastSpeed);
+		//System.out.println(lastEncRun + "   " + pEnc + "  " + pSpd + "   " + speed + "   " + lastSpeed);
     	return pSpd;
     }
     

@@ -11,7 +11,7 @@ public class C_GearWaitForSensor extends Command {
 
     public C_GearWaitForSensor() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.ss_GearPickup);
     	
     }
 

@@ -87,6 +87,7 @@ public class SS_GearPickup extends Subsystem {
     }
     
     public void setGearMotorSpeed(double pSpd){
+    	
     	gearMotor.set(pSpd);
     }
     

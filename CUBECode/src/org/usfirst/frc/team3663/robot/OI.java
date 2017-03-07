@@ -1,7 +1,9 @@
 package org.usfirst.frc.team3663.robot;
 
 
+import org.usfirst.frc.team3663.robot.commands.CG_GearDropOff;
 import org.usfirst.frc.team3663.robot.commands.CG_GearLift;
+import org.usfirst.frc.team3663.robot.commands.CG_GearLiftUp;
 import org.usfirst.frc.team3663.robot.commands.CG_GearLoadSet;
 import org.usfirst.frc.team3663.robot.commands.CG_ShootBasedOnCam;
 import org.usfirst.frc.team3663.robot.commands.CG_ShooterFireAndLoad;
@@ -81,11 +83,14 @@ public class OI {
 		//Button gearUp = new JoystickButton(driveJoystick, 5);
 		//Button gearOpen = new JoystickButton(driveJoystick, 5);//3
 		//Button gearClose = new JoystickButton(driveJoystick, 6);//3
-		Button gearMotorRun = new JoystickButton(driveJoystick, 3);
+		Button gearAutoPickup = new JoystickButton(driveJoystick, 5);
+		Button gearRelease = new JoystickButton(driveJoystick, 6);
 		//Button gearLift = new JoystickButton(driveJoystick, 1);
 		//Button gearMotorReverse= new JoystickButton(driveJoystick, 2); //Reverse	
 		
-		gearMotorRun.whenPressed(new CG_GearLift());
+		gearAutoPickup.whenPressed(new CG_GearLift());
+		gearRelease.whenPressed(new CG_GearDropOff());
+		gearRelease.whenReleased(new CG_GearLiftUp());
 		//gearLift.whenPressed(new C_GearUpPistonSet(true));
 		//gearLift.whenReleased(new C_GearUpPistonSet(false));
 		//gearUp.whenPressed(new C_GearUpPistonSet(true));
@@ -100,14 +105,12 @@ public class OI {
 		//gearAutoLift.whenPressed(new CG_GearLoadSet());
 		//gearAutoLift.whenReleased(new CG_GearLift());
 
-		gearMotorRun.whenPressed(new CG_GearLift());
-
 		
 /***CLIMBER MOTORS***/
-		//Button climb = new JoystickButton(driveJoystick, 3);
-		Button climbRelease = new JoystickButton(driveJoystick, 7);
+		Button climb = new JoystickButton(speedJoystick, 3);
+		Button climbRelease = new JoystickButton(speedJoystick, 7);
 		
-		//climb.whileHeld(new C_ClimberSetSpeed(1));
+		climb.whileHeld(new C_ClimberSetSpeed(1));
 		climbRelease.whileHeld(new C_ClimberSetSpeed(-.2));
 	}
 }
