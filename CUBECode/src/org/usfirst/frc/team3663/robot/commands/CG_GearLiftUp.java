@@ -13,10 +13,8 @@ public class CG_GearLiftUp extends CommandGroup {
         //      addSequential(new Command2());
         // these will run in order.
 
-
-        addSequential(new C_GearClampSet(false));
         addSequential(new C_GearUpPistonSet(false));
-        addSequential(new C_GearPickupLED(true));	
+        addSequential(new C_GearPickupLED(false));	
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());

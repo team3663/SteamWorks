@@ -22,12 +22,12 @@ public class C_DriveTrainSetButterfly extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (Robot.ss_DriveTrainPneumatics.wheelsDown==false){
-    		Robot.ss_DriveTrainPneumatics.toggleButterfly(true);
+        	Robot.ss_DriveTrainPneumatics.toggleButterfly();
         	Robot.ss_DriveTrainPneumatics.wheelsDown= true;
         	}
-    	if (Robot.ss_DriveTrainPneumatics.wheelsDown==true){
-    		Robot.ss_DriveTrainPneumatics.toggleButterfly(false);
-	        Robot.ss_DriveTrainPneumatics.wheelsDown= false;
+    	else{
+            Robot.ss_DriveTrainPneumatics.toggleButterfly();
+            Robot.ss_DriveTrainPneumatics.wheelsDown= false;
     	}
     }
 

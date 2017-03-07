@@ -34,6 +34,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	public Joystick driveJoystick = new Joystick(0);
 	public Joystick speedJoystick = new Joystick(1);
+	public Joystick gearJoystick = new Joystick(2);
+
 	
 	public OI(){
 /***DRIVE TRAIN BUTTONS***/
@@ -81,6 +83,23 @@ public class OI {
 		
 /***GEAR PICKUP BUTTONS***/
 		//Button gearUp = new JoystickButton(driveJoystick, 5);
+		Button gearOpen = new JoystickButton(gearJoystick, 5);//3
+		Button gearClose = new JoystickButton(gearJoystick, 6);//3
+		Button gearPickup = new JoystickButton(driveJoystick, 3);
+		Button gearOPpickup = new JoystickButton(gearJoystick, 3);
+		Button gearLift = new JoystickButton(gearJoystick, 1);
+		Button gearMotorReverse= new JoystickButton(gearJoystick, 4); //Reverse	
+		Button gearSetGear= new JoystickButton(gearJoystick, 8);
+		
+		gearPickup.whenPressed(new CG_GearLift());
+		gearOPpickup.whenPressed(new CG_GearLift());
+		//gearSetGear.whenPressed(new CG_SetGear());
+		gearLift.whenPressed(new C_GearUpPistonSet(false));
+		gearLift.whenReleased(new C_GearUpPistonSet(true));
+		gearOpen.whenPressed(new C_GearClampSet(false));
+		gearClose.whenReleased(new C_GearClampSet(true));
+		gearMotorReverse.whenPressed(new C_GearRunMotor(1)); //Reverse
+		gearMotorReverse.whenReleased(new C_GearRunMotor(0)); //Reverse
 		//Button gearOpen = new JoystickButton(driveJoystick, 5);//3
 		//Button gearClose = new JoystickButton(driveJoystick, 6);//3
 		Button gearAutoPickup = new JoystickButton(driveJoystick, 5);
@@ -91,6 +110,9 @@ public class OI {
 		gearAutoPickup.whenPressed(new CG_GearLift());
 		gearRelease.whenPressed(new CG_GearDropOff());
 		gearRelease.whenReleased(new CG_GearLiftUp());
+		//Button gearMotorRun = new JoystickButton(driveJoystick, 3);
+		//Button gearLift = new JoystickButton(driveJoystick, 1);
+		//Button gearMotorReverse= new JoystickButton(driveJoystick, 2); //Reverse	
 		//gearLift.whenPressed(new C_GearUpPistonSet(true));
 		//gearLift.whenReleased(new C_GearUpPistonSet(false));
 		//gearUp.whenPressed(new C_GearUpPistonSet(true));
@@ -100,11 +122,11 @@ public class OI {
 		//gearMotorReverse.whenPressed(new C_GearRunMotor(1)); //Reverse
 		//gearMotorReverse.whenReleased(new C_GearRunMotor(0)); //Reverse
 
+
 		//Button gearAutoLift = new JoystickButton(driveJoystick, 6);
 		
 		//gearAutoLift.whenPressed(new CG_GearLoadSet());
 		//gearAutoLift.whenReleased(new CG_GearLift());
-
 		
 /***CLIMBER MOTORS***/
 		Button climb = new JoystickButton(speedJoystick, 3);
