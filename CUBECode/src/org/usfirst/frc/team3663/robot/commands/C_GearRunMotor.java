@@ -27,7 +27,7 @@ public class C_GearRunMotor extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return ! Robot.ss_GearPickup.getGearSensor();
+        return !Robot.ss_GearPickup.getGearSensor();
     }
 
     // Called once after isFinished returns true

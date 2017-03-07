@@ -28,7 +28,7 @@ public class C_DriveTrainSetButterfly extends Command {
     	else{
             Robot.ss_DriveTrainPneumatics.toggleButterfly();
             Robot.ss_DriveTrainPneumatics.wheelsDown= false;
-        	}
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

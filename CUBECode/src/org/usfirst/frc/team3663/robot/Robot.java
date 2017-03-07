@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team3663.robot;
 
+import org.usfirst.frc.team3663.robot.commands.C_DriveTrainEncoderDrive;
 import org.usfirst.frc.team3663.robot.subsystems.SS_Climber;
 import org.usfirst.frc.team3663.robot.subsystems.SS_DriveTrain;
 import org.usfirst.frc.team3663.robot.subsystems.SS_DriveTrainPneumatics;
@@ -91,6 +92,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		C_DriveTrainEncoderDrive test = new C_DriveTrainEncoderDrive(100);
+		test.start();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",

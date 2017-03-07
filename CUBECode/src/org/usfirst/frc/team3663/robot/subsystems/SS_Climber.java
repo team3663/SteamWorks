@@ -22,7 +22,7 @@ public class SS_Climber extends Subsystem {
     }
     
     public void setClimberSpeed(double pSpd){
-    	climberMotor.set(-pSpd);
+    	climberMotor.set(pSpd);
     	climberMotor2.set(pSpd);
     }
 }

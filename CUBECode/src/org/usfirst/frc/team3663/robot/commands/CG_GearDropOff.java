@@ -5,18 +5,17 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class CG_GearLoadSet extends CommandGroup {
+public class CG_GearDropOff extends CommandGroup {
 
-    public CG_GearLoadSet() {
+    public CG_GearDropOff() {
         // Add Commands here:
-        addSequential(new C_GearClampSet(false));
-        addSequential(new C_GearUpPistonSet(true));
-        //addSequential(new C_GearRunMotor());
-        addSequential(new C_GearRunMotor(1));
-
+        // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
 
+        addSequential(new C_GearClampSet(false));
+        addSequential(new C_GearUpPistonSet(true));
+        addSequential(new C_GearPickupLED(false));	
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());
