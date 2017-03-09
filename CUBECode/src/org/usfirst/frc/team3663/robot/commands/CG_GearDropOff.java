@@ -16,6 +16,8 @@ public class CG_GearDropOff extends CommandGroup {
         addSequential(new C_GearClampSet(false));
         addSequential(new C_GearUpPistonSet(true));
         addSequential(new C_GearPickupLED(false));	
+        addSequential(new C_TimerWaitMills(.5));
+        addSequential(new C_GearUpPistonSet(false));
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());
