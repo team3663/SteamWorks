@@ -27,7 +27,6 @@ public class C_DriveTrainSetButterfly extends Command {
         	}
     	else{
             Robot.ss_DriveTrainPneumatics.setButterfly(false);
-            Robot.ss_DriveTrainPneumatics.wheelsDown= false;
     	}
     }
 
