@@ -46,8 +46,8 @@ public class OI {
 
 		//driveToEncLoc.whenPressed(new C_DriveTrainEncoderDrive(200000));
 
-		GyroStartNeg.whenPressed(new C_Gyro(-35));
-		GyroStartPos.whenPressed(new C_Gyro(35));		
+		GyroStartNeg.whenPressed(new C_Gyro(-60));
+		GyroStartPos.whenPressed(new C_Gyro(60));		
 		driveTrainToggleGearShift.whenReleased(new C_DriveTrainSetGearShift(Robot.ss_DriveTrainPneumatics.lowGear));
 		driveTrainToggleDir.whenPressed(new C_DriveChangeDirectionToggle());
 		
