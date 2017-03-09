@@ -3,6 +3,7 @@ package org.usfirst.frc.team3663.robot;
 
 
 import org.usfirst.frc.team3663.robot.commands.CG_GearLiftAuto;
+import org.usfirst.frc.team3663.robot.commands.CG_AutoR_1_G;
 import org.usfirst.frc.team3663.robot.commands.CG_GearDropOff;
 import org.usfirst.frc.team3663.robot.commands.CG_ShootBasedOnCam;
 import org.usfirst.frc.team3663.robot.commands.CG_ShooterFireAndLoad;
@@ -14,6 +15,7 @@ import org.usfirst.frc.team3663.robot.commands.C_DriveTrainSetGearShift;
 import org.usfirst.frc.team3663.robot.commands.C_FuelPickupToggle;
 import org.usfirst.frc.team3663.robot.commands.C_Gyro;
 import org.usfirst.frc.team3663.robot.commands.C_GearClampSet;
+import org.usfirst.frc.team3663.robot.commands.C_GearUpPistonSet;
 import org.usfirst.frc.team3663.robot.commands.C_LiftMoveUp;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterMoveRotationAuto;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterRotFindZero;
@@ -25,7 +27,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 
-/**
+/**jj
  * This Sub System is fo all of the buttons see bottom for button layout.
  */
 public class OI {
@@ -38,7 +40,7 @@ public class OI {
 		Button driveTrainToggleButterfly = new JoystickButton(driveJoystick, 8);
 		Button driveTrainToggleGearShift = new JoystickButton(driveJoystick, 9);
 		Button driveTrainToggleDir = new JoystickButton(driveJoystick, 4);
-		//Button GyroStartNeg = new JoystickButton(SpeedJoystick,6);
+		//Button GyroStartNeg = new JoystickButton( SpeedJoystick,6);
 		//Button GyroStartPos = new JoystickButton(SpeedJoystick,5);
 		
 		driveTrainToggleButterfly.whenPressed(new C_DriveTrainSetButterfly());
@@ -85,6 +87,8 @@ public class OI {
 		Button gearOPdrop= new JoystickButton(OPJoystick, 5);
 		Button gearOpen = new JoystickButton(OPJoystick, 7);
 		Button gearClose = new JoystickButton(OPJoystick, 8);
+		
+		Button gearLift = new JoystickButton(OPJoystick, 3);
 //*********************************************************************
 		gearPickup.whenPressed(new CG_GearLiftAuto()); //Driver Pickup
 		gearDrop.whenPressed(new CG_GearDropOff()); //Driver Drop
@@ -94,6 +98,10 @@ public class OI {
 		gearOpen.whenPressed(new C_GearClampSet(false));
 		gearClose.whenPressed(new C_GearClampSet(true));
 
+		Button autogear = new JoystickButton(OPJoystick, 1);
+		autogear.whenPressed(new CG_AutoR_1_G());
+		gearLift.whenPressed(new C_GearUpPistonSet(true));
+		
 		
 /***CLIMBER MOTORS***/
 		Button climb = new JoystickButton(OPJoystick, 4);
