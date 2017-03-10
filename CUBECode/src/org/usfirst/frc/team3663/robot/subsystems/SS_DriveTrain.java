@@ -65,7 +65,10 @@ public class SS_DriveTrain extends Subsystem {
     	leftEncoder.reset();
     }
     
+    //1772
+    
     public void resetBothEnc(){
+    	enableBrakeMode(true);
     	resetRightEnc();
     	resetLeftEnc();
     	endEncLocLeft = 0;
@@ -93,20 +96,21 @@ public class SS_DriveTrain extends Subsystem {
     }
     
     public void advStartEncDrive(int pEndLoc){
+    	double conversion = 125;
     	if(pEndLoc > 0){
     		EncDir = 1;
     	}
     	else{
     		EncDir = -1;
     	}
-    	setEndingRightLocation((int)(EncDir*pEndLoc*118.88));
-    	setEndingLeftLocation((int)(EncDir*pEndLoc*118.88));
+    	setEndingRightLocation((int)(EncDir*pEndLoc*conversion));
+    	setEndingLeftLocation((int)(EncDir*pEndLoc*conversion));
     }
     
     public void advDriveToLoc(){
     	leftDriveMotorOne.enableBrakeMode(true);
     	rightDriveMotorOne.enableBrakeMode(true);
-    	int oinkOinkMagic = 25;
+    	int oinkOinkMagic = 50;
     	int rightEnc = EncDir*getRightEncoder();
     	int leftEnc = EncDir*getLeftEncoder();
     	int encToDestR = endEncLocRight - rightEnc;
@@ -128,7 +132,7 @@ public class SS_DriveTrain extends Subsystem {
     public boolean advDriveOverLoc(){
     	return EncDir*getRightEncoder() > endEncLocRight;
     }
-    public void EnableBrakeMode(boolean state){
+    public void enableBrakeMode(boolean state){
     	leftDriveMotorOne.enableBrakeMode(state);
     	rightDriveMotorOne.enableBrakeMode(state);
     }
