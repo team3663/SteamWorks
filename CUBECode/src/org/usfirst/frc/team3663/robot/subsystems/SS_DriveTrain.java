@@ -75,7 +75,7 @@ public class SS_DriveTrain extends Subsystem {
     }
     
     public int getLeftEncoder(){
-    	return leftEncoder.get();
+    	return -leftEncoder.get();
     }
     
     public int getRightEncoder(){
@@ -104,7 +104,7 @@ public class SS_DriveTrain extends Subsystem {
     public void advDriveToLoc(){
     	leftDriveMotorOne.enableBrakeMode(true);
     	rightDriveMotorOne.enableBrakeMode(true);
-    	int oinkOinkMagic = 1000;
+    	int oinkOinkMagic = 50;
     	int rightEnc = getRightEncoder();
     	int leftEnc = getLeftEncoder();
     	int encToDestR = endEncLocRight - rightEnc;
@@ -120,7 +120,7 @@ public class SS_DriveTrain extends Subsystem {
     		turnSpeed = (double)((double)forwardSpeedL - (double)forwardSpeedR)/1000;
     	}
     	//System.out.println(rightEnc + ",  " + leftEnc + ",  " + turnSpeed + ",  " + forwardSpeedR + ",  " + forwardSpeedL);
-    	driveRobot(forwardSpeedR, turnSpeed);
+    	driveRobot(forwardSpeedR, -turnSpeed);
     }
     
     public boolean advDriveOverLoc(){
