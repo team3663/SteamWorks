@@ -54,6 +54,7 @@ public class SS_DriveTrain extends Subsystem {
     private int endEncLocRight = 0;
     private int lastEncRunLeft = 0;
     private int lastEncRunRight = 0;
+    private int EncDir = 0;
     private double lastSpeed = 0;
     
     public void resetRightEnc(){
@@ -71,6 +72,7 @@ public class SS_DriveTrain extends Subsystem {
     	endEncLocRight = 0;
     	lastEncRunLeft = 0;
     	lastEncRunRight = 0;
+    	lastSpeed = 1;
     	
     }
     
@@ -91,22 +93,22 @@ public class SS_DriveTrain extends Subsystem {
     }
     
     public void advStartEncDrive(int pEndLoc){
-    	setEndingRightLocation((int)(pEndLoc*118.88));
-    	setEndingLeftLocation(pEndLoc);
     	if(pEndLoc > 0){
-    		lastSpeed = -1;
+    		EncDir = 1;
     	}
     	else{
-    		lastSpeed = 1;
+    		EncDir = -1;
     	}
+    	setEndingRightLocation((int)(EncDir*pEndLoc*118.88));
+    	setEndingLeftLocation((int)(EncDir*pEndLoc*118.88));
     }
     
     public void advDriveToLoc(){
     	leftDriveMotorOne.enableBrakeMode(true);
     	rightDriveMotorOne.enableBrakeMode(true);
-    	int oinkOinkMagic = 50;
-    	int rightEnc = getRightEncoder();
-    	int leftEnc = getLeftEncoder();
+    	int oinkOinkMagic = 25;
+    	int rightEnc = EncDir*getRightEncoder();
+    	int leftEnc = EncDir*getLeftEncoder();
     	int encToDestR = endEncLocRight - rightEnc;
     	int encDispR = rightEnc - lastEncRunRight;
     	int encDispL = leftEnc - lastEncRunLeft;
@@ -117,14 +119,14 @@ public class SS_DriveTrain extends Subsystem {
     	double forwardSpeedL = ((double)encToDestL/(double)encDispL)/oinkOinkMagic;
     	double turnSpeed = 0;
     	if(forwardSpeedR < 0x00ffffff){
-    		turnSpeed = (double)((double)forwardSpeedL - (double)forwardSpeedR)/1000;
+    		turnSpeed = (double)((double)forwardSpeedL - (double)forwardSpeedR)/100;
     	}
     	//System.out.println(rightEnc + ",  " + leftEnc + ",  " + turnSpeed + ",  " + forwardSpeedR + ",  " + forwardSpeedL);
-    	driveRobot(forwardSpeedR, -turnSpeed);
+    	driveRobot(EncDir*forwardSpeedR, EncDir*(-turnSpeed));
     }
     
     public boolean advDriveOverLoc(){
-    	return getRightEncoder() > endEncLocRight;
+    	return EncDir*getRightEncoder() > endEncLocRight;
     }
     public void EnableBrakeMode(boolean state){
     	leftDriveMotorOne.enableBrakeMode(state);
