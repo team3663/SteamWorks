@@ -112,14 +112,14 @@ public class SS_Gyro extends Subsystem {
 	    	{
 	    		speed = 0;
 	    		Robot.ss_DriveTrain.driveRobot(speed, speed);
-	    		Robot.ss_DriveTrain.EnableBrakeMode(true);
+	    		Robot.ss_DriveTrain.enableBrakeMode(true);
 	    		System.out.println("Angled Reached" + currentHeading);
 	    		return true;
 	    	}
     	}
     	if (Math.abs(currentHeading) > 180)
     	{
-    		Robot.ss_DriveTrain.EnableBrakeMode(true);
+    		Robot.ss_DriveTrain.enableBrakeMode(true);
     		System.out.println("Angled Reached" + currentHeading);
     		return true;
     	}
