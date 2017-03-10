@@ -23,7 +23,7 @@ public class SS_Gyro extends Subsystem {
 	public double currentHeading;
 	public double MaxSpeed = 0;
 	public double speed = 0;
-	public double BaseSpeed = .5;                // this value is for .35 for turret;
+	public double BaseSpeed = .4;                // this value is for .35 for turret;
 	public double angle;
 	public double offSet;
 	double lastValue = 0;

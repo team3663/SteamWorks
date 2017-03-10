@@ -18,15 +18,10 @@ public class CG_GearLiftAuto extends CommandGroup {
         addSequential(new C_GearUpPistonSet(true));
         addSequential(new C_GearPickupLED(true));
         addSequential(new C_GearRunMotor(1));
-<<<<<<< HEAD
-        addSequential(new C_TimerWaitMills(.2));
-=======
-        addSequential(new C_TimerWaitSec(2000));
->>>>>>> f8a7179aebc15dbc4fc63581b7a3c4e885306bc2
         addSequential(new C_GearClampSet(true));
         addSequential(new C_GearPickupLED(false));	
-        //addSequential(new C_GearUpPistonSet(false));
-        addSequential(new C_GearRunMotor(0));
+        addSequential(new C_GearUpPistonSet(false));
+
         
    
         //addSequential(new )
