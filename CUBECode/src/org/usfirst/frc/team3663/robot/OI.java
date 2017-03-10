@@ -110,7 +110,7 @@ public class OI {
 		climb.whileHeld(new C_ClimberSetSpeed(1));
 		climbRelease.whileHeld(new C_ClimberSetSpeed(-.2));**/
 		Button GyroTest = new JoystickButton(OPJoystick, 2);
-		GyroTest.whenPressed(new C_Gyro(180));
+		GyroTest.whenPressed(new C_Gyro(175));
 	}
 }
 
