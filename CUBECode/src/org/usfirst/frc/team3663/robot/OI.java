@@ -104,11 +104,13 @@ public class OI {
 		
 		
 /***CLIMBER MOTORS***/
-		Button climb = new JoystickButton(OPJoystick, 4);
+		/**Button climb = new JoystickButton(OPJoystick, 4);
 		Button climbRelease = new JoystickButton(OPJoystick, 2);
 		
 		climb.whileHeld(new C_ClimberSetSpeed(1));
-		climbRelease.whileHeld(new C_ClimberSetSpeed(-.2));
+		climbRelease.whileHeld(new C_ClimberSetSpeed(-.2));**/
+		Button GyroTest = new JoystickButton(OPJoystick, 2);
+		GyroTest.whenPressed(new C_Gyro(180));
 	}
 }
 
