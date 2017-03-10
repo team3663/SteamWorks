@@ -104,7 +104,7 @@ public class SS_DriveTrain extends Subsystem {
     public void advDriveToLoc(){
     	leftDriveMotorOne.enableBrakeMode(true);
     	rightDriveMotorOne.enableBrakeMode(true);
-    	int oinkOinkMagic = 1000;
+    	int oinkOinkMagic = 500;
     	int rightEnc = getRightEncoder();
     	int leftEnc = getLeftEncoder();
     	int encToDestR = endEncLocRight - rightEnc;
