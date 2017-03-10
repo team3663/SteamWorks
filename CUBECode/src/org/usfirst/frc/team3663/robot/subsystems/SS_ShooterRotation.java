@@ -23,8 +23,7 @@ public class SS_ShooterRotation extends Subsystem {
 	private CANTalon rotationMotor = new CANTalon(Robot.robotMap.shooterRotMotor);
 
 	private DigitalInput zeroSwitch = new DigitalInput(Robot.robotMap.shooterZeroDIO);
-	private DigitalInput turnLeftDIO = new DigitalInput(Robot.robotMap.shooterTurnLeftDIO);
-	private DigitalInput turnRightDIO = new DigitalInput(Robot.robotMap.shooterTurnRightDIO);
+	private DigitalInput directionDIO = new DigitalInput(Robot.robotMap.shooterTurnLeftDIO);
 	
 	private Encoder encoder = new Encoder(Robot.robotMap.shooterRotEncOne, Robot.robotMap.shooterRotEncTwo);
 
@@ -56,6 +55,7 @@ public class SS_ShooterRotation extends Subsystem {
     private double lastSpeed = 0;
     public boolean isZeroFound = false;
     public boolean safeToShoot = false;
+    private int maxValueForPot = 4000;
     
     public void setSpeedRotationMotor(double pSpeed){
     	rotationMotor.set(-pSpeed);
@@ -135,28 +135,7 @@ public class SS_ShooterRotation extends Subsystem {
     }
     
     public void advMoveRotOffDIO(){
-    	boolean left = turnLeftDIO.get();
-    	boolean right = turnRightDIO.get();
-    	if(left && right){
-    		advSetRotSpd(0);
-    		System.out.println("****GOOD TO SHOOT****");
-    		safeToShoot = true;
-    	}
-    	else if(right){
-    		advSetRotSpd(.4);    		
-    		System.out.println("MOVE : right");
-    		safeToShoot = false;
-    	}
-    	else if(left){
-    		advSetRotSpd(-.4);
-    		System.out.println("MOVE : left");
-    		safeToShoot = false;
-    	}
-    	else{
-    		setSpeedRotationMotor(0);
-    		System.out.println("ERROR : no input");
-    		safeToShoot = false;
-    	}
+    	
     }
     
     public boolean zeroEncLimit(){

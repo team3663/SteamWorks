@@ -80,7 +80,7 @@ public class OI {
 		//liftFuelUp.whileHeld(new C_LiftMoveUp(1));
 		
 /***GEAR PICKUP BUTTONS***/
-		Button gearPickup = new JoystickButton(driveJoystick, 6); //Driver Pickup
+		Button gearPickup = new JoystickButton(driveJoystick, 3); //Driver Pickup
 		Button gearDrop= new JoystickButton(driveJoystick, 5); //Driver Drop
 		
 		Button gearOPpickup = new JoystickButton(OPJoystick, 6);

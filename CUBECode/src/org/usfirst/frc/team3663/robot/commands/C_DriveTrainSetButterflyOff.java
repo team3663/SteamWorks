@@ -21,7 +21,7 @@ public class C_DriveTrainSetButterflyOff extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.ss_DriveTrainPneumatics.wheelsDown= false;
-    	Robot.ss_DriveTrainPneumatics.toggleButterfly(false);
+    	Robot.ss_DriveTrainPneumatics.setButterfly(false);
     }
 
     // Make this return true when this Command no longer needs to run execute()

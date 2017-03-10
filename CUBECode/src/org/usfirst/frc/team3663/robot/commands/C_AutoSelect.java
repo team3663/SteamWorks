@@ -7,12 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class C_DriveTrainSetButterfly extends Command {
+public class C_AutoSelect extends Command {
 
-    public C_DriveTrainSetButterfly() {
-    	
+    public C_AutoSelect() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.ss_DriveTrainPneumatics);
+        requires(Robot.ss_AutoChoose);
     }
 
     // Called just before this Command runs the first time
@@ -21,18 +20,12 @@ public class C_DriveTrainSetButterfly extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.ss_DriveTrainPneumatics.wheelsDown==false){
-        	Robot.ss_DriveTrainPneumatics.setButterfly(true);
-        	Robot.ss_DriveTrainPneumatics.wheelsDown= true;
-        	}
-    	else{
-            Robot.ss_DriveTrainPneumatics.setButterfly(false);
-    	}
+    	Robot.ss_AutoChoose.selectAuto(Robot.ss_AutoChoose.getAnalogVal());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
