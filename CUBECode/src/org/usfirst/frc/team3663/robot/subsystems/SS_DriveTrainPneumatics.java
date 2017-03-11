@@ -23,7 +23,7 @@ public class SS_DriveTrainPneumatics extends Subsystem {
     
     public boolean lowGear = false;
     public void toggleGearShift(boolean pState){
-    	if(lowGear){
+    	if(pState){
     		lowGear = false;
     		gearShift.set(DoubleSolenoid.Value.kForward);
     	}
@@ -36,11 +36,11 @@ public class SS_DriveTrainPneumatics extends Subsystem {
     public boolean wheelsDown = false;
     public void setButterfly(boolean pWheels){
     	if(pWheels){
-    		//wheelsDown = false;
+    		wheelsDown = false;
     		dropButterfly.set(DoubleSolenoid.Value.kForward);
     	}
     	else{
-    		//wheelsDown = true;
+    		wheelsDown = true;
     		dropButterfly.set(DoubleSolenoid.Value.kReverse);
     	}
     }   

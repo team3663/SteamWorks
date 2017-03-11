@@ -7,12 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class C_GearRunMotor extends Command {
-	
-	private int speed;
-    public C_GearRunMotor(int pSp) {
-    	speed = pSp;
-        requires(Robot.ss_GearPickup);
+public class C_DriveTrainToggleGearShift extends Command {
+
+    public C_DriveTrainToggleGearShift() {
+        // Use requires() here to declare subsystem dependencies
+        requires(Robot.ss_DriveTrainPneumatics);
     }
 
     // Called just before this Command runs the first time
@@ -21,22 +20,20 @@ public class C_GearRunMotor extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ss_GearPickup.setGearMotorSpeed(speed);
+    	Robot.ss_DriveTrainPneumatics.toggleGearShift(Robot.ss_DriveTrainPneumatics.lowGear);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !Robot.ss_GearPickup.getGearSensor();
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.ss_GearPickup.setGearMotorSpeed(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }
