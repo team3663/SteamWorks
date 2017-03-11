@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CG_AutoR_2_G extends CommandGroup {
 
     public CG_AutoR_2_G() {
-        addSequential(new C_DriveTrainEncoderDrive(70));
+        addSequential(new C_DriveTrainEncoderDrive(70, 7));
         addSequential(new C_GearClampSet(false));
         addSequential(new C_TimerWaitSec(1));
-        addSequential(new C_DriveTrainEncoderDrive(-50));
+        addSequential(new C_DriveTrainEncoderDrive(-50, 5));
         addSequential(new C_TimerWaitSec(1));
-        addSequential(new C_DriveTrainEncoderDrive(50));
+        addSequential(new C_DriveTrainEncoderDrive(50, 5));
         //addSequential(new C_GearUpPistonSet(true));    
         }
 }

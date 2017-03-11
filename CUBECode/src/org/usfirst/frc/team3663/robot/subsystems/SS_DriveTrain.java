@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -57,7 +58,7 @@ public class SS_DriveTrain extends Subsystem {
     }
     
     public void driveRobot(double pAxisX, double pAxisY){
-    	System.out.println(getLeftEncoder() + ",  " + getRightEncoder());
+    	//System.out.println(getLeftEncoder() + ",  " + getRightEncoder());
     	drive.arcadeDrive(dir*pAxisX, pAxisY);
     }
     
@@ -69,6 +70,7 @@ public class SS_DriveTrain extends Subsystem {
     private int EncDir = 0;
     private double lastSpeed = 0;
     private int oinkOinkMagic = 25;
+    private double maxTime = 0;
     // Gyro Variables
     AHRS ahrs;
 	public double currentHeading;
@@ -118,13 +120,14 @@ public class SS_DriveTrain extends Subsystem {
     	endEncLocLeft = getLeftEncoder() + pEndingLoc;
     }
     
-    public void advStartEncDrive(int pEndLoc){
+    public void advStartEncDrive(int pEndLoc, double pWaitTime){
     	double conversion = 125;
+    	maxTime = Timer.getFPGATimestamp() + pWaitTime;
     	if(Robot.ss_DriveTrainPneumatics.lowGear){
-    		oinkOinkMagic = 25;
+    		oinkOinkMagic = 50;
     	}
     	else{
-    		oinkOinkMagic = 50;
+    		oinkOinkMagic = 25;
     	}
     	if(pEndLoc > 0){
     		EncDir = 1;
@@ -146,15 +149,19 @@ public class SS_DriveTrain extends Subsystem {
     	driveRobot(EncDir*forwardSpeedR, 0);
     }
     
-    public boolean advDriveOverLoc(){
-    	return EncDir*getRightEncoder() > endEncLocRight;
+    public boolean advDriveOverLocOrTime(){
+    	return EncDir*getRightEncoder() > endEncLocRight || Timer.getFPGATimestamp() > maxTime;
     }
+    
     public void enableBrakeMode(boolean state){
     	leftDriveMotorOne.enableBrakeMode(state);
     	rightDriveMotorOne.enableBrakeMode(state);
     	leftDriveMotorTwo.enableBrakeMode(state);
     	rightDriveMotorTwo.enableBrakeMode(state);
     }
+    
+    /***Wiggle Code***/
+    
     
     
     

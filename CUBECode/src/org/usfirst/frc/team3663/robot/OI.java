@@ -13,6 +13,8 @@ import org.usfirst.frc.team3663.robot.commands.C_DriveChangeDirectionToggle;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainEncoderDrive;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainSetButterfly;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainSetGearShift;
+import org.usfirst.frc.team3663.robot.commands.C_DriveTrainToggleButterfly;
+import org.usfirst.frc.team3663.robot.commands.C_DriveTrainToggleGearShift;
 import org.usfirst.frc.team3663.robot.commands.C_FuelPickupToggle;
 import org.usfirst.frc.team3663.robot.commands.C_Gyro;
 import org.usfirst.frc.team3663.robot.commands.C_GearClampSet;
@@ -44,8 +46,8 @@ public class OI {
 		//Button GyroStartNeg = new JoystickButton( SpeedJoystick,6);
 		//Button GyroStartPos = new JoystickButton(SpeedJoystick,5);
 		
-		driveTrainToggleButterfly.whenReleased(new C_DriveTrainSetButterfly(Robot.ss_DriveTrainPneumatics.wheelsDown));
-		driveTrainToggleGearShift.whenReleased(new C_DriveTrainSetGearShift(Robot.ss_DriveTrainPneumatics.lowGear));
+		driveTrainToggleButterfly.whenReleased(new C_DriveTrainToggleButterfly());
+		driveTrainToggleGearShift.whenReleased(new C_DriveTrainToggleGearShift());
 
 		//driveToEncLoc.whenPressed(new C_DriveTrainEncoderDrive(200000));
 	

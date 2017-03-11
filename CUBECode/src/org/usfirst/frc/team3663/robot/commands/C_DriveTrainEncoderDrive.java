@@ -10,17 +10,19 @@ import edu.wpi.first.wpilibj.command.Command;
 public class C_DriveTrainEncoderDrive extends Command {
 
 	public int encFinal = 0;
+	public double timeOutTime = 0;
 	
-    public C_DriveTrainEncoderDrive(int pEncLoc) {
+    public C_DriveTrainEncoderDrive(int pEncLoc, double pTimeWait) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.ss_DriveTrain);
         encFinal = pEncLoc;
+        timeOutTime = pTimeWait;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.ss_DriveTrain.resetBothEnc();
-    	Robot.ss_DriveTrain.advStartEncDrive(encFinal);
+    	Robot.ss_DriveTrain.advStartEncDrive(encFinal, timeOutTime);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -30,7 +32,7 @@ public class C_DriveTrainEncoderDrive extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.ss_DriveTrain.advDriveOverLoc();
+        return Robot.ss_DriveTrain.advDriveOverLocOrTime();
     }
 
     // Called once after isFinished returns true

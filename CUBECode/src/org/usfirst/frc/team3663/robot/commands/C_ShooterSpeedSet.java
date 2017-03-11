@@ -30,7 +30,7 @@ public class C_ShooterSpeedSet extends Command {
     		Robot.ss_ShooterMainWheel.targetvalue -= 50;
     		press=true;
     	}
-    	System.out.println(Robot.ss_ShooterMainWheel.targetvalue);
+    	//System.out.println(Robot.ss_ShooterMainWheel.targetvalue);
     	if(Robot.oi.OPJoystick.getPOV()==-1){
     		press=false;
     	}
