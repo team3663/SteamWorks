@@ -140,10 +140,6 @@ public class SS_Gyro extends Subsystem {
 //		}
 		return false;
     }
-    	
-    	
-    	
-
 }
 
 
