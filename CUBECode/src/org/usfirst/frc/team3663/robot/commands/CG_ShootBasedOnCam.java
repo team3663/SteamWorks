@@ -16,7 +16,7 @@ public class CG_ShootBasedOnCam extends CommandGroup {
         // To run multiple commands at the same time,
         // use addParallel()
         addParallel(new C_ShooterMoveRotationAuto());
-        addParallel(new C_ShooterFireAuto(300));
+       // addParallel(new C_ShooterFireAuto(300));
         // Command1 and Command2 will run in parallel.
 
         // A command group will require all of the subsystems that each member

@@ -23,7 +23,7 @@ public class SS_Lift extends Subsystem {
     }
     
     public void setSpeedLiftFeedMotor(double pSpd){
-    	liftFeedMotor.set(-pSpd/2.5);
+    	liftFeedMotor.set(-pSpd);
     }
     
     public void setSpeedLiftYellowMotor(double pSpd){

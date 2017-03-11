@@ -32,13 +32,13 @@ public class SS_ShooterMainWheel extends Subsystem {
     }
     
     public boolean safeToShoot(){
-    	System.out.println("Shooter safe : " + Robot.ss_ShooterRotation.safeToShoot);
+    	//System.out.println("Shooter safe : " + Robot.ss_ShooterRotation.safeToShoot);
     	return Robot.ss_ShooterRotation.safeToShoot;
     	//return false;
     }
     
     public int getEncoder(){
-    	System.out.println(""+ mainMotor.getEncPosition() + ", " + mainMotor2.getEncPosition());
+    	//System.out.println(""+ mainMotor.getEncPosition() + ", " + mainMotor2.getEncPosition());
     	return mainMotor.getEncPosition();
     	
     }
@@ -63,7 +63,7 @@ public class SS_ShooterMainWheel extends Subsystem {
 	    	if(Math.abs(vel) < 5000){
 		    	currentSpeed -= ((vel - pVal)/Math.abs(pVal))/25;
 		    	setSpeedMainMotor(currentSpeed);
-		    	System.out.println("Velocity : " + vel + "ticks/ms);  CEncPos : " + currentEncVal + "  Current Speed : " + currentSpeed);
+		    	//System.out.println("Velocity : " + vel + "ticks/ms);  CEncPos : " + currentEncVal + "  Current Speed : " + currentSpeed);
 	    	}
 	    	lastEncVal = currentEncVal;
 	    } 
@@ -77,7 +77,7 @@ public class SS_ShooterMainWheel extends Subsystem {
 		}
 		return (int)vel;
 	}
-	public int targetvalue=0;
+	public int targetvalue=1000;
 	public boolean hoodUp = false;
 	public void setPistonValue(boolean pState){
 		if(hoodUp){

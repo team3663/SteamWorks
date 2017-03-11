@@ -34,8 +34,8 @@ public class SS_DriveTrainPneumatics extends Subsystem {
     }
 
     public boolean wheelsDown = false;
-    public void toggleButterfly(){
-    	if(wheelsDown){
+    public void setButterfly(boolean pWheels){
+    	if(pWheels){
     		//wheelsDown = false;
     		dropButterfly.set(DoubleSolenoid.Value.kForward);
     	}

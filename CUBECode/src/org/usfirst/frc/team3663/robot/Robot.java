@@ -1,6 +1,8 @@
 
 package org.usfirst.frc.team3663.robot;
 
+import org.usfirst.frc.team3663.robot.commands.C_DriveTrainEncoderDrive;
+import org.usfirst.frc.team3663.robot.subsystems.SS_AutoChoose;
 import org.usfirst.frc.team3663.robot.subsystems.SS_Climber;
 import org.usfirst.frc.team3663.robot.subsystems.SS_DriveTrain;
 import org.usfirst.frc.team3663.robot.subsystems.SS_DriveTrainPneumatics;
@@ -38,6 +40,7 @@ public class Robot extends IterativeRobot {
 	public static SS_ShooterMainWheel ss_ShooterMainWheel;
 	public static SS_Lift ss_Lift;
 	public static SS_Gyro gyro;
+	public static SS_AutoChoose ss_AutoChoose;
 //=======
 	public static SS_Timer ss_Timer;
 	public static SS_Climber ss_Climber;
@@ -60,6 +63,7 @@ public class Robot extends IterativeRobot {
 		ss_Timer = new SS_Timer();
 		ss_Climber = new SS_Climber();
 		ss_GearPickup = new SS_GearPickup();
+		ss_AutoChoose = new SS_AutoChoose();
 		oi = new OI();
 	}
 
@@ -91,6 +95,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		C_DriveTrainEncoderDrive test = new C_DriveTrainEncoderDrive(100);
+		test.start();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",

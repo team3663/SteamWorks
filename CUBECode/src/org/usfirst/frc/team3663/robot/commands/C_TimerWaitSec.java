@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class C_TimerWaitMills extends Command {
+public class C_TimerWaitSec extends Command {
 
 	double mills = 0;
 	
-    public C_TimerWaitMills(double pMills) {
+    public C_TimerWaitSec(double pMills) {
         // Use requires() here to declare subsystem dependencies
     	mills = pMills;
         requires(Robot.ss_Timer);

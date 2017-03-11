@@ -67,15 +67,6 @@ public class SS_GearPickup extends Subsystem {
     	}
     	return motorToggled; 
     }
-
-    public void setLight(boolean pValue){ //True is on
-    	if(pValue){
-    		spike.set(Relay.Value.kForward);
-    	}
-    	else{
-    		spike.set(Relay.Value.kReverse);
-    	}
-    }
     
     public void setGearUp(boolean pState){
     	if(pState){
@@ -96,12 +87,14 @@ public class SS_GearPickup extends Subsystem {
     }
     
     public void setGearMotorSpeed(double pSpd){
+    	
     	gearMotor.set(pSpd);
     }
     
     public boolean getGearSensor(){
     	return gearSensor.get();
     }
+<<<<<<< HEAD
 //    public void setLight(boolean pValue){ //True is on
 //    	if(pValue){
 //    		spike.set(Relay.Value.kReverse);
@@ -109,5 +102,16 @@ public class SS_GearPickup extends Subsystem {
 //    	else{
 //    		spike.set(Relay.Value.kForward);
 //    	}
+=======
+    
+    public void setLight(boolean pValue){ //True is on
+    	if(pValue){
+    		spike.set(Relay.Value.kReverse);
+    	}
+    	else{
+    		spike.set(Relay.Value.kForward);
+    	}
+    }
+>>>>>>> 76e86fa4b7d6f88761a8bdeb1414c97ce0b83607
 }
 

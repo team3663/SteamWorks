@@ -7,26 +7,20 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class C_ShooterFireAuto extends Command {
+public class C_AutoSelect extends Command {
 
-	private int vel = 0;
-	
-    public C_ShooterFireAuto(int pVel) {
+    public C_AutoSelect() {
         // Use requires() here to declare subsystem dependencies
-    	vel = pVel;
-        requires(Robot.ss_ShooterMainWheel);
+        requires(Robot.ss_AutoChoose);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.ss_ShooterMainWheel.resetMainMotorEncoder(vel);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.ss_ShooterMainWheel.safeToShoot()){
-    		Robot.ss_ShooterMainWheel.mainMotorStayAtVel(vel);
-    	}
+    	Robot.ss_AutoChoose.selectAuto(Robot.ss_AutoChoose.getAnalogVal());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -36,12 +30,10 @@ public class C_ShooterFireAuto extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.ss_ShooterMainWheel.setSpeedMainMotor(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

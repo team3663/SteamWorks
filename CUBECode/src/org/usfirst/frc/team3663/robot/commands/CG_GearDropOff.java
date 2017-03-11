@@ -5,17 +5,19 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class CG_ShooterFireAndLoad extends CommandGroup {
+public class CG_GearDropOff extends CommandGroup {
 
-    public CG_ShooterFireAndLoad() {
+    public CG_GearDropOff() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
 
-    	addParallel(new C_ShooterSpeedSet());
-    	addParallel(new C_ShooterHoldSpeed());
-    	addParallel(new C_LiftMoveUp(1));
+        addSequential(new C_GearClampSet(false));
+        addSequential(new C_GearUpPistonSet(true));
+        addSequential(new C_GearPickupLED(false));	
+        addSequential(new C_TimerWaitSec(.5));
+        addSequential(new C_GearUpPistonSet(false));
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());

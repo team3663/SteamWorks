@@ -41,11 +41,11 @@ public class SS_DriveTrain extends Subsystem {
     }
     
     public void setDirection(int pDir){
-    	dir = 1;
+    	dir = pDir;
     }
     
     public void driveRobot(double pAxisX, double pAxisY){
-    	//System.out.println(getLeftEncoder() + ",  " + getRightEncoder());
+    	System.out.println(getLeftEncoder() + ",  " + getRightEncoder());
     	drive.arcadeDrive(dir*pAxisX, pAxisY);
     }
     
@@ -58,7 +58,6 @@ public class SS_DriveTrain extends Subsystem {
     
     public void resetRightEnc(){
     	rightEncoder.reset();
-    	rightDriveMotorTwo.setPosition(0);
     }
     
     public void resetLeftEnc(){
@@ -81,7 +80,6 @@ public class SS_DriveTrain extends Subsystem {
     
     public int getRightEncoder(){
     	return rightEncoder.get();
-    	//return rightDriveMotorTwo.getEncPosition();
     }
     
     public void setEndingRightLocation(int pEndingLoc){
@@ -106,6 +104,7 @@ public class SS_DriveTrain extends Subsystem {
     public void advDriveToLoc(){
     	leftDriveMotorOne.enableBrakeMode(true);
     	rightDriveMotorOne.enableBrakeMode(true);
+    	int oinkOinkMagic = 1000;
     	int rightEnc = getRightEncoder();
     	int leftEnc = getLeftEncoder();
     	int encToDestR = endEncLocRight - rightEnc;
@@ -114,13 +113,13 @@ public class SS_DriveTrain extends Subsystem {
     	int encToDestL = endEncLocLeft - leftEnc;
     	lastEncRunRight = rightEnc;
     	lastEncRunLeft = leftEnc;
-    	double forwardSpeedR = ((double)encToDestR/(double)encDispR)/52.5;
-    	double forwardSpeedL = ((double)encToDestL/(double)encDispL)/52.5;
+    	double forwardSpeedR = ((double)encToDestR/(double)encDispR)/oinkOinkMagic;
+    	double forwardSpeedL = ((double)encToDestL/(double)encDispL)/oinkOinkMagic;
     	double turnSpeed = 0;
     	if(forwardSpeedR < 0x00ffffff){
     		turnSpeed = (double)((double)forwardSpeedL - (double)forwardSpeedR)/1000;
     	}
-    	System.out.println(rightEnc + ",  " + leftEnc + ",  " + turnSpeed + ",  " + forwardSpeedR + ",  " + forwardSpeedL);
+    	//System.out.println(rightEnc + ",  " + leftEnc + ",  " + turnSpeed + ",  " + forwardSpeedR + ",  " + forwardSpeedL);
     	driveRobot(forwardSpeedR, turnSpeed);
     }
     
