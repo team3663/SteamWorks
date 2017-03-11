@@ -12,25 +12,25 @@ public class C_Gyro extends Command {
 
     public C_Gyro(int pdes)
     {
-    	requires(Robot.gyro);
+    	//requires(Robot.gyro);
     	requires(Robot.ss_DriveTrain);
     	turnValue = pdes;
     }
     protected void initialize()
     {
-    	Robot.gyro.SetUpGyro();
+    	Robot.ss_DriveTrain.SetUpGyro();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute()
     {
-    	Robot.gyro.TurnByGyro(turnValue);
+    	Robot.ss_DriveTrain.TurnByGyro(turnValue);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished()
     {
-    	return Robot.gyro.TurnByGyro(turnValue);
+    	return Robot.ss_DriveTrain.TurnByGyro(turnValue);
     }
 
     // Called once after isFinished returns true
