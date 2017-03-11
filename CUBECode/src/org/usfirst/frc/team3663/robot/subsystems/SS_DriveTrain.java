@@ -4,10 +4,13 @@ import org.usfirst.frc.team3663.robot.Robot;
 import org.usfirst.frc.team3663.robot.commands.C_Drive;
 
 import com.ctre.CANTalon;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -33,6 +36,15 @@ public class SS_DriveTrain extends Subsystem {
         // Set the default command for a subsystem here.
         setDefaultCommand(new C_Drive());
         drive.setSafetyEnabled(false);
+        
+        //Code for starting Gyro 3/10/2017
+        try 
+    	{
+            ahrs = new AHRS(SerialPort.Port.kUSB1); 
+        } catch (RuntimeException ex ) 
+    	{
+            DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+        }
     }
     
     public void moveMotor(double speed){
@@ -54,7 +66,21 @@ public class SS_DriveTrain extends Subsystem {
     private int endEncLocRight = 0;
     private int lastEncRunLeft = 0;
     private int lastEncRunRight = 0;
+    private int EncDir = 0;
     private double lastSpeed = 0;
+    // Gyro Variables
+    AHRS ahrs;
+	public double currentHeading;
+	public double GyroMaxSpeed = 0;
+	public double Gyrospeed = 0;
+	public double BaseSpeed = .45;                // this value is for .35 for turret;
+	public double angle;
+	public double offSet;
+	double lastValue = 0;
+	public boolean test = false; 
+    
+    
+    
     
     public void resetRightEnc(){
     	rightEncoder.reset();
@@ -64,18 +90,22 @@ public class SS_DriveTrain extends Subsystem {
     	leftEncoder.reset();
     }
     
+    //1772
+    
     public void resetBothEnc(){
+    	enableBrakeMode(true);
     	resetRightEnc();
     	resetLeftEnc();
     	endEncLocLeft = 0;
     	endEncLocRight = 0;
     	lastEncRunLeft = 0;
     	lastEncRunRight = 0;
+    	lastSpeed = 1;
     	
     }
     
     public int getLeftEncoder(){
-    	return leftEncoder.get();
+    	return -leftEncoder.get();
     }
     
     public int getRightEncoder(){
@@ -91,22 +121,23 @@ public class SS_DriveTrain extends Subsystem {
     }
     
     public void advStartEncDrive(int pEndLoc){
-    	setEndingRightLocation((int)(pEndLoc*118.88));
-    	setEndingLeftLocation(pEndLoc);
+    	double conversion = 125;
     	if(pEndLoc > 0){
-    		lastSpeed = -1;
+    		EncDir = 1;
     	}
     	else{
-    		lastSpeed = 1;
+    		EncDir = -1;
     	}
+    	setEndingRightLocation((int)(EncDir*pEndLoc*conversion));
+    	setEndingLeftLocation((int)(EncDir*pEndLoc*conversion));
     }
     
     public void advDriveToLoc(){
     	leftDriveMotorOne.enableBrakeMode(true);
     	rightDriveMotorOne.enableBrakeMode(true);
-    	int oinkOinkMagic = 1000;
-    	int rightEnc = getRightEncoder();
-    	int leftEnc = getLeftEncoder();
+    	int oinkOinkMagic = 50;
+    	int rightEnc = EncDir*getRightEncoder();
+    	int leftEnc = EncDir*getLeftEncoder();
     	int encToDestR = endEncLocRight - rightEnc;
     	int encDispR = rightEnc - lastEncRunRight;
     	int encDispL = leftEnc - lastEncRunLeft;
@@ -117,18 +148,113 @@ public class SS_DriveTrain extends Subsystem {
     	double forwardSpeedL = ((double)encToDestL/(double)encDispL)/oinkOinkMagic;
     	double turnSpeed = 0;
     	if(forwardSpeedR < 0x00ffffff){
-    		turnSpeed = (double)((double)forwardSpeedL - (double)forwardSpeedR)/1000;
+    		turnSpeed = (double)((double)forwardSpeedL - (double)forwardSpeedR)/100;
     	}
     	//System.out.println(rightEnc + ",  " + leftEnc + ",  " + turnSpeed + ",  " + forwardSpeedR + ",  " + forwardSpeedL);
-    	driveRobot(forwardSpeedR, turnSpeed);
+    	driveRobot(EncDir*forwardSpeedR, EncDir*(-turnSpeed));
     }
     
     public boolean advDriveOverLoc(){
-    	return getRightEncoder() > endEncLocRight;
+    	return EncDir*getRightEncoder() > endEncLocRight;
     }
-    public void EnableBrakeMode(boolean state){
+    public void enableBrakeMode(boolean state){
     	leftDriveMotorOne.enableBrakeMode(state);
     	rightDriveMotorOne.enableBrakeMode(state);
+    }
+    
+    
+    
+/////////////////// Code for Gyro /////////////////////////////
+    public void SetUpGyro()
+    {
+    	ahrs.resetDisplacement();
+    	//ahrs.reset();
+    	offSet = ahrs.getAngle();
+    	while(offSet == 0){
+	    	if(ahrs.isConnected())
+	    	{
+	    		
+	    		offSet = ahrs.getAngle();
+	    		System.out.println("Zero: " + offSet);
+	    	}
+	    ahrs.setAngleAdjustment(offSet);
+	    System.out.println("Zero: " + offSet);
+    	}
+    }
+    public boolean TurnByGyro(double degree)
+    {
+    	//double accelZ;
+    	//try{
+    	System.out.println("Current Position: " + currentHeading + " Zero: " + offSet + " Speed:" + Gyrospeed);
+    	if(ahrs.isConnected())
+    	{
+    		//angle = ahrs.getAngle();
+    		currentHeading = ahrs.getAngle() - offSet;
+    		//accelZ = ahrs.getRawAccelZ();
+    	}
+    	System.out.println("Cal Angle: " + currentHeading);
+    	//}
+    	//catch (RuntimeException ex ) {
+        //    DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+        //    return false;
+       // }
+//    	if (currentHeading < -180) {
+//    		currentHeading = currentHeading + 180;
+//    	}
+//    	if (currentHeading > 180) {
+//    		currentHeading = currentHeading - 180;
+//    	}
+    	if (Math.abs(degree) > 15)
+    	{
+    		GyroMaxSpeed = .5;
+    	}
+    	else
+    	{
+    		GyroMaxSpeed = .25;
+    	}
+    	// System.out.println("angle: " + angle + " Current Position: " + currentHeading + " Zero: " + zero);
+    	if(ahrs.isConnected() && test == false)
+    	{
+    		double AbsDegree = Math.abs(degree);
+    		Gyrospeed = ((((Math.abs(Math.abs(currentHeading)-AbsDegree)/AbsDegree))*GyroMaxSpeed)/2)+ BaseSpeed;
+    		
+    		if(degree < 0 )
+    		{
+    			Gyrospeed = -1*Gyrospeed;
+    		}
+    		Robot.ss_DriveTrain.driveRobot(0, Gyrospeed);
+	    	if(Math.abs(currentHeading-degree) <= .25)
+	    	{
+	    		Gyrospeed = 0;
+	    		driveRobot(Gyrospeed, Gyrospeed);
+	    		enableBrakeMode(true);
+	    		System.out.println("Angled Reached" + currentHeading);
+	    		return true;
+	    	}
+    	}
+    	if (Math.abs(currentHeading) > 180)
+    	{
+    		enableBrakeMode(true);
+    		System.out.println("Angled Reached" + currentHeading);
+    		return true;
+    	}
+    	if (Math.abs(Gyrospeed) > 1)
+    	{
+    		System.out.println("ERROR Too Fast");
+    		return true;
+    	}
+    	if (Math.abs(currentHeading) > Math.abs(degree)){
+    		System.out.println("ERROR Too Far");
+    		return true;
+    	}
+		return false;
+    }
+    public double DriveByGyro(){
+    	double turnRate = 0;
+    	SetUpGyro();					//reset gyro 
+    	currentHeading = ahrs.getAngle() - offSet;
+    	turnRate = currentHeading/10; 
+    	return turnRate;
     }
     
 }

@@ -91,8 +91,8 @@ public class SS_ShooterRotation extends Subsystem {
     }
     
     private double advConvertSpeed(double pSpd, int pEnc, int dest){
-    	double speed = lastSpeed;
-    	if(pSpd != 0 && (lastEncRun != pEnc || .04 > Math.abs(speed))){
+    	double pickle = lastSpeed;
+    	if(pSpd != 0 && (lastEncRun != pEnc || .04 > Math.abs(pickle))){
     		int encDisp = 0;
     		if(pSpd > 0){
     			encDisp = lastEncRun - pEnc;
@@ -102,21 +102,21 @@ public class SS_ShooterRotation extends Subsystem {
     		}
 			int encToDest = pEnc - dest;
 			double amount = ((double)encToDest/(double)encDisp);
-			speed = amount/10;
-			if(Math.abs(speed) < 1000){
-				lastSpeed = speed;				
+			pickle = amount/10;
+			if(Math.abs(pickle) < 1000){
+				lastSpeed = pickle;				
 			}
-			if(Math.abs(speed) > 1000){
+			if(Math.abs(pickle) > 1000){
 				if(pSpd > 0){
-					speed = .1;
+					pickle = .1;
 				}
 				else{
-					speed = -.1;
+					pickle = -.1;
 				}
 			}
     	}
-		if(Math.abs(pSpd) > Math.abs(speed) && pSpd*speed > 0){
-			pSpd = speed;
+		if(Math.abs(pSpd) > Math.abs(pickle) && pSpd*pickle > 0){
+			pSpd = pickle;
 		}
 		//System.out.println(lastEncRun + "   " + pEnc + "  " + pSpd + "   " + speed + "   " + lastSpeed);
     	return pSpd;

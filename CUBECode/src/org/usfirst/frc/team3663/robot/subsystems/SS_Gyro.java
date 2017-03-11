@@ -23,7 +23,7 @@ public class SS_Gyro extends Subsystem {
 	public double currentHeading;
 	public double MaxSpeed = 0;
 	public double speed = 0;
-	public double BaseSpeed = .5;                // this value is for .35 for turret;
+	public double BaseSpeed = .45;                // this value is for .35 for turret;
 	public double angle;
 	public double offSet;
 	double lastValue = 0;
@@ -57,12 +57,6 @@ public class SS_Gyro extends Subsystem {
 	    ahrs.setAngleAdjustment(offSet);
 	    System.out.println("Zero: " + offSet);
     	}
-		try {
-		Thread.sleep(200);
-		} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
     }
     
     
@@ -101,7 +95,7 @@ public class SS_Gyro extends Subsystem {
     	if(ahrs.isConnected() && test == false)
     	{
     		double AbsDegree = Math.abs(degree);
-    		speed = (((Math.abs(Math.abs(currentHeading)-AbsDegree)/AbsDegree))*MaxSpeed) + BaseSpeed;
+    		speed = ((((Math.abs(Math.abs(currentHeading)-AbsDegree)/AbsDegree))*MaxSpeed)/2)+ BaseSpeed;
     		
     		if(degree < 0 )
     		{
@@ -112,14 +106,14 @@ public class SS_Gyro extends Subsystem {
 	    	{
 	    		speed = 0;
 	    		Robot.ss_DriveTrain.driveRobot(speed, speed);
-	    		Robot.ss_DriveTrain.EnableBrakeMode(true);
+	    		Robot.ss_DriveTrain.enableBrakeMode(true);
 	    		System.out.println("Angled Reached" + currentHeading);
 	    		return true;
 	    	}
     	}
     	if (Math.abs(currentHeading) > 180)
     	{
-    		Robot.ss_DriveTrain.EnableBrakeMode(true);
+    		Robot.ss_DriveTrain.enableBrakeMode(true);
     		System.out.println("Angled Reached" + currentHeading);
     		return true;
     	}
