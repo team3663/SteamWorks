@@ -37,13 +37,13 @@ public class OI {
 	
 	public OI(){
 /***DRIVE TRAIN BUTTONS***/
-		Button driveTrainToggleButterfly = new JoystickButton(driveJoystick, 8);
+		Button driveTrainToggleButterfly = new JoystickButton(driveJoystick, 1);
 		Button driveTrainToggleGearShift = new JoystickButton(driveJoystick, 9);
 		Button driveTrainToggleDir = new JoystickButton(driveJoystick, 4);
 		//Button GyroStartNeg = new JoystickButton( SpeedJoystick,6);
 		//Button GyroStartPos = new JoystickButton(SpeedJoystick,5);
 		
-		driveTrainToggleButterfly.whenPressed(new C_DriveTrainSetButterfly());
+		driveTrainToggleButterfly.whenReleased(new C_DriveTrainSetButterfly(Robot.ss_DriveTrainPneumatics.wheelsDown));
 		driveTrainToggleGearShift.whenReleased(new C_DriveTrainSetGearShift(Robot.ss_DriveTrainPneumatics.lowGear));
 
 		//driveToEncLoc.whenPressed(new C_DriveTrainEncoderDrive(200000));

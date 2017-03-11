@@ -56,6 +56,7 @@ public class SS_DriveTrain extends Subsystem {
     private int lastEncRunRight = 0;
     private int EncDir = 0;
     private double lastSpeed = 0;
+    private int oinkOinkMagic = 25;
     
     public void resetRightEnc(){
     	rightEncoder.reset();
@@ -97,6 +98,12 @@ public class SS_DriveTrain extends Subsystem {
     
     public void advStartEncDrive(int pEndLoc){
     	double conversion = 125;
+    	if(Robot.ss_DriveTrainPneumatics.lowGear){
+    		oinkOinkMagic = 25;
+    	}
+    	else{
+    		oinkOinkMagic = 50;
+    	}
     	if(pEndLoc > 0){
     		EncDir = 1;
     	}
@@ -108,25 +115,13 @@ public class SS_DriveTrain extends Subsystem {
     }
     
     public void advDriveToLoc(){
-    	leftDriveMotorOne.enableBrakeMode(true);
-    	rightDriveMotorOne.enableBrakeMode(true);
-    	int oinkOinkMagic = 50;
     	int rightEnc = EncDir*getRightEncoder();
-    	int leftEnc = EncDir*getLeftEncoder();
     	int encToDestR = endEncLocRight - rightEnc;
     	int encDispR = rightEnc - lastEncRunRight;
-    	int encDispL = leftEnc - lastEncRunLeft;
-    	int encToDestL = endEncLocLeft - leftEnc;
     	lastEncRunRight = rightEnc;
-    	lastEncRunLeft = leftEnc;
     	double forwardSpeedR = ((double)encToDestR/(double)encDispR)/oinkOinkMagic;
-    	double forwardSpeedL = ((double)encToDestL/(double)encDispL)/oinkOinkMagic;
-    	double turnSpeed = 0;
-    	if(forwardSpeedR < 0x00ffffff){
-    		turnSpeed = (double)((double)forwardSpeedL - (double)forwardSpeedR)/100;
-    	}
     	//System.out.println(rightEnc + ",  " + leftEnc + ",  " + turnSpeed + ",  " + forwardSpeedR + ",  " + forwardSpeedL);
-    	driveRobot(EncDir*forwardSpeedR, EncDir*(-turnSpeed));
+    	driveRobot(EncDir*forwardSpeedR, 0);
     }
     
     public boolean advDriveOverLoc(){
@@ -135,6 +130,8 @@ public class SS_DriveTrain extends Subsystem {
     public void enableBrakeMode(boolean state){
     	leftDriveMotorOne.enableBrakeMode(state);
     	rightDriveMotorOne.enableBrakeMode(state);
+    	leftDriveMotorTwo.enableBrakeMode(state);
+    	rightDriveMotorTwo.enableBrakeMode(state);
     }
     
 }

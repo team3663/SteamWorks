@@ -13,7 +13,7 @@ public class CG_GearLiftAuto extends CommandGroup {
     public CG_GearLiftAuto() {
         // Add Commands here:
 
-    	addSequential(new C_DriveTrainSetButterflyOff());
+    	addSequential(new C_DriveTrainSetButterfly(false));
         addSequential(new C_GearClampSet(false));
         addSequential(new C_GearUpPistonSet(true));
         addSequential(new C_GearPickupLED(true));
