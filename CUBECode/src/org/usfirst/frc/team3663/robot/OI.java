@@ -5,6 +5,7 @@ package org.usfirst.frc.team3663.robot;
 import org.usfirst.frc.team3663.robot.commands.CG_GearLiftAuto;
 import org.usfirst.frc.team3663.robot.commands.CG_AutoB_2_G;
 import org.usfirst.frc.team3663.robot.commands.CG_AutoR_1_G;
+import org.usfirst.frc.team3663.robot.commands.CG_AutoR_3_G;
 import org.usfirst.frc.team3663.robot.commands.CG_GearDropOff;
 import org.usfirst.frc.team3663.robot.commands.CG_ShootBasedOnCam;
 import org.usfirst.frc.team3663.robot.commands.CG_ShooterFireAndLoad;
@@ -38,13 +39,13 @@ public class OI {
 	
 	public OI(){
 /***DRIVE TRAIN BUTTONS***/
-		Button driveTrainToggleButterfly = new JoystickButton(driveJoystick, 8);
+		Button driveTrainToggleButterfly = new JoystickButton(driveJoystick, 1);
 		Button driveTrainToggleGearShift = new JoystickButton(driveJoystick, 9);
 		Button driveTrainToggleDir = new JoystickButton(driveJoystick, 4);
 		//Button GyroStartNeg = new JoystickButton( SpeedJoystick,6);
 		//Button GyroStartPos = new JoystickButton(SpeedJoystick,5);
 		
-		driveTrainToggleButterfly.whenPressed(new C_DriveTrainSetButterfly());
+		driveTrainToggleButterfly.whenReleased(new C_DriveTrainSetButterfly(Robot.ss_DriveTrainPneumatics.wheelsDown));
 		driveTrainToggleGearShift.whenReleased(new C_DriveTrainSetGearShift(Robot.ss_DriveTrainPneumatics.lowGear));
 
 		//driveToEncLoc.whenPressed(new C_DriveTrainEncoderDrive(200000));
@@ -99,7 +100,7 @@ public class OI {
 		gearClose.whenPressed(new C_GearClampSet(true));
 
 		Button autogear = new JoystickButton(OPJoystick, 1);
-		autogear.whenPressed(new CG_AutoB_2_G());
+		autogear.whenPressed(new CG_AutoR_3_G());
 		gearLift.whenPressed(new C_GearUpPistonSet(true));
 		
 		

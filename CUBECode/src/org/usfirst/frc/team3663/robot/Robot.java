@@ -7,7 +7,6 @@ import org.usfirst.frc.team3663.robot.subsystems.SS_Climber;
 import org.usfirst.frc.team3663.robot.subsystems.SS_DriveTrain;
 import org.usfirst.frc.team3663.robot.subsystems.SS_DriveTrainPneumatics;
 import org.usfirst.frc.team3663.robot.subsystems.SS_FuelPickup;
-import org.usfirst.frc.team3663.robot.subsystems.SS_Gyro;
 import org.usfirst.frc.team3663.robot.subsystems.SS_GearPickup;
 import org.usfirst.frc.team3663.robot.subsystems.SS_Lift;
 import org.usfirst.frc.team3663.robot.subsystems.SS_ShooterMainWheel;
@@ -39,9 +38,7 @@ public class Robot extends IterativeRobot {
 	public static SS_ShooterRotation ss_ShooterRotation;
 	public static SS_ShooterMainWheel ss_ShooterMainWheel;
 	public static SS_Lift ss_Lift;
-	//public static SS_Gyro gyro;
 	public static SS_AutoChoose ss_AutoChoose;
-//=======
 	public static SS_Timer ss_Timer;
 	public static SS_Climber ss_Climber;
 	public static SS_GearPickup ss_GearPickup;
@@ -59,7 +56,6 @@ public class Robot extends IterativeRobot {
 		ss_ShooterRotation = new SS_ShooterRotation();
 		ss_ShooterMainWheel = new SS_ShooterMainWheel();
 		ss_Lift = new SS_Lift();
-		//gyro = new SS_Gyro();
 		ss_Timer = new SS_Timer();
 		ss_Climber = new SS_Climber();
 		ss_GearPickup = new SS_GearPickup();
@@ -95,7 +91,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		C_DriveTrainEncoderDrive test = new C_DriveTrainEncoderDrive(-32);
+		C_DriveTrainEncoderDrive test = new C_DriveTrainEncoderDrive(-132);
 		test.start();
 
 		/*

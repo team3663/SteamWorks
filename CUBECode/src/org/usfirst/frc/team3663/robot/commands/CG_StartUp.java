@@ -1,30 +1,18 @@
 package org.usfirst.frc.team3663.robot.commands;
 
-import org.usfirst.frc.team3663.robot.Robot;
-
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class CG_GearLiftAuto extends CommandGroup {
+public class CG_StartUp extends CommandGroup {
 
-    public CG_GearLiftAuto() {
+    public CG_StartUp() {
         // Add Commands here:
-
-    	addSequential(new C_DriveTrainSetButterfly(false));
-        addSequential(new C_GearClampSet(false));
-        addSequential(new C_GearUpPistonSet(true));
-        addSequential(new C_GearPickupLED(true));
-        addSequential(new C_GearRunMotor(1));
-        addSequential(new C_GearClampSet(true));
-        addSequential(new C_GearPickupLED(false));	
-        addSequential(new C_GearUpPistonSet(false));
-
-        
-   
-        //addSequential(new )
+        addSequential(new C_DriveTrainSetButterfly(false));
+        addSequential(new C_DriveTrainSetGearShift(false));
+        //      addSequential(new Command2());
+        // these will run in order.
 
         // To run multiple commands at the same time,
         // use addParallel()

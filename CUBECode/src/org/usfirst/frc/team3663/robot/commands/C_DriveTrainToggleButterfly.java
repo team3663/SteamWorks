@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class C_DriveTrainSetButterflyOff extends Command {
+public class C_DriveTrainToggleButterfly extends Command {
 
-    public C_DriveTrainSetButterflyOff() {
+    public C_DriveTrainToggleButterfly() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.ss_DriveTrainPneumatics);
     }
 
     // Called just before this Command runs the first time
@@ -20,8 +20,7 @@ public class C_DriveTrainSetButterflyOff extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ss_DriveTrainPneumatics.wheelsDown= false;
-    	Robot.ss_DriveTrainPneumatics.setButterfly(false);
+    	Robot.ss_DriveTrainPneumatics.toggleGearShift(Robot.ss_DriveTrainPneumatics.lowGear);
     }
 
     // Make this return true when this Command no longer needs to run execute()
