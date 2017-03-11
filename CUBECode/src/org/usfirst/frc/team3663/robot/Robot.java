@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team3663.robot;
 
+import org.usfirst.frc.team3663.robot.commands.CG_AutoB_2_G;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainEncoderDrive;
 import org.usfirst.frc.team3663.robot.subsystems.SS_AutoChoose;
 import org.usfirst.frc.team3663.robot.subsystems.SS_Climber;
@@ -91,7 +92,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		C_DriveTrainEncoderDrive test = new C_DriveTrainEncoderDrive(-132);
+		//C_DriveTrainEncoderDrive test = new C_DriveTrainEncoderDrive(-132, 13);
+		CG_AutoB_2_G test= new CG_AutoB_2_G();
 		test.start();
 
 		/*

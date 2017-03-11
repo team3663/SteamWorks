@@ -99,8 +99,8 @@ public class OI {
 
 		gearLift.whenPressed(new C_GearUpPistonSet(true));
 
-		Button autogear = new JoystickButton(OPJoystick, 1);
-		autogear.whenPressed(new CG_AutoB_1_G());
+		//Button autogear = new JoystickButton(OPJoystick, 1);
+		//autogear.whenPressed(new CG_AutoB_1_G());
 		gearLift.whenPressed(new C_GearUpPistonSet(true));
 		
 
