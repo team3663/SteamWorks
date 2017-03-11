@@ -145,6 +145,10 @@ public class SS_DriveTrain extends Subsystem {
     	int encDispR = rightEnc - lastEncRunRight;
     	lastEncRunRight = rightEnc;
     	double forwardSpeedR = ((double)encToDestR/(double)encDispR)/oinkOinkMagic;
+    	forwardSpeedR = Math.abs(forwardSpeedR);
+    	if(forwardSpeedR > .7){
+    		forwardSpeedR = .7;
+    	}
     	//System.out.println(rightEnc + ",  " + leftEnc + ",  " + turnSpeed + ",  " + forwardSpeedR + ",  " + forwardSpeedL);
     	driveRobot(EncDir*forwardSpeedR, 0);
     }

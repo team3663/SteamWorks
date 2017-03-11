@@ -5,6 +5,7 @@ package org.usfirst.frc.team3663.robot;
 import org.usfirst.frc.team3663.robot.commands.CG_GearLiftAuto;
 import org.usfirst.frc.team3663.robot.commands.CG_AutoB_2_G;
 import org.usfirst.frc.team3663.robot.commands.CG_AutoR_1_G;
+import org.usfirst.frc.team3663.robot.commands.CG_AutoR_3_G;
 import org.usfirst.frc.team3663.robot.commands.CG_GearDropOff;
 import org.usfirst.frc.team3663.robot.commands.CG_ShootBasedOnCam;
 import org.usfirst.frc.team3663.robot.commands.CG_ShooterFireAndLoad;
@@ -101,7 +102,7 @@ public class OI {
 		gearClose.whenPressed(new C_GearClampSet(true));
 
 		Button autogear = new JoystickButton(OPJoystick, 1);
-		autogear.whenPressed(new CG_AutoB_2_G());
+		autogear.whenPressed(new CG_AutoR_3_G());
 		gearLift.whenPressed(new C_GearUpPistonSet(true));
 		
 		
