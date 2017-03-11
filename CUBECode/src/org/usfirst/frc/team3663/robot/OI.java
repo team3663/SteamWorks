@@ -98,10 +98,10 @@ public class OI {
 		gearOpen.whenPressed(new C_GearClampSet(false));
 		gearClose.whenPressed(new C_GearClampSet(true));
 
+		gearLift.whenPressed(new C_GearUpPistonSet(true));
+
 		Button autogear = new JoystickButton(OPJoystick, 1);
 		autogear.whenPressed(new CG_AutoR_1_G());
-		gearLift.whenPressed(new C_GearUpPistonSet(true));
-		
 		
 /***CLIMBER MOTORS***/
 		/**Button climb = new JoystickButton(OPJoystick, 4);
