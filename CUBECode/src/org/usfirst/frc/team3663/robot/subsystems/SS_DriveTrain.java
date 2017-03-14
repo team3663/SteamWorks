@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -63,6 +64,7 @@ public class SS_DriveTrain extends Subsystem {
     
 /*****Drive Encoders Code******/
     private int endEncLocLeft = 0;
+    double TimeStart;
     private int endEncLocRight = 0;
     private int lastEncRunLeft = 0;
     private int lastEncRunRight = 0;
@@ -132,6 +134,7 @@ public class SS_DriveTrain extends Subsystem {
     	else{
     		EncDir = -1;
     	}
+        TimeStart = Timer.getFPGATimestamp(); // Get the current CPU clock time before the code drives by encoder
     	setEndingRightLocation((int)(EncDir*pEndLoc*conversion));
     	setEndingLeftLocation((int)(EncDir*pEndLoc*conversion));
     }
@@ -247,11 +250,23 @@ public class SS_DriveTrain extends Subsystem {
     	}
 		return false;
     }
+    
+    // Code for turning by gyro this function gets the current heading from the gyro and calulate the turn rate
+    // and returns the turn value
+    
+    double Kp = .25;									//value for turn rate per angle 
+    double Ki = .01;									//value for turn rate per angle  
+    double LastError_I = 0;
+    double TurnValue = .10;
     public double DriveByGyro(){
+    	double I_val;
     	double turnRate = 0;
-    	SetUpGyro();					//reset gyro 
-    	currentHeading = ahrs.getAngle() - offSet;
-    	turnRate = currentHeading/10; 
+    	SetUpGyro();								//reset gyro 
+    	currentHeading = -1*(ahrs.getAngle() - offSet);  //after getting offset value in setup subtract this from the current angle
+    	I_val = ((Timer.getFPGATimestamp() - TimeStart)*currentHeading)+LastError_I;
+    	LastError_I = I_val;
+    	turnRate = (currentHeading*Kp)+(I_val*Ki)*TurnValue; 	
+    	TimeStart = Timer.getFPGATimestamp();//
     	return turnRate;
     }
     
