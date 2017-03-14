@@ -92,7 +92,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		//C_DriveTrainEncoderDrive test = new C_DriveTrainEncoderDrive(-132, 13);
+		//C_DriveTrainEncoderDrive test = new C_DriveTrainEncoderDrive(62, 13);
 		CG_AutoB_2_G test= new CG_AutoB_2_G();
 		test.start();
 

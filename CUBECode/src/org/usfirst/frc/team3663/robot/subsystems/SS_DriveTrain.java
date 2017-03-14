@@ -122,7 +122,7 @@ public class SS_DriveTrain extends Subsystem {
     }
     
     public void advStartEncDrive(int pEndLoc, double pWaitTime){
-    	double conversion = 125;
+    	double conversion = 83;
     	maxTime = Timer.getFPGATimestamp() + pWaitTime;
     	if(Robot.ss_DriveTrainPneumatics.lowGear){
     		oinkOinkMagic = 50;

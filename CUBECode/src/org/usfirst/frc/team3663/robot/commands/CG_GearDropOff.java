@@ -12,7 +12,7 @@ public class CG_GearDropOff extends CommandGroup {
         //addSequential(new C_GearPickupLED(true));	
         //addSequential(new C_GearUpPistonSet(true));
         addSequential(new C_GearUpSet(true));
-        addSequential(new C_TimerWaitSec(.3));
+        addSequential(new C_TimerWaitSec(.2));
         addSequential(new C_GearUpSet(false));
         //commented out lines flick the pegs
     }
