@@ -12,14 +12,14 @@ public class CG_GearLiftAuto extends CommandGroup {
 
     public CG_GearLiftAuto() {
     	addSequential(new C_DriveTrainSetButterfly(false));
-        addSequential(new C_GearClampSet(false));
-        addSequential(new C_GearUpPistonSet(true));
-        addSequential(new C_GearPickupLED(true));
-        
-        addSequential(new C_GearRunMotor(1));
-        
+        addSequential(new C_GearUpSet(true));
         addSequential(new C_GearClampSet(true));
-        addSequential(new C_GearPickupLED(false));	
-        addSequential(new C_GearUpPistonSet(false));
+        addSequential(new C_GearPickupLED(false));
+        
+        addSequential(new C_GearRunMotor(-1));
+        
+        addSequential(new C_GearUpSet(false));
+        addSequential(new C_GearPickupLED(true));	
+        addSequential(new C_GearClampSet(false)); 
     }
 }

@@ -23,7 +23,7 @@ public class SS_ShooterRotation extends Subsystem {
 	private CANTalon rotationMotor = new CANTalon(Robot.robotMap.shooterRotMotor);
 
 	private DigitalInput zeroSwitch = new DigitalInput(Robot.robotMap.shooterZeroDIO);
-	private DigitalInput directionDIO = new DigitalInput(Robot.robotMap.shooterTurnLeftDIO);
+	//private DigitalInput directionDIO = new DigitalInput(Robot.robotMap.shooterTurnLeftDIO);
 	
 	private Encoder encoder = new Encoder(Robot.robotMap.shooterRotEncOne, Robot.robotMap.shooterRotEncTwo);
 

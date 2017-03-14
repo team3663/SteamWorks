@@ -21,8 +21,8 @@ import org.usfirst.frc.team3663.robot.commands.C_FuelPickupToggle;
 import org.usfirst.frc.team3663.robot.commands.C_Gyro;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterRotFindZero;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterSetPiston;
+import org.usfirst.frc.team3663.robot.commands.C_GearUpSet;
 import org.usfirst.frc.team3663.robot.commands.C_GearClampSet;
-import org.usfirst.frc.team3663.robot.commands.C_GearUpPistonSet;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -99,14 +99,7 @@ public class OI {
 		
 		gearOPpickup.whenPressed(new CG_GearLiftAuto());
 		gearOPdrop.whenPressed(new CG_GearDropOff());
-		//gearOpen.whenPressed(new C_GearClampSet(false));
-		gearClose.whenPressed(new C_GearClampSet(true));
 
-		gearLift.whenPressed(new C_GearUpPistonSet(true));
-
-		//Button autogear = new JoystickButton(OPJoystick, 1);
-		//autogear.whenPressed(new CG_AutoB_1_G());
-		gearLift.whenPressed(new C_GearUpPistonSet(true));
 		
 
 		
