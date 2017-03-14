@@ -19,8 +19,8 @@ import org.usfirst.frc.team3663.robot.commands.C_DriveTrainToggleButterfly;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainToggleGearShift;
 import org.usfirst.frc.team3663.robot.commands.C_FuelPickupToggle;
 import org.usfirst.frc.team3663.robot.commands.C_Gyro;
+import org.usfirst.frc.team3663.robot.commands.C_GearUpSet;
 import org.usfirst.frc.team3663.robot.commands.C_GearClampSet;
-import org.usfirst.frc.team3663.robot.commands.C_GearUpPistonSet;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -94,14 +94,14 @@ public class OI {
 		
 		gearOPpickup.whenPressed(new CG_GearLiftAuto());
 		gearOPdrop.whenPressed(new CG_GearDropOff());
-		gearOpen.whenPressed(new C_GearClampSet(false));
-		gearClose.whenPressed(new C_GearClampSet(true));
+		gearOpen.whenPressed(new C_GearUpSet(false));
+		gearClose.whenPressed(new C_GearUpSet(true));
 
-		gearLift.whenPressed(new C_GearUpPistonSet(true));
+		gearLift.whenPressed(new C_GearClampSet(true));
 
 		Button autogear = new JoystickButton(OPJoystick, 1);
 		autogear.whenPressed(new CG_AutoB_1_G());
-		gearLift.whenPressed(new C_GearUpPistonSet(true));
+		gearLift.whenPressed(new C_GearClampSet(true));
 		
 
 		

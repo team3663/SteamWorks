@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class C_GearUpPistonSet extends Command {
+public class C_GearUpSet extends Command {
 
 	private boolean state = false;
 	
-    public C_GearUpPistonSet(boolean pState) {
+    public C_GearUpSet(boolean pState) {
         // Use requires() here to declare subsystem dependencies
     	state = pState;
         requires(Robot.ss_GearPickup);
@@ -23,7 +23,7 @@ public class C_GearUpPistonSet extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ss_GearPickup.setGearUp(state);
+    	Robot.ss_GearPickup.setGearClose(state);
     }
 
     // Make this return true when this Command no longer needs to run execute()

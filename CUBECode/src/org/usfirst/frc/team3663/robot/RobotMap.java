@@ -36,8 +36,8 @@ public class RobotMap {
 	public static int shooterMainMotor2= 6;
 	//digtial Input
 	public static int shooterZeroDIO = 7;
-	public static int shooterTurnLeftDIO = 9;
-	public static int shooterTurnRightDIO = 8;
+	//public static int shooterTurnLeftDIO = 9;
+	//public static int shooterTurnRightDIO = 8;
 	//Encoder
 	public static int shooterRotEncOne = 4;
 	public static int shooterRotEncTwo = 5;
@@ -67,7 +67,7 @@ public class RobotMap {
 	public static int gearPickupCloseTwo = 1;
 	//DIO
 
-	public static int gearTrigger = 6;
+	public static int gearTrigger = 8;
 	//Relay
 	public static int pickupLED= 0;
 

@@ -12,7 +12,7 @@ public class CG_AutoR_1_G extends CommandGroup {
            addSequential(new C_Gyro(-54));
            addSequential(new C_TimerWaitSec(1));
            addSequential(new C_DriveTrainEncoderDrive(58, 5));
-           addSequential(new C_GearClampSet(false));
+           addSequential(new C_GearUpSet(false));
            addSequential(new C_TimerWaitSec(1));
            addSequential(new C_DriveTrainEncoderDrive(-50, 5));
     }

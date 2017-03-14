@@ -23,7 +23,7 @@ public class C_GearClampSet extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ss_GearPickup.setGearClose(state);
+    	Robot.ss_GearPickup.setGearUp(state);
     }
 
     // Make this return true when this Command no longer needs to run execute()
