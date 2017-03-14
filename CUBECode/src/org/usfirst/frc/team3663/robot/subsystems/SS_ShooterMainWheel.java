@@ -28,7 +28,7 @@ public class SS_ShooterMainWheel extends Subsystem {
     
     public void setSpeedMainMotor(double pSpeed){
     	mainMotor.set(pSpeed);
-    	mainMotor2.set(pSpeed);
+    	mainMotor2.set(-pSpeed);
     }
     
     public boolean safeToShoot(){
@@ -59,12 +59,11 @@ public class SS_ShooterMainWheel extends Subsystem {
 	public void mainMotorStayAtVel(int pVal){
 		int currentEncVal = getEncoder();
 		if(currentEncVal != lastEncVal){
-	    	double vel = (currentEncVal - lastEncVal)/20;
+	    	double vel = -(currentEncVal - lastEncVal)/20;
 	    	if(Math.abs(vel) < 5000){
 		    	currentSpeed -= ((vel - pVal)/Math.abs(pVal))/25;
-		    	setSpeedMainMotor(currentSpeed);
-		    	//System.out.println("Velocity : " + vel + "ticks/ms);  CEncPos : " + currentEncVal + "  Current Speed : " + currentSpeed);
-	    	}
+		    	setSpeedMainMotor(-currentSpeed);
+		   }
 	    	lastEncVal = currentEncVal;
 	    } 
 	}

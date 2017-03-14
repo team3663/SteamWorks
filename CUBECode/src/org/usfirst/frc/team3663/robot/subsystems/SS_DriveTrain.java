@@ -58,7 +58,7 @@ public class SS_DriveTrain extends Subsystem {
     }
     
     public void driveRobot(double pAxisX, double pAxisY){
-    	//System.out.println(getLeftEncoder() + ",  " + getRightEncoder());
+    	System.out.println(getLeftEncoder() + ",  " + getRightEncoder());
     	drive.arcadeDrive(dir*pAxisX, pAxisY);
     }
     
@@ -106,11 +106,11 @@ public class SS_DriveTrain extends Subsystem {
     }
     
     public int getLeftEncoder(){
-    	return -leftEncoder.get();
+    	return leftEncoder.get();
     }
     
     public int getRightEncoder(){
-    	return rightEncoder.get();
+    	return -rightEncoder.get();
     }
     
     public void setEndingRightLocation(int pEndingLoc){
@@ -151,7 +151,7 @@ public class SS_DriveTrain extends Subsystem {
     	if(forwardSpeedR > .6){
     		forwardSpeedR = .6;
     	}
-    	//System.out.println(rightEnc + ",  " + leftEnc + ",  " + turnSpeed + ",  " + forwardSpeedR + ",  " + forwardSpeedL);
+    	//System.out.println(rightEnc + ",  " + forwardSpeedR);
     	driveRobot(EncDir*forwardSpeedR, 0);
     }
     
