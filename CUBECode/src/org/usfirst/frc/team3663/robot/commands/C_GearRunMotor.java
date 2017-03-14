@@ -11,7 +11,6 @@ public class C_GearRunMotor extends Command {
 	
 	private int speed;
     public C_GearRunMotor(int pSp) {
-        // Use requires() here to declare subsystem dependencies
     	speed = pSp;
         requires(Robot.ss_GearPickup);
     }

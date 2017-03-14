@@ -31,6 +31,7 @@ public class SS_DriveTrainPneumatics extends Subsystem {
     		lowGear = true;
     		gearShift.set(DoubleSolenoid.Value.kReverse);
     	}
+    	System.out.println("Value : " + lowGear+ "   , "+ wheelsDown);
     }
 
     public boolean wheelsDown = false;
@@ -43,6 +44,7 @@ public class SS_DriveTrainPneumatics extends Subsystem {
     		wheelsDown = true;
     		dropButterfly.set(DoubleSolenoid.Value.kReverse);
     	}
+    	System.out.println("Value : " + lowGear+ "   , "+ wheelsDown);
     }   
 }
 

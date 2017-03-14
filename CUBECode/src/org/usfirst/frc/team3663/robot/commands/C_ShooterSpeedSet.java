@@ -10,8 +10,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class C_ShooterSpeedSet extends Command {
 
     public C_ShooterSpeedSet() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.ss_ShooterMainWheel);
     }
 
@@ -30,7 +28,7 @@ public class C_ShooterSpeedSet extends Command {
     		Robot.ss_ShooterMainWheel.targetvalue -= 50;
     		press=true;
     	}
-    	System.out.println(Robot.ss_ShooterMainWheel.targetvalue);
+    	//System.out.println(Robot.ss_ShooterMainWheel.targetvalue);
     	if(Robot.oi.OPJoystick.getPOV()==-1){
     		press=false;
     	}

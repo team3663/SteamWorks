@@ -3,6 +3,7 @@ package org.usfirst.frc.team3663.robot;
 
 
 import org.usfirst.frc.team3663.robot.commands.CG_GearLiftAuto;
+import org.usfirst.frc.team3663.robot.commands.CG_AutoB_1_G;
 import org.usfirst.frc.team3663.robot.commands.CG_AutoB_2_G;
 import org.usfirst.frc.team3663.robot.commands.CG_AutoR_1_G;
 import org.usfirst.frc.team3663.robot.commands.CG_AutoR_3_G;
@@ -14,15 +15,12 @@ import org.usfirst.frc.team3663.robot.commands.C_DriveChangeDirectionToggle;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainEncoderDrive;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainSetButterfly;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainSetGearShift;
+import org.usfirst.frc.team3663.robot.commands.C_DriveTrainToggleButterfly;
+import org.usfirst.frc.team3663.robot.commands.C_DriveTrainToggleGearShift;
 import org.usfirst.frc.team3663.robot.commands.C_FuelPickupToggle;
 import org.usfirst.frc.team3663.robot.commands.C_Gyro;
 import org.usfirst.frc.team3663.robot.commands.C_GearClampSet;
 import org.usfirst.frc.team3663.robot.commands.C_GearUpPistonSet;
-import org.usfirst.frc.team3663.robot.commands.C_LiftMoveUp;
-import org.usfirst.frc.team3663.robot.commands.C_ShooterMoveRotationAuto;
-import org.usfirst.frc.team3663.robot.commands.C_ShooterRotFindZero;
-import org.usfirst.frc.team3663.robot.commands.C_ShooterRotateToDegree;
-import org.usfirst.frc.team3663.robot.commands.C_ShooterSetPiston;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -45,8 +43,8 @@ public class OI {
 		//Button GyroStartNeg = new JoystickButton( SpeedJoystick,6);
 		//Button GyroStartPos = new JoystickButton(SpeedJoystick,5);
 		
-		driveTrainToggleButterfly.whenReleased(new C_DriveTrainSetButterfly(Robot.ss_DriveTrainPneumatics.wheelsDown));
-		driveTrainToggleGearShift.whenReleased(new C_DriveTrainSetGearShift(Robot.ss_DriveTrainPneumatics.lowGear));
+		driveTrainToggleButterfly.whenReleased(new C_DriveTrainToggleButterfly());
+		driveTrainToggleGearShift.whenReleased(new C_DriveTrainToggleGearShift());
 
 		//driveToEncLoc.whenPressed(new C_DriveTrainEncoderDrive(200000));
 	
@@ -99,19 +97,22 @@ public class OI {
 		gearOpen.whenPressed(new C_GearClampSet(false));
 		gearClose.whenPressed(new C_GearClampSet(true));
 
+		gearLift.whenPressed(new C_GearUpPistonSet(true));
+
 		Button autogear = new JoystickButton(OPJoystick, 1);
-		autogear.whenPressed(new CG_AutoR_3_G());
+		autogear.whenPressed(new CG_AutoB_1_G());
 		gearLift.whenPressed(new C_GearUpPistonSet(true));
 		
+
 		
 /***CLIMBER MOTORS***/
-		/**Button climb = new JoystickButton(OPJoystick, 4);
+		Button climb = new JoystickButton(OPJoystick, 4);
 		Button climbRelease = new JoystickButton(OPJoystick, 2);
 		
 		climb.whileHeld(new C_ClimberSetSpeed(1));
-		climbRelease.whileHeld(new C_ClimberSetSpeed(-.2));**/
-		Button GyroTest = new JoystickButton(OPJoystick, 2);
-		GyroTest.whenPressed(new C_Gyro(175));
+		climbRelease.whileHeld(new C_ClimberSetSpeed(-.2));
+		//Button GyroTest = new JoystickButton(OPJoystick, 2);
+		//GyroTest.whenPressed(new C_Gyro(175));
 	}
 }
 

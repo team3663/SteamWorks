@@ -58,7 +58,7 @@ public class SS_DriveTrain extends Subsystem {
     }
     
     public void driveRobot(double pAxisX, double pAxisY){
-    	System.out.println(getLeftEncoder() + ",  " + getRightEncoder());
+    	//System.out.println(getLeftEncoder() + ",  " + getRightEncoder());
     	drive.arcadeDrive(dir*pAxisX, pAxisY);
     }
     
@@ -71,6 +71,7 @@ public class SS_DriveTrain extends Subsystem {
     private int EncDir = 0;
     private double lastSpeed = 0;
     private int oinkOinkMagic = 25;
+    private double maxTime = 0;
     // Gyro Variables
     AHRS ahrs;
 	public double currentHeading;
@@ -120,8 +121,9 @@ public class SS_DriveTrain extends Subsystem {
     	endEncLocLeft = getLeftEncoder() + pEndingLoc;
     }
     
-    public void advStartEncDrive(int pEndLoc){
+    public void advStartEncDrive(int pEndLoc, double pWaitTime){
     	double conversion = 125;
+    	maxTime = Timer.getFPGATimestamp() + pWaitTime;
     	if(Robot.ss_DriveTrainPneumatics.lowGear){
     		oinkOinkMagic = 50;
     	}
@@ -146,22 +148,26 @@ public class SS_DriveTrain extends Subsystem {
     	lastEncRunRight = rightEnc;
     	double forwardSpeedR = ((double)encToDestR/(double)encDispR)/oinkOinkMagic;
     	forwardSpeedR = Math.abs(forwardSpeedR);
-    	if(forwardSpeedR > .7){
-    		forwardSpeedR = .7;
+    	if(forwardSpeedR > .6){
+    		forwardSpeedR = .6;
     	}
     	//System.out.println(rightEnc + ",  " + leftEnc + ",  " + turnSpeed + ",  " + forwardSpeedR + ",  " + forwardSpeedL);
     	driveRobot(EncDir*forwardSpeedR, 0);
     }
     
-    public boolean advDriveOverLoc(){
-    	return EncDir*getRightEncoder() > endEncLocRight;
+    public boolean advDriveOverLocOrTime(){
+    	return EncDir*getRightEncoder() > endEncLocRight || Timer.getFPGATimestamp() > maxTime;
     }
+    
     public void enableBrakeMode(boolean state){
     	leftDriveMotorOne.enableBrakeMode(state);
     	rightDriveMotorOne.enableBrakeMode(state);
     	leftDriveMotorTwo.enableBrakeMode(state);
     	rightDriveMotorTwo.enableBrakeMode(state);
     }
+    
+    /***Wiggle Code***/
+    
     
     
     
