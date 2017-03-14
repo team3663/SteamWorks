@@ -10,8 +10,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class C_ShooterSpeedSet extends Command {
 
     public C_ShooterSpeedSet() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.ss_ShooterMainWheel);
     }
 
