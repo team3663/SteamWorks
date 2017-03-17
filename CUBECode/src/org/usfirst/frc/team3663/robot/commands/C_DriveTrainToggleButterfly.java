@@ -20,20 +20,22 @@ public class C_DriveTrainToggleButterfly extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ss_DriveTrainPneumatics.setButterfly(Robot.ss_DriveTrainPneumatics.wheelsDown);
+    	Robot.ss_DriveTrainPneumatics.setButterfly(false);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.ss_DriveTrainPneumatics.setButterfly(true);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

@@ -9,6 +9,5 @@ public class CG_ShooterTele extends CommandGroup {
 
     public CG_ShooterTele() {
     	addParallel(new C_ShooterMoveRotationTeleop());
-    	addParallel(new C_ShooterSpeedSet());
     }
 }

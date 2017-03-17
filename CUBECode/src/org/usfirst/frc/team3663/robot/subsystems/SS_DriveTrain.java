@@ -58,7 +58,7 @@ public class SS_DriveTrain extends Subsystem {
     }
     
     public void driveRobot(double pAxisX, double pAxisY){
-    	System.out.println(getLeftEncoder() + ",  " + getRightEncoder());
+    	//System.out.println(getLeftEncoder() + ",  " + getRightEncoder());
     	drive.arcadeDrive(dir*pAxisX, pAxisY);
     }
     
