@@ -27,7 +27,7 @@ public class SS_Lift extends Subsystem {
     }
     
     public void setSpeedLiftYellowMotor(double pSpd){
-    	liftYellowMotor.set((-pSpd)/10);				//MC changed from 1 to 10 for new wheel
+    	liftYellowMotor.set((-pSpd)/5);				//MC changed from 1 to 10 for new wheel
     }
     
     public void setTotalLiftSpeed(double pSpd){

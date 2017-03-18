@@ -16,12 +16,13 @@ public class C_ShooterHoldSpeed extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.ss_ShooterMainWheel.resetMainMotorEncoder(Robot.ss_ShooterMainWheel.targetvalue);
+    	Robot.ss_ShooterMainWheel.resetMainMotorEncoder(Robot.ss_ShooterMainWheel.targetValue);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ss_ShooterMainWheel.mainMotorStayAtVel(Robot.ss_ShooterMainWheel.targetvalue);
+    	Robot.ss_ShooterMainWheel.mainMotorStayAtVel(Robot.ss_ShooterMainWheel.targetValue);
+    	Robot.ss_ShooterMainWheel.setTargetVal(Robot.oi.OPJoystick.getRawAxis(5));
     }
 
     // Make this return true when this Command no longer needs to run execute()

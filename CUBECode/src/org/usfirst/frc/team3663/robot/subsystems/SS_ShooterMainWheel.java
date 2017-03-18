@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3663.robot.subsystems;
 
 import org.usfirst.frc.team3663.robot.Robot;
-import org.usfirst.frc.team3663.robot.commands.C_ShooterSpeedSet;
 
 import com.ctre.CANTalon;
 
@@ -20,10 +19,13 @@ public class SS_ShooterMainWheel extends Subsystem {
 	
 	private DoubleSolenoid hoodHeight = new DoubleSolenoid(Robot.robotMap.shooterMain, Robot.robotMap.shooterPistonOne, Robot.robotMap.shooterPistonTwo);
 
+	public int targetValue=1000;
+	public boolean hoodUp = false;
+	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	setDefaultCommand(new C_ShooterSpeedSet());
+    	//setDefaultCommand(new C_ShooterTriggerButton());
     }
     
     public void setSpeedMainMotor(double pSpeed){
@@ -50,7 +52,7 @@ public class SS_ShooterMainWheel extends Subsystem {
 		else{
 			currentSpeed = -(double)targetSpeed/(double)SHOOTER_EST_MAX_SPEED;
 		}
-		System.out.println("Current Speed : " + currentSpeed);
+		//System.out.println("Current Speed : " + currentSpeed);
 		lastEncVal = mainMotor.getEncPosition()+1;
 	}
 		
@@ -76,8 +78,7 @@ public class SS_ShooterMainWheel extends Subsystem {
 		}
 		return (int)vel;
 	}
-	public int targetvalue=1000;
-	public boolean hoodUp = false;
+	
 	public void setPistonValue(boolean pState){
 		if(hoodUp){
 			hoodHeight.set(DoubleSolenoid.Value.kForward);
@@ -87,6 +88,16 @@ public class SS_ShooterMainWheel extends Subsystem {
 			hoodHeight.set(DoubleSolenoid.Value.kReverse);
 			hoodUp = true;
 		}
+	}
+	
+	public void setTargetVal(double pDir){
+		if(pDir > .7 && targetValue > 0){
+			targetValue-=5;
+		}
+		else if(pDir < -.7 && targetValue < SHOOTER_EST_MAX_SPEED){
+			targetValue+=5;
+		}
+		System.out.println(targetValue);
 	}
 }
 

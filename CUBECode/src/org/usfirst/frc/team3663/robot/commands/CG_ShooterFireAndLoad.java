@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CG_ShooterFireAndLoad extends CommandGroup {
 
     public CG_ShooterFireAndLoad() {
-    	addParallel(new C_ShooterSpeedSet());
     	addParallel(new C_ShooterHoldSpeed());
     	addParallel(new C_LiftMoveUp(1));
     }
