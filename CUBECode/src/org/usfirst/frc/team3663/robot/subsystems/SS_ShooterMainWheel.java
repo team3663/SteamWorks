@@ -19,7 +19,7 @@ public class SS_ShooterMainWheel extends Subsystem {
 	
 	private DoubleSolenoid hoodHeight = new DoubleSolenoid(Robot.robotMap.shooterMain, Robot.robotMap.shooterPistonOne, Robot.robotMap.shooterPistonTwo);
 
-	public int targetValue=1000;
+	public int targetValue=1400;
 	public boolean hoodUp = false;
 	
     public void initDefaultCommand() {

@@ -18,19 +18,19 @@ public class C_Gyro extends Command {
     }
     protected void initialize()
     {
-    	Robot.ss_DriveTrain.SetUpGyro();
+    	//Robot.ss_DriveTrain.SetUpGyro();
+    	Robot.ss_DriveTrain.gryoReset();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute()
     {
-    	Robot.ss_DriveTrain.TurnByGyro(turnValue);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished()
     {
-    	return Robot.ss_DriveTrain.TurnByGyro(turnValue);
+    	return Robot.ss_DriveTrain.driveByGyroTwo(turnValue);
     }
 
     // Called once after isFinished returns true

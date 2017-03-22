@@ -15,7 +15,7 @@ public class SS_Climber extends Subsystem {
     // here. Call these from Commands.
 	CANTalon climberMotor = new CANTalon(Robot.robotMap.climberMotor);
 	CANTalon climberMotor2 = new CANTalon(Robot.robotMap.climberMotor2);
-	private boolean driverPressedButton = false;
+	private boolean driverPressedButton = true;
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

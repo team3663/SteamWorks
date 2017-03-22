@@ -107,12 +107,14 @@ public class SS_ShooterRotation extends Subsystem {
 			if(Math.abs(pickle) < 1000){
 				lastSpeed = pickle;				
 			}
+			System.out.println(pEnc);
+			//System.out.println(pickle);
 			if(Math.abs(pickle) > 1000){
 				if(pSpd > 0){
-					pickle = .1;
+					pickle = .15;
 				}
 				else{
-					pickle = -.1;
+					pickle = -.15;
 				}
 			}
     	}
@@ -127,18 +129,27 @@ public class SS_ShooterRotation extends Subsystem {
     	int currEnc = -getEncLocation();
     	double pSpd = 0;
     	if(currEnc-encLocation > 0){
-    		pSpd = 1;
+    		pSpd = -1;
     	}
     	else{
-    		pSpd = -1;
+    		pSpd = 1;
     	}
     	advSetRotSpd(pSpd);    	
     }
     
-    public void moveRotationToValue(int pEncoderLoc){
+    public boolean moveRotationToValue(int pEncoderLoc){
     	int currentLoc = getEncLocation();
-    	double spd = ((double)currentLoc - (double)pEncoderLoc)/100;
-    	advSetRotSpd(spd);
+    	double dist = ((double)currentLoc - (double)pEncoderLoc);
+    	double spd = dist/60;
+    	advSetRotSpd(-spd);
+    	return Math.abs(spd) < .05;
+    }
+    
+    public int targetTick = 0;
+    public void convertToTicks(double x, double y){
+    	if(x>.7||x<-.7||y>.7||y<-.7){
+    		targetTick = (int)(((Math.atan(x/y))/2)*ROTATION_MOTOR_MAX);
+    	}
     }
     
     public boolean zeroEncLimit(){

@@ -18,6 +18,7 @@ public class CG_GearLiftAuto extends CommandGroup {
         
         addSequential(new C_GearRunMotor(-1));
         
+        addSequential(new C_TimerWaitSec(.3));
         addSequential(new C_GearUpSet(false));
         addSequential(new C_GearPickupLED(true));	
         addSequential(new C_GearClampSet(false)); 
