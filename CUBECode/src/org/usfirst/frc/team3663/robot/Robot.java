@@ -43,7 +43,6 @@ public class Robot extends IterativeRobot {
 	public static SS_Timer ss_Timer;
 	public static SS_Climber ss_Climber;
 	public static SS_GearPickup ss_GearPickup;
-
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.

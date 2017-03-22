@@ -10,6 +10,7 @@ import org.usfirst.frc.team3663.robot.commands.CG_AutoR_3_G;
 import org.usfirst.frc.team3663.robot.commands.CG_GearDropOff;
 import org.usfirst.frc.team3663.robot.commands.CG_ShootBasedOnCam;
 import org.usfirst.frc.team3663.robot.commands.CG_ShooterFireAndLoad;
+import org.usfirst.frc.team3663.robot.commands.C_AutoSelect;
 import org.usfirst.frc.team3663.robot.commands.C_ClimberSetSpeed;
 import org.usfirst.frc.team3663.robot.commands.C_DriveChangeDirectionToggle;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainEncoderDrive;
@@ -93,7 +94,9 @@ public class OI {
 		gearDrop.whenPressed(new CG_GearDropOff()); //Driver Drop
 		
 		
-
+// Start 
+		Button getAnalogVal = new JoystickButton(OPJoystick, 8);
+		getAnalogVal.whenPressed(new C_AutoSelect());
 		
 /***CLIMBER MOTORS***/
 		Button climb = new JoystickButton(OPJoystick, 4);
