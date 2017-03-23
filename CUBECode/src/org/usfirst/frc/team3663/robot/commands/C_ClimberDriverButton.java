@@ -7,9 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class C_ShooterRotateToDegree extends Command {	
-    public C_ShooterRotateToDegree() {
+public class C_ClimberDriverButton extends Command {
+
+    public C_ClimberDriverButton() {
         // Use requires() here to declare subsystem dependencies
+        requires(Robot.ss_Climber);
     }
 
     // Called just before this Command runs the first time
@@ -18,12 +20,12 @@ public class C_ShooterRotateToDegree extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.ss_Climber.setButtonPessed();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
-        
+        return true;
     }
 
     // Called once after isFinished returns true

@@ -7,14 +7,14 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class C_DriveTrainSetGearShift extends Command {
+public class C_ShooterSetVelocity extends Command {
 
+	int target = 0;
 	
-	private boolean state = false;
-    public C_DriveTrainSetGearShift(boolean pState) {
-    	state = pState;
+    public C_ShooterSetVelocity(int pTarget) {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.ss_DriveTrainPneumatics);
+        requires(Robot.ss_ShooterMainWheel);
+        target = pTarget;
     }
 
     // Called just before this Command runs the first time
@@ -23,7 +23,7 @@ public class C_DriveTrainSetGearShift extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ss_DriveTrainPneumatics.setGearShift(state);
+    	Robot.ss_ShooterMainWheel.targetValue = target;
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -38,5 +38,6 @@ public class C_DriveTrainSetGearShift extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	
     }
 }

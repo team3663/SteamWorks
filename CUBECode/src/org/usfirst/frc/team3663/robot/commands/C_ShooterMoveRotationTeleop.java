@@ -22,7 +22,7 @@ public class C_ShooterMoveRotationTeleop extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ss_ShooterRotation.advSetRotSpd(Robot.oi.OPJoystick.getRawAxis(0));
+    	Robot.ss_ShooterRotation.advSetRotSpd(-Robot.oi.OPJoystick.getRawAxis(0));
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -8,6 +8,7 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -19,6 +20,8 @@ public class SS_ShooterRotation extends Subsystem {
     // here. Call these from Commands.
 	private final int ROTATION_MOTOR_MAX = 1445;
 	private final int ROTATION_MOTOR_MIN = 0;
+	private Relay spike = new Relay(Robot.robotMap.turretLED);
+	
 	
 	private CANTalon rotationMotor = new CANTalon(Robot.robotMap.shooterRotMotor);
 
@@ -52,6 +55,7 @@ public class SS_ShooterRotation extends Subsystem {
 /***all of the code responsible for moving the rotation***/   
     private int encoderZero = 0;
     private int lastEncRun = 0;
+    private int rotDirection = 1;
     private double lastSpeed = 0;
     public boolean isZeroFound = false;
     public boolean safeToShoot = false;
@@ -106,12 +110,14 @@ public class SS_ShooterRotation extends Subsystem {
 			if(Math.abs(pickle) < 1000){
 				lastSpeed = pickle;				
 			}
+			System.out.println(pEnc);
+			//System.out.println(pickle);
 			if(Math.abs(pickle) > 1000){
 				if(pSpd > 0){
-					pickle = .1;
+					pickle = .15;
 				}
 				else{
-					pickle = -.1;
+					pickle = -.15;
 				}
 			}
     	}
@@ -126,20 +132,40 @@ public class SS_ShooterRotation extends Subsystem {
     	int currEnc = -getEncLocation();
     	double pSpd = 0;
     	if(currEnc-encLocation > 0){
-    		pSpd = 1;
+    		pSpd = -1;
     	}
     	else{
-    		pSpd = -1;
+    		pSpd = 1;
     	}
     	advSetRotSpd(pSpd);    	
     }
     
-    public void advMoveRotOffDIO(){
-    	
+    public boolean moveRotationToValue(int pEncoderLoc){
+    	int currentLoc = getEncLocation();
+    	double dist = ((double)currentLoc - (double)pEncoderLoc);
+    	double spd = dist/60;
+    	advSetRotSpd(-spd);
+    	return Math.abs(spd) < .05;
+    }
+    
+    public int targetTick = 0;
+    public void convertToTicks(double x, double y){
+    	if(x>.7||x<-.7||y>.7||y<-.7){
+    		targetTick = (int)(((Math.atan(x/y))/2)*ROTATION_MOTOR_MAX);
+    	}
     }
     
     public boolean zeroEncLimit(){
     	return zeroSwitch.get();
+    }
+    public boolean LightToggle(){
+    	if(pValue){
+    		spike.set(Relay.Value.kReverse);
+    	}
+    	else{
+    		spike.set(Relay.Value.kForward);
+    	}
+    }
     }
 }
 

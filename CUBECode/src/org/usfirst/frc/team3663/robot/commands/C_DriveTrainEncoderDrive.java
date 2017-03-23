@@ -23,6 +23,7 @@ public class C_DriveTrainEncoderDrive extends Command {
     protected void initialize() {
     	Robot.ss_DriveTrain.resetBothEnc();
     	Robot.ss_DriveTrain.advStartEncDrive(encFinal, timeOutTime);
+    	Robot.ss_DriveTrain.gryoReset();
     }
 
     // Called repeatedly when this Command is scheduled to run

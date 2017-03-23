@@ -7,14 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class C_DriveTrainSetGearShift extends Command {
+public class C_ShooterRotDuelStick extends Command {
 
-	
-	private boolean state = false;
-    public C_DriveTrainSetGearShift(boolean pState) {
-    	state = pState;
+    public C_ShooterRotDuelStick() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.ss_DriveTrainPneumatics);
+        requires(Robot.ss_ShooterRotation);
     }
 
     // Called just before this Command runs the first time
@@ -23,20 +20,23 @@ public class C_DriveTrainSetGearShift extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ss_DriveTrainPneumatics.setGearShift(state);
+    	Robot.ss_ShooterRotation.convertToTicks(Robot.oi.OPJoystick.getRawAxis(1), Robot.oi.OPJoystick.getRawAxis(0));
+    	Robot.ss_ShooterRotation.moveRotationToValue(Robot.ss_ShooterRotation.targetTick);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.ss_ShooterRotation.advSetRotSpd(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

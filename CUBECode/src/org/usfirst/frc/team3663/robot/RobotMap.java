@@ -70,6 +70,7 @@ public class RobotMap {
 	public static int gearTrigger = 8;
 	//Relay
 	public static int pickupLED= 0;
+	public static int turretLED = 1;
 
 /***AutoPorts***/
 	public static int autoAnalog = 0;

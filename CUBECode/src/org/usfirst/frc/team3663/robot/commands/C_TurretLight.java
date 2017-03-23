@@ -7,28 +7,30 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class C_DriveTrainSetGearShift extends Command {
-
+public class C_TurretLight extends Command {
 	
-	private boolean state = false;
-    public C_DriveTrainSetGearShift(boolean pState) {
-    	state = pState;
+	private boolean state=false;
+	state =pState;
+	requires (Robot.ss_);
+
+
+    public C_TurretLight() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.ss_DriveTrainPneumatics);
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.ss_GearPickup.setLight(state);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ss_DriveTrainPneumatics.setGearShift(state);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true

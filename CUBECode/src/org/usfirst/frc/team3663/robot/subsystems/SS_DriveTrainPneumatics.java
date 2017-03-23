@@ -22,7 +22,7 @@ public class SS_DriveTrainPneumatics extends Subsystem {
     }
     
     public boolean lowGear = false;
-    public void toggleGearShift(boolean pState){
+    public void setGearShift(boolean pState){
     	if(pState){
     		lowGear = false;
     		gearShift.set(DoubleSolenoid.Value.kForward);
