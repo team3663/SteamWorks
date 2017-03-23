@@ -152,7 +152,7 @@ public class SS_DriveTrain extends Subsystem {
     		forwardSpeedR = .6;
     	}
     	//System.out.println(rightEnc + ",  " + forwardSpeedR);
-    	driveRobot(EncDir*forwardSpeedR, 0);
+    	driveRobot(EncDir*forwardSpeedR, driveStrait());
     }
     
     public boolean advDriveOverLocOrTime(){
@@ -294,8 +294,11 @@ public class SS_DriveTrain extends Subsystem {
     	double spd = turnByGyro(pLoc);
     	System.out.println("  Speed : " + spd + "   Current : " + getAngle() + "  Dest : " + pLoc);
     	drive.arcadeDrive(0, spd);
-    	return Math.abs(spd)<.5;
+    	return Math.abs(pLoc) > Math.abs(getAngle());
     }
     
+    public double driveStrait(){
+    	return getAngle()/360;
+    }
 }
 

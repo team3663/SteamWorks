@@ -14,6 +14,10 @@ public class CG_AutoB_2_G extends CommandGroup {
         addSequential(new C_GearClampSet(true));
         //addSequential(new C_GearUpPistonSet(true));
         addSequential(new C_DriveTrainEncoderDrive(-46, 5));
+        addSequential(new C_ShooterGoToLocation(737));
+        addSequential(new C_ShooterSetVelocity(1600));
+        addSequential(new C_ShooterSetPiston(true));
+        addSequential(new CG_ShooterFireAndLoad());
         
     }
 }

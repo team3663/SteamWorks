@@ -16,10 +16,12 @@ public class C_ShooterRotFindZero extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	System.out.println("sgjdfpiagjpiowesdgoaihjw");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	System.out.println("oiedfgjoihjwe");
     	Robot.ss_ShooterRotation.setSpeedRotationMotor(-.3);
     }
 

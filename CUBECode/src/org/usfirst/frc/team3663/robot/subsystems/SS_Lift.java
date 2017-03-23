@@ -22,7 +22,7 @@ public class SS_Lift extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void setSpeedLiftFeedMotor(double pSpd){
+    public void setSpeedLiftFeedMotor(double pSpd){//`1650, 735
     	liftFeedMotor.set(-pSpd);
     }
     
@@ -32,7 +32,7 @@ public class SS_Lift extends Subsystem {
     
     public void setTotalLiftSpeed(double pSpd){
     	setSpeedLiftFeedMotor(pSpd);
-    	setSpeedLiftYellowMotor(-pSpd);
+    	setSpeedLiftYellowMotor(-pSpd/2);
     }
 }
 

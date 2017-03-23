@@ -2,12 +2,14 @@ package org.usfirst.frc.team3663.robot.subsystems;
 
 import org.usfirst.frc.team3663.robot.Robot;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterMoveRotationTeleop;
+import org.usfirst.frc.team3663.robot.commands.C_ShooterRotDuelStick;
 
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -20,6 +22,8 @@ public class SS_ShooterRotation extends Subsystem {
 	private final int ROTATION_MOTOR_MAX = 1445;
 	private final int ROTATION_MOTOR_MIN = 0;
 	
+	private Relay spike = new Relay(Robot.robotMap.turretLed);
+	
 	private CANTalon rotationMotor = new CANTalon(Robot.robotMap.shooterRotMotor);
 
 	private DigitalInput zeroSwitch = new DigitalInput(Robot.robotMap.shooterZeroDIO);
@@ -29,11 +33,11 @@ public class SS_ShooterRotation extends Subsystem {
 
 	private int[] perviousEncPos = new int[5];
 	private int arrayLoc = 0;
-
+	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
     	//rotationMotor.enableBrakeMode(true);
-        setDefaultCommand(new C_ShooterMoveRotationTeleop());
+        setDefaultCommand(new C_ShooterRotDuelStick());
     }
     
     public int getEncoderRotationMotor(){
@@ -145,15 +149,38 @@ public class SS_ShooterRotation extends Subsystem {
     	return Math.abs(spd) < .05;
     }
     
-    public int targetTick = 0;
+    public double targetTick = 0;
     public void convertToTicks(double x, double y){
-    	if(x>.7||x<-.7||y>.7||y<-.7){
-    		targetTick = (int)(((Math.atan(x/y))/2)*ROTATION_MOTOR_MAX);
-    	}
+		System.out.println("targetLim : " + targetTick);
+		if(!Robot.ss_ShooterMainWheel.shooting){
+			if(x>.7||x<-.7||y>.7||y<-.7){
+				targetTick = (((Math.atan2(x,y)/Math.PI)+1)/2)*ROTATION_MOTOR_MAX;    		
+			}
+			else{
+				targetTick = getEncLocation();
+			}
+		}
+		else{
+			setLight(true);
+			if(y < -.7){
+				targetTick++;
+			}
+			if(y > .7){
+				targetTick--;
+			}
+		}
     }
     
     public boolean zeroEncLimit(){
     	return zeroSwitch.get();
+    }
+    public void setLight(boolean pValue){
+    	if(!pValue){
+    		spike.set(Relay.Value.kForward);
+    	}
+    	else{
+    		spike.set(Relay.Value.kReverse);
+    	}
     }
 }
 

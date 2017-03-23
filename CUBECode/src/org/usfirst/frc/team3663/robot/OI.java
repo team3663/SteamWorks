@@ -24,6 +24,7 @@ import org.usfirst.frc.team3663.robot.commands.C_ShooterGoToLocation;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterHoldSpeed;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterRotFindZero;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterSetPiston;
+import org.usfirst.frc.team3663.robot.commands.C_TurretLight;
 import org.usfirst.frc.team3663.robot.commands.C_GearUpSet;
 import org.usfirst.frc.team3663.robot.commands.C_GearClampSet;
 
@@ -71,6 +72,7 @@ public class OI {
 		//Button shooterTest = new JoystickButton(driveJoystick, 1);
 		Button shooterSetHood = new JoystickButton(OPJoystick, 2);
 		//Button shooterGoToLoc = new JoystickButton(OPJoystick, 1);
+		Button ShooterLightSet = new JoystickButton(OPJoystick, 1);
 		
 		//shooterUseDIO.whenPressed(new C_ShooterMoveRotationAuto());
 		//shooterPresetTest.whenPressed(new C_ShooterHoldSpeed(1100));
@@ -80,7 +82,7 @@ public class OI {
 		//shooterTest.whenPressed(new C_ShooterSetPiston(Robot.ss_ShooterMainWheel.hoodUp));
 		shooterSetHood.whenPressed(new C_ShooterSetPiston(Robot.ss_ShooterMainWheel.hoodUp));
 		//shooterGoToLoc.whileHeld(new CG_AutoB_3_B());
-		
+		ShooterLightSet.whenPressed(new C_TurretLight(false));
 		
 /***LIFT BUTTONS***/
 		//Button liftFuelUp = new JoystickButton(driveJoystick,1);
