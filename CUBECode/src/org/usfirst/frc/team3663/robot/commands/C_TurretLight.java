@@ -9,19 +9,20 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class C_TurretLight extends Command {
 	
-	private boolean state=false;
-	state =pState;
-	requires (Robot.ss_);
+	private boolean state = false;
 
-
-    public C_TurretLight() {
+    public C_TurretLight(boolean pState) {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.ss_ShooterRotation);
+        state = pState;
+
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.ss_GearPickup.setLight(state);
+    	//Robot.ss_GearPickup.setLight(state);
+    	Robot.ss_ShooterRotation.setLight(state);
+
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -30,7 +31,8 @@ public class C_TurretLight extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
+
     }
 
     // Called once after isFinished returns true
@@ -42,3 +44,4 @@ public class C_TurretLight extends Command {
     protected void interrupted() {
     }
 }
+

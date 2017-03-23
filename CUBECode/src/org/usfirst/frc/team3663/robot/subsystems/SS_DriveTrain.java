@@ -301,8 +301,10 @@ public class SS_DriveTrain extends Subsystem {
     	double TurnSpeed = 0;
     	TurnSpeed = -1*(getAngle()/TurnGyroValue);
 		return TurnSpeed;
-    		
     }
     
+    public double driveStrait(){
+    	return getAngle()/360;
+    }
 }
 

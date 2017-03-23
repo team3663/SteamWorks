@@ -27,6 +27,7 @@ import org.usfirst.frc.team3663.robot.commands.C_ShooterGoToLocation;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterHoldSpeed;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterRotFindZero;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterSetPiston;
+import org.usfirst.frc.team3663.robot.commands.C_TurretLight;
 import org.usfirst.frc.team3663.robot.commands.C_GearUpSet;
 import org.usfirst.frc.team3663.robot.commands.C_GearClampSet;
 
@@ -42,7 +43,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class OI {
 	public Joystick driveJoystick = new Joystick(0);
 	public Joystick OPJoystick = new Joystick(1);
-
 	
 	public OI(){
 /***DRIVE TRAIN BUTTONS***/
@@ -70,9 +70,10 @@ public class OI {
 		//Button shooterUseDIO = new JoystickButton(driveJoystick, 3);
 	    //Button shooterPresetTest = new JoystickButton(driveJoystick, 10);
 		Button shooterZeroRotation = new JoystickButton(OPJoystick, 7);
+		Button ShooterLightSet= new JoystickButton(OPJoystick, 2);
 		Button shooterFireAndLoad = new JoystickButton(OPJoystick, 6);
 		//Button shooterTest = new JoystickButton(driveJoystick, 1);
-		Button shooterSetHood = new JoystickButton(OPJoystick, 2);
+		Button shooterSetHood = new JoystickButton(OPJoystick, 10); // 2 mc
 		//Button shooterGoToLoc = new JoystickButton(OPJoystick, 1);
 		
 		//shooterUseDIO.whenPressed(new C_ShooterMoveRotationAuto());
@@ -83,6 +84,7 @@ public class OI {
 		//shooterTest.whenPressed(new C_ShooterSetPiston(Robot.ss_ShooterMainWheel.hoodUp));
 		shooterSetHood.whenPressed(new C_ShooterSetPiston(Robot.ss_ShooterMainWheel.hoodUp));
 		//shooterGoToLoc.whileHeld(new CG_AutoB_3_B());
+		ShooterLightSet.whenPressed(new C_TurretLight(true));
 		
 		
 /***LIFT BUTTONS***/
@@ -102,6 +104,8 @@ public class OI {
 // Start 
 		Button getAnalogVal = new JoystickButton(OPJoystick, 8);
 		getAnalogVal.whenPressed(new C_AutoSelect());
+		
+		
 		
 /***CLIMBER MOTORS***/
 		Button climb = new JoystickButton(OPJoystick, 4);

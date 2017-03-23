@@ -21,7 +21,7 @@ public class C_ShooterRotDuelStick extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.ss_ShooterRotation.convertToTicks(Robot.oi.OPJoystick.getRawAxis(1), Robot.oi.OPJoystick.getRawAxis(0));
-    	Robot.ss_ShooterRotation.moveRotationToValue(Robot.ss_ShooterRotation.targetTick);
+    	Robot.ss_ShooterRotation.moveRotationToValue((int)Robot.ss_ShooterRotation.targetTick);
     }
 
     // Make this return true when this Command no longer needs to run execute()
