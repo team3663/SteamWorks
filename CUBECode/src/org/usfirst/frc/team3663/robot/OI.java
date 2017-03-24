@@ -4,8 +4,8 @@ package org.usfirst.frc.team3663.robot;
 
 import org.usfirst.frc.team3663.robot.commands.CG_GearLiftAuto;
 import org.usfirst.frc.team3663.robot.commands.CG_GearDropOff;
-import org.usfirst.frc.team3663.robot.commands.CG_ShootBasedOnCam;
 import org.usfirst.frc.team3663.robot.commands.CG_ShooterFireAndLoad;
+import org.usfirst.frc.team3663.robot.commands.C_ClimberDriverButton;
 import org.usfirst.frc.team3663.robot.commands.C_ClimberSetSpeed;
 import org.usfirst.frc.team3663.robot.commands.C_DriveChangeDirectionToggle;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainSetGearShift;
@@ -15,6 +15,7 @@ import org.usfirst.frc.team3663.robot.commands.C_FuelPickupToggle;
 import org.usfirst.frc.team3663.robot.commands.C_Gyro;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterHoldSpeed;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterRotFindZero;
+import org.usfirst.frc.team3663.robot.commands.C_ShooterRotateToEncLoc;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterSetPiston;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -59,6 +60,7 @@ public class OI {
 		Button shooterFireAndLoad = new JoystickButton(OPJoystick, 6);
 		//Button shooterTest = new JoystickButton(driveJoystick, 1);
 		Button shooterSetHood = new JoystickButton(OPJoystick, 2);
+		Button shooterGoToLoc = new JoystickButton(OPJoystick, 1);
 		
 		//shooterUseDIO.whenPressed(new C_ShooterMoveRotationAuto());
 		//shooterPresetTest.whenPressed(new C_ShooterHoldSpeed(1100));
@@ -67,6 +69,7 @@ public class OI {
 		//shooterAutoFire.whileHeld(new CG_ShootBasedOnCam());
 		//shooterTest.whenPressed(new C_ShooterSetPiston(Robot.ss_ShooterMainWheel.hoodUp));
 		shooterSetHood.whenPressed(new C_ShooterSetPiston(Robot.ss_ShooterMainWheel.hoodUp));
+		shooterGoToLoc.whileHeld(new C_ShooterRotateToEncLoc(100));
 		
 		
 /***LIFT BUTTONS***/
@@ -83,9 +86,11 @@ public class OI {
 		
 /***CLIMBER MOTORS***/
 		Button climb = new JoystickButton(OPJoystick, 4);
+		Button climbSafeButton = new JoystickButton(driveJoystick, 7);
 		//Button climbRelease = new JoystickButton(OPJoystick, 2);
 		
 		climb.whileHeld(new C_ClimberSetSpeed(1));
+		climbSafeButton.whenPressed(new C_ClimberDriverButton());
 		//climbRelease.whileHeld(new C_ClimberSetSpeed(-.2));
 		
 		

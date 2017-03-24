@@ -52,6 +52,7 @@ public class SS_ShooterRotation extends Subsystem {
 /***all of the code responsible for moving the rotation***/   
     private int encoderZero = 0;
     private int lastEncRun = 0;
+    private int rotDirection = 1;
     private double lastSpeed = 0;
     public boolean isZeroFound = false;
     public boolean safeToShoot = false;
@@ -134,8 +135,10 @@ public class SS_ShooterRotation extends Subsystem {
     	advSetRotSpd(pSpd);    	
     }
     
-    public void advMoveRotOffDIO(){
-    	
+    public void moveRotationToValue(int pEncoderLoc){
+    	int currentLoc = getEncLocation();
+    	double spd = ((double)currentLoc - (double)pEncoderLoc)/100;
+    	advSetRotSpd(spd);
     }
     
     public boolean zeroEncLimit(){
