@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3663.robot.subsystems;
 
 import org.usfirst.frc.team3663.robot.Robot;
+import org.usfirst.frc.team3663.robot.commands.C_GearLightAlways;
 
 import com.ctre.CANTalon;
 
@@ -34,15 +35,11 @@ public class SS_GearPickup extends Subsystem {
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new C_GearLightAlways());
     	
     }
     
     public boolean PickUp() {
-    	
-    	
-    	
-    	
 		return true;
     }
     

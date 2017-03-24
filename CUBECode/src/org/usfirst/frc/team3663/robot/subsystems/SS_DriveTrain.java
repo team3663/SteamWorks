@@ -32,6 +32,7 @@ public class SS_DriveTrain extends Subsystem {
 	private RobotDrive drive = new RobotDrive(leftDriveMotorOne, leftDriveMotorTwo, rightDriveMotorOne, rightDriveMotorTwo);
 
 	public int dir = 1;
+	private double TurnGyroValue = 2;
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -77,7 +78,7 @@ public class SS_DriveTrain extends Subsystem {
 	public double currentHeading;
 	public double GyroMaxSpeed = 0;
 	public double Gyrospeed = 0;
-	public double BaseSpeed = .45;                // this value is for .35 for turret;
+	public double BaseSpeed = .5;                // this value is for .35 for turret;
 	public double angle;
 	public double offSet;
 	double lastValue = 0;
@@ -152,7 +153,7 @@ public class SS_DriveTrain extends Subsystem {
     		forwardSpeedR = .6;
     	}
     	//System.out.println(rightEnc + ",  " + forwardSpeedR);
-    	driveRobot(EncDir*forwardSpeedR, 0);
+    	driveRobot(EncDir*forwardSpeedR, (strightByGyro())*forwardSpeedR); // Drive By Gyro
     }
     
     public boolean advDriveOverLocOrTime(){
@@ -182,24 +183,24 @@ public class SS_DriveTrain extends Subsystem {
 	    	{
 	    		
 	    		offSet = ahrs.getAngle();
-	    		System.out.println("Zero: " + offSet);
+	    		//System.out.println("Zero: " + offSet);
 	    	}
 	    ahrs.setAngleAdjustment(offSet);
-	    System.out.println("Zero: " + offSet);
+	    //System.out.println("Zero: " + offSet);
     	}
     }
     public boolean TurnByGyro(double degree)
     {
     	//double accelZ;
     	//try{
-    	System.out.println("Current Position: " + currentHeading + " Zero: " + offSet + " Speed:" + Gyrospeed);
+    	//System.out.println("Current Position: " + currentHeading + " Zero: " + offSet + " Speed:" + Gyrospeed);
     	if(ahrs.isConnected())
     	{
     		//angle = ahrs.getAngle();
     		currentHeading = ahrs.getAngle() - offSet;
     		//accelZ = ahrs.getRawAccelZ();
     	}
-    	System.out.println("Cal Angle: " + currentHeading);
+    	//System.out.println("Cal Angle: " + currentHeading);
     	//}
     	//catch (RuntimeException ex ) {
         //    DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
@@ -235,23 +236,23 @@ public class SS_DriveTrain extends Subsystem {
 	    		Gyrospeed = 0;
 	    		driveRobot(Gyrospeed, Gyrospeed);
 	    		enableBrakeMode(true);
-	    		System.out.println("Angled Reached" + currentHeading);
+	    		//System.out.println("Angled Reached" + currentHeading);
 	    		return true;
 	    	}
     	}
     	if (Math.abs(currentHeading) > 180)
     	{
     		enableBrakeMode(true);
-    		System.out.println("Angled Reached" + currentHeading);
+    		//System.out.println("Angled Reached" + currentHeading);
     		return true;
     	}
-    	if (Math.abs(Gyrospeed) > 1)
+    	if (Math.abs(Gyrospeed) > 2)
     	{
-    		System.out.println("ERROR Too Fast");
+    		//System.out.println("ERROR Too Fast");
     		return true;
     	}
     	if (Math.abs(currentHeading) > Math.abs(degree)){
-    		System.out.println("ERROR Too Far");
+    		//System.out.println("ERROR Too Far");
     		return true;
     	}
 		return false;
@@ -276,5 +277,34 @@ public class SS_DriveTrain extends Subsystem {
     	return turnRate;
     }
     
+    private double startNumber = 0;
+    
+    public double getAngle(){
+    	return ahrs.getAngle() - startNumber;
+    }
+    
+    public void gryoReset(){
+    	startNumber = ahrs.getAngle();
+    }
+    
+    public double turnByGyro(double pLoc){
+    	return (pLoc-getAngle())/10;
+    }
+    
+    public boolean driveByGyroTwo(double pLoc){
+    	double spd = turnByGyro(pLoc);
+    	System.out.println("  Speed : " + spd + "   Current : " + getAngle() + "  Dest : " + pLoc);
+    	drive.arcadeDrive(0, spd);
+    	return Math.abs(pLoc) > Math.abs(getAngle());
+    }
+    public double strightByGyro(){
+    	double TurnSpeed = 0;
+    	TurnSpeed = -1*(getAngle()/TurnGyroValue);
+		return TurnSpeed;
+    }
+    
+    public double driveStrait(){
+    	return getAngle()/360;
+    }
 }
 

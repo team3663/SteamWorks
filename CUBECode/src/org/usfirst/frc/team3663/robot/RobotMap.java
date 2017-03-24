@@ -41,6 +41,8 @@ public class RobotMap {
 	//Encoder
 	public static int shooterRotEncOne = 4;
 	public static int shooterRotEncTwo = 5;
+	
+	public static int turretLed = 1;
 	//pneumatic
 	public static int shooterMain = 1;
 	public static int shooterPistonOne = 0;
@@ -69,7 +71,8 @@ public class RobotMap {
 
 	public static int gearTrigger = 8;
 	//Relay
-	public static int pickupLED= 0;
+
+	public static int pickupLED= 0; //0
 
 /***AutoPorts***/
 	public static int autoAnalog = 0;

@@ -21,6 +21,7 @@ public class SS_AutoChoose extends Subsystem {
     }
     
     public int getAnalogVal(){
+    	System.out.println(autoSelect.getAverageValue());
     	return autoSelect.getAverageValue();
     }
     

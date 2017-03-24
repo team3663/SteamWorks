@@ -11,7 +11,7 @@ public class CG_GearDropOff extends CommandGroup {
         addSequential(new C_GearClampSet(true));
         //everything else flicks the peg
         addSequential(new C_GearUpSet(true));
-        addSequential(new C_TimerWaitSec(.2));
+        addSequential(new C_TimerWaitSec(.3));
         addSequential(new C_GearUpSet(false));
         
     }

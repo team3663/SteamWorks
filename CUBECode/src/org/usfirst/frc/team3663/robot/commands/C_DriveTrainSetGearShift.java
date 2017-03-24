@@ -23,7 +23,7 @@ public class C_DriveTrainSetGearShift extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ss_DriveTrainPneumatics.toggleGearShift(state);
+    	Robot.ss_DriveTrainPneumatics.setGearShift(state);
     }
 
     // Make this return true when this Command no longer needs to run execute()

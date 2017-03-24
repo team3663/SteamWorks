@@ -7,27 +7,27 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class C_ShooterRotateToEncLoc extends Command {
-	private int target;
-    public C_ShooterRotateToEncLoc(int pTarget) {
+public class C_ShooterGoToLocation extends Command {
+
+	private int target = 0;
+	
+    public C_ShooterGoToLocation(int pTarget) {
     	target = pTarget;
         // Use requires() here to declare subsystem dependencies
-    	requires(Robot.ss_ShooterMainWheel);
+        requires(Robot.ss_ShooterRotation);
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {    	
+    protected void initialize() {
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ss_ShooterRotation.moveRotationToValue(target);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
-        
+        return Robot.ss_ShooterRotation.moveRotationToValue(target);
     }
 
     // Called once after isFinished returns true

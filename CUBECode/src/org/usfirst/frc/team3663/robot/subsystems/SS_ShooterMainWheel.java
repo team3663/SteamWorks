@@ -19,8 +19,11 @@ public class SS_ShooterMainWheel extends Subsystem {
 	
 	private DoubleSolenoid hoodHeight = new DoubleSolenoid(Robot.robotMap.shooterMain, Robot.robotMap.shooterPistonOne, Robot.robotMap.shooterPistonTwo);
 
-	public int targetValue=1000;
+	public int targetValue=1450;
 	public boolean hoodUp = false;
+	
+	public boolean shooting = false;
+	public boolean atSpeed = false;
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -63,7 +66,11 @@ public class SS_ShooterMainWheel extends Subsystem {
 		if(currentEncVal != lastEncVal){
 	    	double vel = -(currentEncVal - lastEncVal)/20;
 	    	if(Math.abs(vel) < 5000){
-		    	currentSpeed -= ((vel - pVal)/Math.abs(pVal))/25;
+	    		double moveAmount = ((vel - pVal)/Math.abs(pVal))/25; 
+		    	currentSpeed -= moveAmount;
+		    	if(moveAmount < .001 && moveAmount > -.001){
+		    		atSpeed = true;
+		    	}
 		    	setSpeedMainMotor(-currentSpeed);
 		   }
 	    	lastEncVal = currentEncVal;
@@ -90,14 +97,14 @@ public class SS_ShooterMainWheel extends Subsystem {
 		}
 	}
 	
-	public void setTargetVal(double pDir){
-		if(pDir > .7 && targetValue > 0){
+	public void setTargetVal(int dp){
+		if(dp == 0){
+			targetValue += 5;
+		}
+		if(dp == 180){
 			targetValue-=5;
 		}
-		else if(pDir < -.7 && targetValue < SHOOTER_EST_MAX_SPEED){
-			targetValue+=5;
-		}
-		System.out.println(targetValue);
+		System.out.println(targetValue + "   " + dp);
 	}
 }
 

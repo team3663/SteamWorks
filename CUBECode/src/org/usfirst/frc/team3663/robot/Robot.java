@@ -1,7 +1,9 @@
 
 package org.usfirst.frc.team3663.robot;
 
+import org.usfirst.frc.team3663.robot.commands.CG_AutoB_1_G;
 import org.usfirst.frc.team3663.robot.commands.CG_AutoB_2_G;
+import org.usfirst.frc.team3663.robot.commands.CG_AutoR_1_G;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainEncoderDrive;
 import org.usfirst.frc.team3663.robot.subsystems.SS_AutoChoose;
 import org.usfirst.frc.team3663.robot.subsystems.SS_Climber;
@@ -43,7 +45,6 @@ public class Robot extends IterativeRobot {
 	public static SS_Timer ss_Timer;
 	public static SS_Climber ss_Climber;
 	public static SS_GearPickup ss_GearPickup;
-
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -116,6 +117,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
+		//ss_ShooterRotation.isZeroFound = false;
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
