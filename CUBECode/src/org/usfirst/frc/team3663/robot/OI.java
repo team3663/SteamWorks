@@ -47,13 +47,13 @@ public class OI {
 	public OI(){
 /***DRIVE TRAIN BUTTONS***/
 		Button driveTrainToggleButterfly = new JoystickButton(driveJoystick, 1);
-		Button driveTrainToggleGearShift = new JoystickButton(driveJoystick, 9);
+		//Button driveTrainToggleGearShift = new JoystickButton(driveJoystick, 9);
 		Button driveTrainToggleDir = new JoystickButton(driveJoystick, 4);
 		//Button GyroStartNeg = new JoystickButton( SpeedJoystick,6);
 		//Button GyroStartPos = new JoystickButton(SpeedJoystick,5);
 		
 		driveTrainToggleButterfly.whileHeld(new C_DriveTrainToggleButterfly());
-		driveTrainToggleGearShift.whileHeld(new C_DriveTrainToggleGearShift());
+		//driveTrainToggleGearShift.whileHeld(new C_DriveTrainToggleGearShift());
 
 		//driveToEncLoc.whenPressed(new C_DriveTrainEncoderDrive(200000));
 	
@@ -70,10 +70,10 @@ public class OI {
 		//Button shooterUseDIO = new JoystickButton(driveJoystick, 3);
 	    //Button shooterPresetTest = new JoystickButton(driveJoystick, 10);
 		Button shooterZeroRotation = new JoystickButton(OPJoystick, 7);
-		Button ShooterLightSet= new JoystickButton(OPJoystick, 2);
+		Button ShooterLightSet= new JoystickButton(OPJoystick, 1);
 		Button shooterFireAndLoad = new JoystickButton(OPJoystick, 6);
 		//Button shooterTest = new JoystickButton(driveJoystick, 1);
-		Button shooterSetHood = new JoystickButton(OPJoystick, 10); // 2 mc
+		Button shooterSetHood = new JoystickButton(OPJoystick, 2);
 		//Button shooterGoToLoc = new JoystickButton(OPJoystick, 1);
 		
 		//shooterUseDIO.whenPressed(new C_ShooterMoveRotationAuto());

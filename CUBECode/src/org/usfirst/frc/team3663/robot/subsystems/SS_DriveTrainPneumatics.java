@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3663.robot.subsystems;
 
 import org.usfirst.frc.team3663.robot.Robot;
+import org.usfirst.frc.team3663.robot.commands.C_DriveTrainGearOffTrigger;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -18,7 +19,7 @@ public class SS_DriveTrainPneumatics extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new C_DriveTrainGearOffTrigger());
     }
     
     public boolean lowGear = false;
@@ -31,7 +32,7 @@ public class SS_DriveTrainPneumatics extends Subsystem {
     		lowGear = true;
     		gearShift.set(DoubleSolenoid.Value.kReverse);
     	}
-    	System.out.println("Value : " + lowGear+ "   , "+ wheelsDown);
+    	//System.out.println("Value : " + lowGear+ "   , "+ wheelsDown);
     }
 
     public boolean wheelsDown = false;
@@ -44,7 +45,7 @@ public class SS_DriveTrainPneumatics extends Subsystem {
     		wheelsDown = true;
     		dropButterfly.set(DoubleSolenoid.Value.kReverse);
     	}
-    	System.out.println("Value : " + lowGear+ "   , "+ wheelsDown);
+    	//System.out.println("Value : " + lowGear+ "   , "+ wheelsDown);
     }   
 }
 

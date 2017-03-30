@@ -112,7 +112,6 @@ public class SS_ShooterRotation extends Subsystem {
 			if(Math.abs(pickle) < 1000){
 				lastSpeed = pickle;				
 			}
-			System.out.println(pEnc);
 			//System.out.println(pickle);
 			if(Math.abs(pickle) > 1000){
 				if(pSpd > 0){
@@ -152,17 +151,17 @@ public class SS_ShooterRotation extends Subsystem {
     
     public double targetTick = 0;
     public void convertToTicks(double x, double y){
-		System.out.println("targetLim : " + targetTick);
 		if(!Robot.ss_ShooterMainWheel.shooting){
 			if(x>.7||x<-.7||y>.7||y<-.7){
 				targetTick = (((Math.atan2(x,y)/Math.PI)+1)/2)*ROTATION_MOTOR_MAX;    		
 			}
 			else{
 				targetTick = getEncLocation();
+				System.out.println("targetTick : " + targetTick);
 			}
 		}
 		else{
-			setLight(true);
+			setLight(false);
 			if(y < -.7){
 				targetTick++;
 			}
@@ -172,12 +171,17 @@ public class SS_ShooterRotation extends Subsystem {
 		}
     }
     
+    public double giveUsingZeroLoc(){
+    	double spinRot = Robot.ss_DriveTrain.returnShooterAngle();
+    	return 0;
+    }
+    
     public boolean zeroEncLimit(){
     	return zeroSwitch.get();
     }
 
     public void setLight(boolean pValue){
-    	if(!pValue){
+    	if(pValue){
     		spike.set(Relay.Value.kForward);
     	}
     	else{

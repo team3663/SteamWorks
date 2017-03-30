@@ -23,7 +23,7 @@ public class C_ShooterSetPiston extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ss_ShooterMainWheel.setPistonValue(Robot.ss_ShooterMainWheel.hoodUp);
+    	Robot.ss_ShooterMainWheel.setPistonValue(state);
     }
 
     // Make this return true when this Command no longer needs to run execute()

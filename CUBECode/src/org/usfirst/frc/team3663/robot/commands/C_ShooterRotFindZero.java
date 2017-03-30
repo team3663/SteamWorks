@@ -27,13 +27,16 @@ public class C_ShooterRotFindZero extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.ss_ShooterRotation.zeroEncLimit();
+    	if(Robot.ss_ShooterRotation.zeroEncLimit()){
+    		Robot.ss_ShooterRotation.isZeroFound = true;
+    		return true;
+    	}
+    	return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	Robot.ss_ShooterRotation.setSpeedRotationMotor(0);
-    	Robot.ss_ShooterRotation.isZeroFound = true;
     	Robot.ss_ShooterRotation.advRotResetEnc();
     	System.out.println("Found Shooter Rotation Zero");
     }

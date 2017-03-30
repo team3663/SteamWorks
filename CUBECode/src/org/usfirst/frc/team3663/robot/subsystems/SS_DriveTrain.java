@@ -288,14 +288,23 @@ public class SS_DriveTrain extends Subsystem {
     }
     
     public double turnByGyro(double pLoc){
-    	return (pLoc-getAngle())/10;
+    	double speed = (pLoc-getAngle())/75;
+    	
+    	System.out.println(getAngle());
+    	if(speed < .8 && speed > 0){
+    		speed = .8;
+    	}if(speed > -.8 && speed < 0){
+    		speed = -.8;
+    	}
+    	return speed;
     }
     
     public boolean driveByGyroTwo(double pLoc){
     	double spd = turnByGyro(pLoc);
     	System.out.println("  Speed : " + spd + "   Current : " + getAngle() + "  Dest : " + pLoc);
     	drive.arcadeDrive(0, spd);
-    	return Math.abs(pLoc) > Math.abs(getAngle());
+    	System.out.println("oiaseWR" + (Math.abs(pLoc) > Math.abs(getAngle())));
+    	return Math.abs(pLoc) < Math.abs(getAngle());
     }
     public double strightByGyro(){
     	double TurnSpeed = 0;
@@ -305,6 +314,14 @@ public class SS_DriveTrain extends Subsystem {
     
     public double driveStrait(){
     	return getAngle()/360;
+    }
+    
+    public double returnShooterAngle(){
+    	double angle = ahrs.getAngle();
+    	while(angle > 360){
+    		angle-=360;
+    	}
+    	return angle;
     }
 }
 

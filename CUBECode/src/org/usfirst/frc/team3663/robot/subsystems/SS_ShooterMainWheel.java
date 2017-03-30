@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class SS_ShooterMainWheel extends Subsystem {
 
-	public final int SHOOTER_EST_MAX_SPEED= 2000;
+	public final int SHOOTER_EST_MAX_SPEED= 1900;
 	
 	private CANTalon mainMotor = new CANTalon(Robot.robotMap.shooterMainMotor);
 	private CANTalon mainMotor2 = new CANTalon(Robot.robotMap.shooterMainMotor2);
@@ -59,17 +59,29 @@ public class SS_ShooterMainWheel extends Subsystem {
 		lastEncVal = mainMotor.getEncPosition()+1;
 	}
 		
-	private double currentSpeed = 0;
+	public double currentSpeed = 0;
 	private int lastEncVal = 0;
 	public void mainMotorStayAtVel(int pVal){
 		int currentEncVal = getEncoder();
+		//System.out.println(currentEncVal);
 		if(currentEncVal != lastEncVal){
 	    	double vel = -(currentEncVal - lastEncVal)/20;
+			System.out.println("Run " + vel + "  NEEDED : " + pVal +"   Boolean " + (Math.abs(vel) < 5000));
 	    	if(Math.abs(vel) < 5000){
-	    		double moveAmount = ((vel - pVal)/Math.abs(pVal))/25; 
-		    	currentSpeed -= moveAmount;
-		    	if(moveAmount < .001 && moveAmount > -.001){
+	    		double moveAmount = ((vel - pVal)/Math.abs(pVal))/5;
+		    	currentSpeed -= (moveAmount);
+		    	if(currentSpeed > ((double)(pVal+100)/SHOOTER_EST_MAX_SPEED)){
+		    		currentSpeed =(double)(pVal+100)/SHOOTER_EST_MAX_SPEED;
+		    	}
+		    	else if(currentSpeed < ((double)(pVal-100)/SHOOTER_EST_MAX_SPEED)){
+		    		currentSpeed =(double)(pVal-100)/SHOOTER_EST_MAX_SPEED;
+		    	}
+		    	//System.out.print("moveAmount : " + moveAmount);
+		    	if(vel < pVal+20 && vel > pVal-20){
 		    		atSpeed = true;
+		    	}
+		    	else{
+		    		atSpeed = false;
 		    	}
 		    	setSpeedMainMotor(-currentSpeed);
 		   }
@@ -100,11 +112,12 @@ public class SS_ShooterMainWheel extends Subsystem {
 	public void setTargetVal(int dp){
 		if(dp == 0){
 			targetValue += 5;
+			//currentSpeed = ((double)targetValue/(double)(SHOOTER_EST_MAX_SPEED-200))-.2;
 		}
 		if(dp == 180){
 			targetValue-=5;
+			//currentSpeed = ((double)targetValue/(double)(SHOOTER_EST_MAX_SPEED-200))-.2;
 		}
-		System.out.println(targetValue + "   " + dp);
 	}
 }
 
