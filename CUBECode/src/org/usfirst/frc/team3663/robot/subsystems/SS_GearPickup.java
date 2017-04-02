@@ -107,5 +107,7 @@ public class SS_GearPickup extends Subsystem {
     		spike.set(Relay.Value.kForward);
     	}
     }
+    
+    public boolean live= true;
 }
 

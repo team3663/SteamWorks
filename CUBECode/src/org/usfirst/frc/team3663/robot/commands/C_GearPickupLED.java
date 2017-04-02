@@ -2,6 +2,7 @@ package org.usfirst.frc.team3663.robot.commands;
 
 import org.usfirst.frc.team3663.robot.Robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -22,6 +23,10 @@ public class C_GearPickupLED extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.ss_GearPickup.setLight(state);
+    	if(Robot.ss_GearPickup.live){
+    		CameraServer.getInstance().startAutomaticCapture("cam0",0);
+    		Robot.ss_GearPickup.live = false;
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
