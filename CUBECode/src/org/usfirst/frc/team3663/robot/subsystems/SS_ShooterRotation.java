@@ -171,9 +171,16 @@ public class SS_ShooterRotation extends Subsystem {
 		}
     }
     
-    public double giveUsingZeroLoc(){
+    public double giveUsingZeroLoc(double x, double y){
     	double spinRot = Robot.ss_DriveTrain.returnShooterAngle();
-    	return 0;
+    	double raidSpinVal = spinRot/360;
+    	double targetMult = raidSpinVal+((Math.atan2(x,y)/Math.PI)+1)/2;
+    	if(targetMult > 1)
+    	{
+    		targetMult-=1;
+    	}
+    	System.out.println("The Value : " + targetMult);
+    	return targetMult;
     }
     
     public boolean zeroEncLimit(){

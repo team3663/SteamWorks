@@ -5,6 +5,7 @@ import org.usfirst.frc.team3663.robot.commands.CG_AutoB_1_G;
 import org.usfirst.frc.team3663.robot.commands.CG_AutoB_2_G;
 import org.usfirst.frc.team3663.robot.commands.CG_AutoR_1_G;
 import org.usfirst.frc.team3663.robot.commands.CG_AutoR_2_G;
+import org.usfirst.frc.team3663.robot.commands.C_AutoSelect;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainEncoderDrive;
 import org.usfirst.frc.team3663.robot.subsystems.SS_AutoChoose;
 import org.usfirst.frc.team3663.robot.subsystems.SS_Climber;
@@ -13,12 +14,14 @@ import org.usfirst.frc.team3663.robot.subsystems.SS_DriveTrainPneumatics;
 import org.usfirst.frc.team3663.robot.subsystems.SS_FuelPickup;
 import org.usfirst.frc.team3663.robot.subsystems.SS_GearPickup;
 import org.usfirst.frc.team3663.robot.subsystems.SS_Lift;
+import org.usfirst.frc.team3663.robot.subsystems.SS_NeedyCamera;
 import org.usfirst.frc.team3663.robot.subsystems.SS_ShooterMainWheel;
 import org.usfirst.frc.team3663.robot.subsystems.SS_ShooterRotation;
 import org.usfirst.frc.team3663.robot.subsystems.SS_Timer;
 
-
+//import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -46,6 +49,7 @@ public class Robot extends IterativeRobot {
 	public static SS_Timer ss_Timer;
 	public static SS_Climber ss_Climber;
 	public static SS_GearPickup ss_GearPickup;
+	public static SS_NeedyCamera ss_NeedyCamera;
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -64,6 +68,15 @@ public class Robot extends IterativeRobot {
 		ss_GearPickup = new SS_GearPickup();
 		ss_AutoChoose = new SS_AutoChoose();
 		oi = new OI();
+		/*try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		//CameraServer.getInstance().startAutomaticCapture();
+		//ss_NeedyCamera = new SS_NeedyCamera();
+		System.out.println("lskjfdlkj");
 	}
 
 	/**
@@ -95,8 +108,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		//C_DriveTrainEncoderDrive test = new C_DriveTrainEncoderDrive(62, 13);
-		CG_AutoB_2_G test= new CG_AutoB_2_G();
-		test.start();
+		//CG_AutoR_1_G test= new CG_AutoR_1_G();
+		C_AutoSelect c_Auto = new C_AutoSelect();
+		c_Auto.start();
+		//test.start();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -118,6 +133,13 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
+		/*try{
+			Thread.sleep(50);
+		}
+		catch(InterruptedException e){
+			
+		}
+		CameraServer.getInstance().startAutomaticCapture("cam0", 0);*/
 		//ss_ShooterRotation.isZeroFound = false;
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to

@@ -3,6 +3,7 @@ package org.usfirst.frc.team3663.robot;
 
 
 import org.usfirst.frc.team3663.robot.commands.CG_GearLiftAuto;
+import org.usfirst.frc.team3663.robot.commands.CG_HopperShots;
 import org.usfirst.frc.team3663.robot.commands.CG_AutoB_1_G;
 import org.usfirst.frc.team3663.robot.commands.CG_AutoB_2_G;
 import org.usfirst.frc.team3663.robot.commands.CG_AutoR_1_G;
@@ -69,6 +70,7 @@ public class OI {
 		Button shooterFireAndLoad = new JoystickButton(OPJoystick, 6);
 		//Button shooterTest = new JoystickButton(driveJoystick, 1);
 		Button shooterSetHood = new JoystickButton(OPJoystick, 2);
+		Button hopperShoot = new JoystickButton(OPJoystick, 5);
 		//Button shooterGoToLoc = new JoystickButton(OPJoystick, 1);
 		
 		//shooterUseDIO.whenPressed(new C_ShooterMoveRotationAuto());
@@ -77,9 +79,11 @@ public class OI {
 		shooterFireAndLoad.whileHeld(new CG_ShooterFireAndLoad());
 		//shooterAutoFire.whileHeld(new CG_ShootBasedOnCam());
 		//shooterTest.whenPressed(new C_ShooterSetPiston(Robot.ss_ShooterMainWheel.hoodUp));
-		shooterSetHood.whenPressed(new C_ShooterSetPiston(Robot.ss_ShooterMainWheel.hoodUp));
+		shooterSetHood.whenPressed(new C_ShooterSetPiston(true));
+		shooterSetHood.whenReleased(new C_ShooterSetPiston(false));
 		//shooterGoToLoc.whileHeld(new CG_AutoB_3_B());
 		ShooterLightSet.whenPressed(new C_TurretLight(true));
+		hopperShoot.whileHeld(new CG_HopperShots());
 		
 		
 /***LIFT BUTTONS***/

@@ -50,10 +50,10 @@ public class SS_ShooterMainWheel extends Subsystem {
 	    
 	public void resetMainMotorEncoder(int targetSpeed){
 		if(targetSpeed > 0){
-			currentSpeed = (double)targetSpeed/(double)SHOOTER_EST_MAX_SPEED; 
+			//currentSpeed = (double)targetSpeed/(double)SHOOTER_EST_MAX_SPEED; 
 		}
 		else{
-			currentSpeed = -(double)targetSpeed/(double)SHOOTER_EST_MAX_SPEED;
+			//currentSpeed = -(double)targetSpeed/(double)SHOOTER_EST_MAX_SPEED;
 		}
 		//System.out.println("Current Speed : " + currentSpeed);
 		lastEncVal = mainMotor.getEncPosition()+1;
@@ -66,17 +66,16 @@ public class SS_ShooterMainWheel extends Subsystem {
 		//System.out.println(currentEncVal);
 		if(currentEncVal != lastEncVal){
 	    	double vel = -(currentEncVal - lastEncVal)/20;
-			System.out.println("Run " + vel + "  NEEDED : " + pVal +"   Boolean " + (Math.abs(vel) < 5000));
+			//System.out.println("Run " + vel + "  NEEDED : " + pVal +"   Boolean " + (Math.abs(vel) < 5000));
 	    	if(Math.abs(vel) < 5000){
-	    		double moveAmount = ((vel - pVal)/Math.abs(pVal))/5;
-		    	currentSpeed -= (moveAmount);
-		    	if(currentSpeed > ((double)(pVal+100)/SHOOTER_EST_MAX_SPEED)){
-		    		currentSpeed =(double)(pVal+100)/SHOOTER_EST_MAX_SPEED;
-		    	}
-		    	else if(currentSpeed < ((double)(pVal-100)/SHOOTER_EST_MAX_SPEED)){
-		    		currentSpeed =(double)(pVal-100)/SHOOTER_EST_MAX_SPEED;
-		    	}
-		    	//System.out.print("moveAmount : " + moveAmount);
+	    		//double moveAmount = ((vel - pVal)/Math.abs(pVal))/10;
+	    		double diff = (vel-pVal);
+	    		double moveAmount = Math.sqrt(Math.abs(diff));
+	    		if(diff < 0){
+	    			moveAmount = -moveAmount;
+	    		}
+		    	currentSpeed -= (moveAmount/600);
+		    	System.out.println("moveAmount : " + moveAmount);
 		    	if(vel < pVal+20 && vel > pVal-20){
 		    		atSpeed = true;
 		    	}
@@ -99,7 +98,7 @@ public class SS_ShooterMainWheel extends Subsystem {
 	}
 	
 	public void setPistonValue(boolean pState){
-		if(hoodUp){
+		if(pState){
 			hoodHeight.set(DoubleSolenoid.Value.kForward);
 			hoodUp = false;
 		}

@@ -32,13 +32,12 @@ public class SS_Lift extends Subsystem {
     
     public void setTotalLiftSpeed(double pSpd){
     	if(Robot.ss_ShooterMainWheel.atSpeed){
-        	setSpeedLiftFeedMotor(pSpd);
-        	setSpeedLiftYellowMotor(-pSpd/2);    		
+        	setSpeedLiftYellowMotor(-pSpd/1.5);    		
     	}
     	else{
-        	setSpeedLiftFeedMotor(0);
         	setSpeedLiftYellowMotor(0);       		
     	}
+    	setSpeedLiftFeedMotor(pSpd);
     }
 }
 

@@ -9,16 +9,17 @@ public class CG_AutoB_1_G extends CommandGroup {
 
     public CG_AutoB_1_G() {
     	addParallel(new C_ShooterRotFindZero());
-        addSequential(new C_DriveTrainEncoderDrive(68, 6));
-        addSequential(new C_Gyro(47));
-        addSequential(new C_TimerWaitSec(1));
+    	addSequential(new C_DriveTrainEncoderDrive(58, 7));
+        addSequential(new C_Gyro(55));
+        addSequential(new C_TimerWaitSec(.5));
         addSequential(new C_DriveTrainEncoderDrive(64, 5));
         addSequential(new C_GearClampSet(true));
-        addSequential(new C_TimerWaitSec(1));
-        
-        addSequential(new C_DriveTrainEncoderDrive(46, 4)); //81-40=41+5=46
-        addSequential(new CG_GearDropOff());
-        
+        addSequential(new C_TimerWaitSec(.5));
         addSequential(new C_DriveTrainEncoderDrive(-50, 5));
+        addSequential(new C_ShooterRotFindZero());
+        addSequential(new C_ShooterGoToLocation(340));
+        addSequential(new C_ShooterSetVelocity(1430));
+        addSequential(new C_ShooterSetPiston(false));
+        addSequential(new CG_ShooterFireAndLoad());
     }
 }

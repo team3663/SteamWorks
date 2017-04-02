@@ -9,7 +9,9 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -43,8 +45,13 @@ public class SS_DriveTrain extends Subsystem {
         try 
     	{
             ahrs = new AHRS(SerialPort.Port.kUSB1); 
+            //ahrs = new AHRS(SPI.Port.kMXP);
         } catch (RuntimeException ex ) 
     	{
+        	int test = 1;
+        	while(test == 1){
+        		System.out.println("sdafjsdfjao'sidjgoiarsdgasop");
+        	}
             DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
         }
     }
@@ -59,7 +66,7 @@ public class SS_DriveTrain extends Subsystem {
     }
     
     public void driveRobot(double pAxisX, double pAxisY){
-    	//System.out.println(getLeftEncoder() + ",  " + getRightEncoder());
+    	System.out.println(getLeftEncoder() + ",  " + getRightEncoder() + ",  " + ahrs.getAngle() + ",  " + Robot.ss_AutoChoose.getAnalogVal());
     	drive.arcadeDrive(dir*pAxisX, pAxisY);
     }
     
@@ -288,27 +295,28 @@ public class SS_DriveTrain extends Subsystem {
     }
     
     public double turnByGyro(double pLoc){
+    	double tract = .75; //feild = .8
     	double speed = (pLoc-getAngle())/75;
     	
     	System.out.println(getAngle());
-    	if(speed < .8 && speed > 0){
-    		speed = .8;
-    	}if(speed > -.8 && speed < 0){
-    		speed = -.8;
+    	if(speed < tract && speed > 0){
+    		speed = tract;
+    	}if(speed > -tract && speed < 0){
+    		speed = -tract;
     	}
     	return speed;
     }
     
     public boolean driveByGyroTwo(double pLoc){
     	double spd = turnByGyro(pLoc);
-    	System.out.println("  Speed : " + spd + "   Current : " + getAngle() + "  Dest : " + pLoc);
+    	//System.out.println("  Speed : " + spd + "   Current : " + getAngle() + "  Dest : " + pLoc);
     	drive.arcadeDrive(0, spd);
-    	System.out.println("oiaseWR" + (Math.abs(pLoc) > Math.abs(getAngle())));
+    	//System.out.println("oiaseWR" + (Math.abs(pLoc) > Math.abs(getAngle())));
     	return Math.abs(pLoc) < Math.abs(getAngle());
     }
     public double strightByGyro(){
     	double TurnSpeed = 0;
-    	TurnSpeed = -1*(getAngle()/TurnGyroValue);
+    	TurnSpeed = -1*(getAngle()/TurnGyroValue)*3;
 		return TurnSpeed;
     }
     
@@ -321,6 +329,10 @@ public class SS_DriveTrain extends Subsystem {
     	while(angle > 360){
     		angle-=360;
     	}
+    	while(angle < 0){
+    		angle+=360;
+    	}
+    	System.out.print("  Angle : " + angle + "  ");
     	return angle;
     }
 }
