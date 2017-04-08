@@ -9,12 +9,20 @@ public class CG_AutoB_3_G extends CommandGroup {
 
     public CG_AutoB_3_G() {
     	addParallel(new C_ShooterRotFindZero());
-    	addSequential(new C_DriveTrainEncoderDrive(70, 7));
-        addSequential(new C_Gyro(54));
-        addSequential(new C_TimerWaitSec(1));
-        addSequential(new C_DriveTrainEncoderDrive(58, 5));
+    	System.out.println("alsdjkf: 1");
+    	addSequential(new C_DriveTrainEncoderDrive(61, 3));
+    	System.out.println("alsdjkf: 2");
+        addSequential(new C_Gyro(-55));
+    	System.out.println("alsdjkf: 3");
+        addSequential(new C_TimerWaitSec(.5));
+    	System.out.println("alsdjkf: 4");
+        addSequential(new C_DriveTrainEncoderDrive(70, 4));
+    	System.out.println("alsdjkf: 5");
         addSequential(new C_GearClampSet(true));
-        addSequential(new C_TimerWaitSec(1));
-        addSequential(new C_DriveTrainEncoderDrive(-50, 5));
+    	System.out.println("alsdjkf: 6");
+        addSequential(new C_TimerWaitSec(.5));
+    	System.out.println("alsdjkf: 7");
+        addSequential(new C_DriveTrainEncoderDrive(-54, 3));
+    	System.out.println("alsdjkf: 8");
     }
 }

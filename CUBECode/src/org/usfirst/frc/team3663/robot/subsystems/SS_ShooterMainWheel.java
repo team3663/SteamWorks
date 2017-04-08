@@ -19,7 +19,7 @@ public class SS_ShooterMainWheel extends Subsystem {
 	
 	private DoubleSolenoid hoodHeight = new DoubleSolenoid(Robot.robotMap.shooterMain, Robot.robotMap.shooterPistonOne, Robot.robotMap.shooterPistonTwo);
 
-	public int targetValue=1450;
+	public int targetValue=400;
 	public boolean hoodUp = false;
 	
 	public boolean shooting = false;
@@ -61,6 +61,7 @@ public class SS_ShooterMainWheel extends Subsystem {
 		
 	public double currentSpeed = 0;
 	private int lastEncVal = 0;
+	public int excp = 20;
 	public void mainMotorStayAtVel(int pVal){
 		int currentEncVal = getEncoder();
 		//System.out.println(currentEncVal);
@@ -76,8 +77,11 @@ public class SS_ShooterMainWheel extends Subsystem {
 	    		}
 		    	currentSpeed -= (moveAmount/600);
 		    	System.out.println("moveAmount : " + moveAmount);
-		    	if(vel < pVal+20 && vel > pVal-20){
+		    	if(vel < pVal+excp && vel > pVal-excp){
 		    		atSpeed = true;
+		    		if(excp < 1000){
+		    			excp+=2;
+		    		}
 		    	}
 		    	else{
 		    		atSpeed = false;
@@ -111,12 +115,18 @@ public class SS_ShooterMainWheel extends Subsystem {
 	public void setTargetVal(int dp){
 		if(dp == 0){
 			targetValue += 5;
+			excp = 10;
 			//currentSpeed = ((double)targetValue/(double)(SHOOTER_EST_MAX_SPEED-200))-.2;
 		}
 		if(dp == 180){
 			targetValue-=5;
+			excp = 10;
 			//currentSpeed = ((double)targetValue/(double)(SHOOTER_EST_MAX_SPEED-200))-.2;
 		}
+	}
+	
+	public void reassignExcp(){
+		excp = 10;
 	}
 }
 

@@ -9,12 +9,13 @@ public class CG_AutoR_3_G extends CommandGroup {
 
     public CG_AutoR_3_G() {
     	addParallel(new C_ShooterRotFindZero());
-    	addSequential(new C_DriveTrainEncoderDrive(70, 7));
-        addSequential(new C_Gyro(-54));
-        addSequential(new C_TimerWaitSec(1));
-        addSequential(new C_DriveTrainEncoderDrive(58, 5));
-        addSequential(new C_GearUpSet(false));
-        addSequential(new C_TimerWaitSec(1));
-        addSequential(new C_DriveTrainEncoderDrive(-50, 5));
+        addSequential(new C_ShooterSetVelocity(1430));
+    	addSequential(new C_DriveTrainEncoderDrive(67, 3));
+        addSequential(new C_Gyro(55));
+        addSequential(new C_TimerWaitSec(.5));
+        addSequential(new C_DriveTrainEncoderDrive(67, 3));
+        addSequential(new C_GearClampSet(true));
+        addSequential(new C_TimerWaitSec(.5));
+        addSequential(new C_DriveTrainEncoderDrive(-50, 3));
     }
 }

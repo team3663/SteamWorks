@@ -18,6 +18,7 @@ public class C_ShooterMoveRotationTeleop extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.ss_ShooterRotation.setRotMotorBreak(true);
+    	Robot.ss_ShooterRotation.safeToShoot = true;
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -3,8 +3,10 @@ package org.usfirst.frc.team3663.robot.subsystems;
 import org.usfirst.frc.team3663.robot.Robot;
 import org.usfirst.frc.team3663.robot.commands.CG_AutoB_1_G;
 import org.usfirst.frc.team3663.robot.commands.CG_AutoB_2_G;
+import org.usfirst.frc.team3663.robot.commands.CG_AutoB_3_G;
 import org.usfirst.frc.team3663.robot.commands.CG_AutoR_1_G;
 import org.usfirst.frc.team3663.robot.commands.CG_AutoR_2_G;
+import org.usfirst.frc.team3663.robot.commands.CG_AutoR_3_G;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -64,7 +66,22 @@ public class SS_AutoChoose extends Subsystem {
         		System.out.println("Red Center");
         	}
     	}
-    	auto.start();
+    	if(value > 1500 && value < 3000){
+    		if(side == DriverStation.Alliance.Blue){
+        		System.out.println("Blue Why");
+        		//auto = new CG_AutoB_1_G();
+        		auto = new CG_AutoB_3_G();
+           	}
+        	else{
+        		//auto = new CG_AutoR_1_G();
+        		auto = new CG_AutoR_3_G();
+        		System.out.println("Red Why");
+        	}
+    	}
+    	System.out.println("Starting" + value);
+    	if(auto != null){
+    		auto.start();
+    	}
     	
     }
 }

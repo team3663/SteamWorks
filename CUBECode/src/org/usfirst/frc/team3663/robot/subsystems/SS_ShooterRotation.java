@@ -153,11 +153,12 @@ public class SS_ShooterRotation extends Subsystem {
     public void convertToTicks(double x, double y){
 		if(!Robot.ss_ShooterMainWheel.shooting){
 			if(x>.7||x<-.7||y>.7||y<-.7){
-				targetTick = (((Math.atan2(x,y)/Math.PI)+1)/2)*ROTATION_MOTOR_MAX;    		
+				//targetTick = (((Math.atan2(x,y)/Math.PI)+1)/2)*ROTATION_MOTOR_MAX; 
+				targetTick = giveUsingZeroLoc(-x,-y);
 			}
 			else{
 				targetTick = getEncLocation();
-				System.out.println("targetTick : " + targetTick);
+				//System.out.println("targetTick : " + targetTick);
 			}
 		}
 		else{
@@ -179,8 +180,8 @@ public class SS_ShooterRotation extends Subsystem {
     	{
     		targetMult-=1;
     	}
-    	System.out.println("The Value : " + targetMult);
-    	return targetMult;
+    	System.out.println("The Value : " + (targetMult*ROTATION_MOTOR_MAX));
+    	return targetMult*ROTATION_MOTOR_MAX;
     }
     
     public boolean zeroEncLimit(){

@@ -66,7 +66,7 @@ public class SS_DriveTrain extends Subsystem {
     }
     
     public void driveRobot(double pAxisX, double pAxisY){
-    	System.out.println(getLeftEncoder() + ",  " + getRightEncoder() + ",  " + ahrs.getAngle() + ",  " + Robot.ss_AutoChoose.getAnalogVal());
+    	//System.out.println(getLeftEncoder() + ",  " + getRightEncoder() + ",  " + ahrs.getAngle() + ",  " + Robot.ss_AutoChoose.getAnalogVal());
     	drive.arcadeDrive(dir*pAxisX, pAxisY);
     }
     
@@ -172,118 +172,7 @@ public class SS_DriveTrain extends Subsystem {
     	rightDriveMotorOne.enableBrakeMode(state);
     	leftDriveMotorTwo.enableBrakeMode(state);
     	rightDriveMotorTwo.enableBrakeMode(state);
-    }
-    
-    /***Wiggle Code***/
-    
-    
-    
-    
-/////////////////// Code for Gyro /////////////////////////////
-    public void SetUpGyro()
-    {
-    	ahrs.resetDisplacement();
-    	//ahrs.reset();
-    	offSet = ahrs.getAngle();
-    	while(offSet == 0){
-	    	if(ahrs.isConnected())
-	    	{
-	    		
-	    		offSet = ahrs.getAngle();
-	    		//System.out.println("Zero: " + offSet);
-	    	}
-	    ahrs.setAngleAdjustment(offSet);
-	    //System.out.println("Zero: " + offSet);
-    	}
-    }
-    public boolean TurnByGyro(double degree)
-    {
-    	//double accelZ;
-    	//try{
-    	//System.out.println("Current Position: " + currentHeading + " Zero: " + offSet + " Speed:" + Gyrospeed);
-    	if(ahrs.isConnected())
-    	{
-    		//angle = ahrs.getAngle();
-    		currentHeading = ahrs.getAngle() - offSet;
-    		//accelZ = ahrs.getRawAccelZ();
-    	}
-    	//System.out.println("Cal Angle: " + currentHeading);
-    	//}
-    	//catch (RuntimeException ex ) {
-        //    DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
-        //    return false;
-       // }
-//    	if (currentHeading < -180) {
-//    		currentHeading = currentHeading + 180;
-//    	}
-//    	if (currentHeading > 180) {
-//    		currentHeading = currentHeading - 180;
-//    	}
-    	if (Math.abs(degree) > 15)
-    	{
-    		GyroMaxSpeed = .5;
-    	}
-    	else
-    	{
-    		GyroMaxSpeed = .25;
-    	}
-    	// System.out.println("angle: " + angle + " Current Position: " + currentHeading + " Zero: " + zero);
-    	if(ahrs.isConnected() && test == false)
-    	{
-    		double AbsDegree = Math.abs(degree);
-    		Gyrospeed = ((((Math.abs(Math.abs(currentHeading)-AbsDegree)/AbsDegree))*GyroMaxSpeed)/2)+ BaseSpeed;
-    		
-    		if(degree < 0 )
-    		{
-    			Gyrospeed = -1*Gyrospeed;
-    		}
-    		Robot.ss_DriveTrain.driveRobot(0, Gyrospeed);
-	    	if(Math.abs(currentHeading-degree) <= .25)
-	    	{
-	    		Gyrospeed = 0;
-	    		driveRobot(Gyrospeed, Gyrospeed);
-	    		enableBrakeMode(true);
-	    		//System.out.println("Angled Reached" + currentHeading);
-	    		return true;
-	    	}
-    	}
-    	if (Math.abs(currentHeading) > 180)
-    	{
-    		enableBrakeMode(true);
-    		//System.out.println("Angled Reached" + currentHeading);
-    		return true;
-    	}
-    	if (Math.abs(Gyrospeed) > 2)
-    	{
-    		//System.out.println("ERROR Too Fast");
-    		return true;
-    	}
-    	if (Math.abs(currentHeading) > Math.abs(degree)){
-    		//System.out.println("ERROR Too Far");
-    		return true;
-    	}
-		return false;
-    }
-    
-    // Code for turning by gyro this function gets the current heading from the gyro and calulate the turn rate
-    // and returns the turn value
-    
-    double Kp = .25;									//value for turn rate per angle 
-    double Ki = .01;									//value for turn rate per angle  
-    double LastError_I = 0;
-    double TurnValue = .10;
-    public double DriveByGyro(){
-    	double I_val;
-    	double turnRate = 0;
-    	SetUpGyro();								//reset gyro 
-    	currentHeading = -1*(ahrs.getAngle() - offSet);  //after getting offset value in setup subtract this from the current angle
-    	I_val = ((Timer.getFPGATimestamp() - TimeStart)*currentHeading)+LastError_I;
-    	LastError_I = I_val;
-    	turnRate = (currentHeading*Kp)+(I_val*Ki)*TurnValue; 	
-    	TimeStart = Timer.getFPGATimestamp();//
-    	return turnRate;
-    }
-    
+    }    
     private double startNumber = 0;
     
     public double getAngle(){
@@ -296,7 +185,7 @@ public class SS_DriveTrain extends Subsystem {
     
     public double turnByGyro(double pLoc){
     	double tract = .75; //feild = .8
-    	double speed = (pLoc-getAngle())/75;
+    	double speed = (pLoc-getAngle())/60;
     	
     	System.out.println(getAngle());
     	if(speed < tract && speed > 0){
@@ -316,7 +205,7 @@ public class SS_DriveTrain extends Subsystem {
     }
     public double strightByGyro(){
     	double TurnSpeed = 0;
-    	TurnSpeed = -1*(getAngle()/TurnGyroValue)*3;
+    	TurnSpeed = -1*(getAngle()/TurnGyroValue)/2;
 		return TurnSpeed;
     }
     
@@ -325,14 +214,14 @@ public class SS_DriveTrain extends Subsystem {
     }
     
     public double returnShooterAngle(){
-    	double angle = ahrs.getAngle();
+    	double angle = -ahrs.getAngle();
     	while(angle > 360){
     		angle-=360;
     	}
     	while(angle < 0){
     		angle+=360;
     	}
-    	System.out.print("  Angle : " + angle + "  ");
+    	//System.out.print("  Angle : " + angle + "  ");
     	return angle;
     }
 }

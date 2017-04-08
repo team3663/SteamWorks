@@ -151,6 +151,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		ss_ShooterRotation.safeToShoot = true;
 		Scheduler.getInstance().run();
 	}
 

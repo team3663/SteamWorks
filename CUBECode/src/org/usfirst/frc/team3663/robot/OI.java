@@ -20,6 +20,7 @@ import org.usfirst.frc.team3663.robot.commands.C_DriveTrainSetGearShift;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainToggleButterfly;
 import org.usfirst.frc.team3663.robot.commands.C_DriveTrainToggleGearShift;
 import org.usfirst.frc.team3663.robot.commands.C_FuelPickupToggle;
+import org.usfirst.frc.team3663.robot.commands.C_FuelSetSpeed;
 import org.usfirst.frc.team3663.robot.commands.C_Gyro;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterHoldSpeed;
 import org.usfirst.frc.team3663.robot.commands.C_ShooterRotFindZero;
@@ -58,9 +59,10 @@ public class OI {
 	
 /***FUEL PICKUP BUTTONS***/
 		
-		Button fuelPickupToggle = new JoystickButton(driveJoystick, 2);
+		Button fuelPickup = new JoystickButton(driveJoystick, 2);
 		
-		fuelPickupToggle.whenReleased(new C_FuelPickupToggle());
+		//fuelPickupToggle.whenReleased(new C_FuelPickupToggle());
+		fuelPickup.whileHeld(new C_FuelSetSpeed(.5));
 		
 /***SHOOTER BUTTONS***/
 		//Button shooterUseDIO = new JoystickButton(driveJoystick, 3);
@@ -96,13 +98,14 @@ public class OI {
 		Button gearDrop= new JoystickButton(driveJoystick, 5); //Driver Drop
 		
 		gearPickup.whenPressed(new CG_GearLiftAuto()); //Driver Pickup
+		gearPickup.whenReleased(new C_GearUpSet(false));
 		gearDrop.whenPressed(new CG_GearDropOff()); //Driver Drop
 		
 
 		
 // Start 
-		Button getAnalogVal = new JoystickButton(OPJoystick, 8);
-		getAnalogVal.whenPressed(new C_AutoSelect());
+		//Button getAnalogVal = new JoystickButton(OPJoystick, 8);
+		//getAnalogVal.whenPressed(new C_AutoSelect());
 		
 /***CLIMBER MOTORS***/
 		Button climb = new JoystickButton(OPJoystick, 4);

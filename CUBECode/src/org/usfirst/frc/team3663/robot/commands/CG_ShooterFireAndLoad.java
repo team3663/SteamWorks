@@ -10,7 +10,8 @@ public class CG_ShooterFireAndLoad extends CommandGroup {
     public CG_ShooterFireAndLoad() {
     	//addSequential(new C_TurretLight(false));
     	addParallel(new C_ShooterHoldSpeed());
-    	addSequential(new C_TimerWaitSec(.5));
-    	addSequential(new C_LiftMoveUp(.5));
+    	//addSequential(new C_TimerWaitSec(.5));
+    	addParallel(new C_LiftMoveUp(.5));
+    	addParallel(new C_FuelSetSpeed(.2));
     }
 }

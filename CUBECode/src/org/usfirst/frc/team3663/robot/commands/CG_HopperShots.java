@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3663.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -9,8 +10,14 @@ public class CG_HopperShots extends CommandGroup {
 
     public CG_HopperShots() {
         // Add Commands here:
-        addSequential(new C_ShooterGoToLocation(20));
-        addSequential(new C_ShooterSetVelocity(1480));
+    	if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Blue){
+    		addSequential(new C_ShooterGoToLocation(20));
+        	addSequential(new C_ShooterSetVelocity(1480));
+    	}
+    	else{
+    		addSequential(new C_ShooterGoToLocation(700));
+        	addSequential(new C_ShooterSetVelocity(1480));
+    	}
         addSequential(new CG_ShooterFireAndLoad());
         //      addSequential(new Command2());
         // these will run in order.

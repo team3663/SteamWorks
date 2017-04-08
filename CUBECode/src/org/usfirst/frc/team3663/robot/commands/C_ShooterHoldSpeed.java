@@ -16,6 +16,7 @@ public class C_ShooterHoldSpeed extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.ss_ShooterMainWheel.reassignExcp();
     	Robot.ss_ShooterMainWheel.shooting = true;
      	Robot.ss_ShooterMainWheel.currentSpeed = (((double)Robot.ss_ShooterMainWheel.targetValue/(double)Robot.ss_ShooterMainWheel.SHOOTER_EST_MAX_SPEED)-.2);
     	Robot.ss_ShooterMainWheel.resetMainMotorEncoder(Robot.ss_ShooterMainWheel.targetValue);

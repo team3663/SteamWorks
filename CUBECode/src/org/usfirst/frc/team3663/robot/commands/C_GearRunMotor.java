@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class C_GearRunMotor extends Command {
 	
-	private int speed;
-    public C_GearRunMotor(int pSp) {
+	private double speed;
+    public C_GearRunMotor(double pSp) {
     	speed = pSp;
         requires(Robot.ss_GearPickup);
     }

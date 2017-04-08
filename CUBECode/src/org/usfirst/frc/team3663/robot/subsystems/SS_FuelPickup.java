@@ -22,7 +22,7 @@ public class SS_FuelPickup extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    private void setPickupMotorSpeed(double pSpeed){
+    public void setPickupMotorSpeed(double pSpeed){
     	pickupMotor.set(-pSpeed);
     }
     

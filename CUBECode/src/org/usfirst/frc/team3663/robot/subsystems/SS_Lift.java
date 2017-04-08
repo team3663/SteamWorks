@@ -31,13 +31,19 @@ public class SS_Lift extends Subsystem {
     }
     
     public void setTotalLiftSpeed(double pSpd){
-    	if(Robot.ss_ShooterMainWheel.atSpeed){
-        	setSpeedLiftYellowMotor(-pSpd/1.5);    		
-    	}
+    	if(Robot.ss_ShooterRotation.safeToShoot){
+	    	if(Robot.ss_ShooterMainWheel.atSpeed){
+	        	setSpeedLiftYellowMotor(-pSpd/1.5);    		
+	    	}
+	    	else{
+	        	setSpeedLiftYellowMotor(0);       		
+	    	}
+	    	setSpeedLiftFeedMotor(pSpd);
+	    }
     	else{
-        	setSpeedLiftYellowMotor(0);       		
+    		setSpeedLiftFeedMotor(0);
+    		setSpeedLiftYellowMotor(0);  
     	}
-    	setSpeedLiftFeedMotor(pSpd);
     }
 }
 

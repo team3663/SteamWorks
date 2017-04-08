@@ -16,6 +16,7 @@ public class C_ShooterRotFindZero extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.ss_ShooterRotation.safeToShoot = false;
     	System.out.println("sgjdfpiagjpiowesdgoaihjw");
     }
 

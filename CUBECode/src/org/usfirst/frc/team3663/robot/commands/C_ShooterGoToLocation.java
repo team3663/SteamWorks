@@ -19,6 +19,7 @@ public class C_ShooterGoToLocation extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.ss_ShooterRotation.safeToShoot = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -32,6 +33,7 @@ public class C_ShooterGoToLocation extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.ss_ShooterRotation.safeToShoot = true;
     	Robot.ss_ShooterRotation.advSetRotSpd(0);
     }
 
